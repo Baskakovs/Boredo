@@ -1,64 +1,56 @@
-import styled from "styled-components";
+import React from 'react';
+import styled from 'styled-components';
 
-import WriteIcon from "../../images/WriteIcon.png";
+import WriteIcon from '../../images/WriteIcon.png';
 import ProfileIcon from '../../images/ProfileIcon.png';
 
-
 const Container = styled.div`
-box-sizing: border-box;
+  box-sizing: border-box;
 
-/* Auto layout */
+  /* Auto layout */
 
-display: flex;
-flex-direction: row;
-justify-content: center;
-align-items: center;
-padding: 17px 145px;
-gap: 80px;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  padding: 17px 145px;
+  gap: 80px;
 
-position: absolute;
-width: 100vw;
-height: 68px;
-left: 0px;
-top: 761px;
+  position: absolute;
+  width: 100vw;
+  height: 68px;
+  left: 0px;
+  top: 761px;
 
-background: #FFFFFF;
-border-top: 1px solid #D1D5DB;
-`
+  background: #FFFFFF;
+  border-top: 1px solid #D1D5DB;
+`;
 
-const IconContainer = styled.div`
-width: 34px;
-height: 34px;
+const IconContainer = styled.button`
+  width: 34px;
+  height: 34px;
+  cursor: pointer;
 
+  /* Inside auto layout */
 
-/* Inside auto layout */
+  flex: none;
+  order: 0;
+  flex-grow: 0;
+  border: none;
+  background-color: transparent;
+`;
 
-flex: none;
-order: 0;
-flex-grow: 0;
-`
-
-const Icon = styled.img`
-width: 34px;
-height: 34px;
-
-/* Inside auto layout */
-
-flex: none;
-order: 0;
-flex-grow: 0;
-`
-
-function NavBar(){
-    return(
-        <Container>
-            <IconContainer>
-                <Icon src={ProfileIcon}/>
-            </IconContainer>
-            <IconContainer>
-                <Icon src={WriteIcon}/>
-            </IconContainer>
-        </Container>
-    );
+function NavBar() {
+  return (
+    <Container>
+      <IconContainer>
+        <img src={ProfileIcon} alt="Profile Icon" />
+      </IconContainer>
+      <IconContainer>
+        <img src={WriteIcon} alt="Write Icon" />
+      </IconContainer>
+    </Container>
+  );
 }
+
 export default NavBar;
