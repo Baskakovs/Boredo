@@ -11,13 +11,12 @@ box-sizing: border-box;
 
 display: flex;
 flex-direction: row;
-justify-content: space-between;
+justify-content: center;
 align-items: center;
 padding: 11px 17px 11px 10px;
 gap: 39px;
 
-position: absolute;
-width: 395px;
+width: 100vw;
 height: 37px;
 left: 0px;
 top: 128px;

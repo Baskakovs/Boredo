@@ -9,7 +9,7 @@ box-sizing: border-box;
 display: flex;
 flex-direction: column;
 align-items: center;
-padding: 0px;
+margin-bottom: 8px;
 
 width: 376px;
 
@@ -101,6 +101,7 @@ display: flex;
 align-items: center;
 letter-spacing: 0.04em;
 text-align: left;
+margin: 8px 0px;
 
 color: #000000;
 `

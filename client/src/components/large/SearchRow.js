@@ -39,6 +39,11 @@ function SearchRow() {
             <SearchButton>South Africa</SearchButton>
             <SearchButton>China</SearchButton>
             <SearchButton>USA</SearchButton>
+            <SearchButton>France</SearchButton>
+            <SearchButton>Poland</SearchButton>
+            <SearchButton>South Africa</SearchButton>
+            <SearchButton>China</SearchButton>
+            <SearchButton>USA</SearchButton>
         </SearchRowContainer>
     );
 }

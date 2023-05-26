@@ -16,15 +16,16 @@ const Container = styled.div`
   padding: 17px 145px;
   gap: 80px;
 
-  position: absolute;
   width: 100vw;
   height: 68px;
-  left: 0px;
-  top: 761px;
 
   background: #FFFFFF;
   border-top: 1px solid #D1D5DB;
-`;
+
+    position: fixed;
+    bottom: 0;
+    z-index: 1;
+    `;
 
 const IconContainer = styled.button`
   width: 34px;
