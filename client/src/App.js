@@ -16,12 +16,12 @@ const Item = styled(Paper)(({ theme }) => ({
 }));
 
 const ScrollableContainer = styled(Box)`
-  display: flex;
-  justify-content: center;
+  width: 90%
+  margin: auto;
   flex-grow: 1;
   overflow-y: auto;
-  padding-top: 14%;
-  padding-bottom: 5%; /* Adjust this value based on the height of the NavBar */
+  padding-top: 200px;
+  padding-bottom: 100px /* Adjust this value based on the height of the NavBar */
 `;
 
 const FixedContainer = styled(Box)`
@@ -39,52 +39,66 @@ function App() {
       </FixedContainer>
       <ScrollableContainer>
         <Grid container spacing={2} sx={{display: 'flex', justifyContent:'center'}}>
-          <Grid item xs={12} md={6} lg={4}>
+          <Grid item xs={12} md={6} lg={4} sx={{display: 'flex', justifyContent:'center'}}>
             <div>
               <Post />
             </div>
           </Grid>
-          <Grid item xs={12} md={6} lg={4}>
+          <Grid item xs={12} md={6} lg={4} sx={{display: 'flex', justifyContent:'center'}}>
             <div>
               <Post />
             </div>
           </Grid>
-          <Grid item xs={12} md={6} lg={4}>
+          <Grid item xs={12} md={6} lg={4} sx={{display: 'flex', justifyContent:'center'}}>
             <div>
               <Post />
             </div>
           </Grid>
-          <Grid item xs={12} md={6} lg={4}>
+          <Grid item xs={12} md={6} lg={4} sx={{display: 'flex', justifyContent:'center'}}>
             <div>
               <Post />
             </div>
           </Grid>
-          <Grid item xs={12} md={6} lg={4}>
+          <Grid item xs={12} md={6} lg={4} sx={{display: 'flex', justifyContent:'center'}}>
             <div>
               <Post />
             </div>
           </Grid>
-          <Grid item xs={12} md={6} lg={4}>
+          <Grid item xs={12} md={6} lg={4} sx={{display: 'flex', justifyContent:'center'}}>
             <div>
               <Post />
             </div>
           </Grid>
-          <Grid item xs={12} md={6} lg={4}>
+          <Grid item xs={12} md={6} lg={4} sx={{display: 'flex', justifyContent:'center'}}>
             <div>
               <Post />
             </div>
           </Grid>
-          <Grid item xs={12} md={6} lg={4}>
+          <Grid item xs={12} md={6} lg={4} sx={{display: 'flex', justifyContent:'center'}}>
             <div>
               <Post />
             </div>
           </Grid>
-          <Grid item xs={12} md={6} lg={4}>
+          <Grid item xs={12} md={6} lg={4} sx={{display: 'flex', justifyContent:'center'}}>
             <div>
               <Post />
             </div>
           </Grid>
-          {/* Rest of the post items */}
+          <Grid item xs={12} md={6} lg={4} sx={{display: 'flex', justifyContent:'center'}}>
+            <div>
+              <Post />
+            </div>
+          </Grid>
+          <Grid item xs={12} md={6} lg={4} sx={{display: 'flex', justifyContent:'center'}}>
+            <div>
+              <Post />
+            </div>
+          </Grid>
+          <Grid item xs={12} md={6} lg={4} sx={{display: 'flex', justifyContent:'center'}}>
+            <div>
+              <Post />
+            </div>
+          </Grid>
         </Grid>
       </ScrollableContainer>
       <FixedContainer>
