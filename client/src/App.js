@@ -1,6 +1,6 @@
-import * as React from 'react';
+import React from 'react';
 import { styled } from '@mui/material/styles';
-import Grid from '@mui/material/Unstable_Grid2';
+import Grid from '@mui/material/Grid';
 import Paper from '@mui/material/Paper';
 import Box from '@mui/material/Box';
 import SearchAndSort from './components/large/SearchAndSort';
@@ -15,87 +15,82 @@ const Item = styled(Paper)(({ theme }) => ({
   color: theme.palette.text.secondary,
 }));
 
+const ScrollableContainer = styled(Box)`
+  display: flex;
+  justify-content: center;
+  flex-grow: 1;
+  overflow-y: auto;
+  padding-top: 14%;
+  padding-bottom: 5%; /* Adjust this value based on the height of the NavBar */
+`;
+
+const FixedContainer = styled(Box)`
+  position: sticky;
+  top: 0;
+  z-index: 1;
+  background-color: #ffffff;
+`;
+
 function App() {
   return (
     <>
-    {/* <Box sx={{
-      width: '100%',
-      overflowX: 'hidden', // Hide horizontal scrollbar
-      display: 'flex',
-      flexDirection: 'column', // Set container as column layout
-      position: 'sticky', top: 0, zIndex: 1,
-      backgroundColor: '#FFFFFF',
-      marginBottom: '16px',
-    }}>
-        <Grid item xs={12} sx={{ marginBottom: '32px' }}>
-          <div>
-            <Search />
-          </div>
-        </Grid>
-        <Grid item xs={12} md={6} lg={4}>
-          <div>
-            <SortFilter />
-          </div>
-        </Grid>
-    </Box> */}
-    <SearchAndSort />
-    <Box sx={{
-      width: '100%',
-      overflowX: 'hidden', // Hide horizontal scrollbar
-      display: 'flex',
-      justifyContent: 'center',
-    }}>
-      <Grid container spacing={2}>
-        <Grid item xs={12} sx={{ justifyContent: 'center' }}>
-          <Grid container spacing={2} justifyContent="center">
-            <Grid item xs={12} md={6} lg={4}>
-              <div>
-                <Post />
-              </div>
-            </Grid>
-            <Grid item xs={12} md={6} lg={4}>
-              <div>
-                <Post />
-              </div>
-            </Grid>
-            <Grid item xs={12} md={6} lg={4}>
-              <div>
-                <Post />
-              </div>
-            </Grid>
-            <Grid item xs={12} md={6} lg={4}>
-              <div>
-                <Post />
-              </div>
-            </Grid>
-            <Grid item xs={12} md={6} lg={4}>
-              <div>
-                <Post />
-              </div>
-            </Grid>
-            <Grid item xs={12} md={6} lg={4}>
-              <div>
-                <Post />
-              </div>
-            </Grid>
-            <Grid item xs={12} md={6} lg={4}>
-              <div>
-                <Post />
-              </div>
-            </Grid>
-            <Grid item xs={12} md={6} lg={4}>
-              <div>
-                <Post />
-              </div>
-            </Grid>
-          
+      <FixedContainer>
+        <SearchAndSort />
+      </FixedContainer>
+      <ScrollableContainer>
+        <Grid container spacing={2} sx={{display: 'flex', justifyContent:'center'}}>
+          <Grid item xs={12} md={6} lg={4}>
+            <div>
+              <Post />
+            </div>
           </Grid>
+          <Grid item xs={12} md={6} lg={4}>
+            <div>
+              <Post />
+            </div>
+          </Grid>
+          <Grid item xs={12} md={6} lg={4}>
+            <div>
+              <Post />
+            </div>
+          </Grid>
+          <Grid item xs={12} md={6} lg={4}>
+            <div>
+              <Post />
+            </div>
+          </Grid>
+          <Grid item xs={12} md={6} lg={4}>
+            <div>
+              <Post />
+            </div>
+          </Grid>
+          <Grid item xs={12} md={6} lg={4}>
+            <div>
+              <Post />
+            </div>
+          </Grid>
+          <Grid item xs={12} md={6} lg={4}>
+            <div>
+              <Post />
+            </div>
+          </Grid>
+          <Grid item xs={12} md={6} lg={4}>
+            <div>
+              <Post />
+            </div>
+          </Grid>
+          <Grid item xs={12} md={6} lg={4}>
+            <div>
+              <Post />
+            </div>
+          </Grid>
+          {/* Rest of the post items */}
         </Grid>
-      </Grid>
-    </Box>
-    <NavBar/>
+      </ScrollableContainer>
+      <FixedContainer>
+        <NavBar />
+      </FixedContainer>
     </>
-    
   );
 }
 

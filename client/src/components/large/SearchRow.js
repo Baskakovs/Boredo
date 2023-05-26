@@ -7,7 +7,6 @@ const SearchRowContainer = styled.div`
     display: flex;
     flex-direction: row;
     align-items: flex-start;
-    padding: 8px 4px;
     gap: 8px;
     width: 100%;
 

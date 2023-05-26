@@ -9,8 +9,6 @@ const SearchContainer = styled.div`
     display: flex;
     flex-direction: column;
     align-items: flex-start;
-    padding: 8px 4px;
-    gap: 24px;
     width: 100%;
     height: auto;
     position: fixed;
