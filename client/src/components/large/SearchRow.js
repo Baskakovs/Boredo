@@ -10,6 +10,10 @@ const SearchRowContainer = styled.div`
     gap: 8px;
     width: 100%;
 
+    ::-webkit-scrollbar {
+        display: none;
+      }
+
     position: absolute;
 
     overflow-x: auto;

@@ -49,3 +49,7 @@ group :test do
 end
 
 gem "active_model_serializers", "~> 0.10.12"
+
+gem 'dotenv', require: 'dotenv/load'
+
+gem 'openai'
