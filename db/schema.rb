@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2023_05_27_220123) do
+ActiveRecord::Schema.define(version: 2023_05_28_190951) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -41,9 +41,10 @@ ActiveRecord::Schema.define(version: 2023_05_27_220123) do
     t.string "text"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.string "geolocation"
     t.string "category"
-    t.string "title"
+    t.integer "category_id"
+    t.integer "geography_id"
+    t.integer "title_id"
   end
 
   create_table "subcomments", force: :cascade do |t|

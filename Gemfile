@@ -52,4 +52,6 @@ gem "active_model_serializers", "~> 0.10.12"
 
 gem 'dotenv', require: 'dotenv/load'
 
-gem 'openai'
+gem "ruby-openai"
+
+gem 'faker', '~> 3.2'

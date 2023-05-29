@@ -3,6 +3,12 @@ import Grid from '@mui/material/Grid';
 import Paper from '@mui/material/Paper';
 import Box from '@mui/material/Box';
 
+//redux imports
+import { useEffect } from 'react';
+import { useSelector } from 'react-redux';
+import { setCountry } from '../slices/searchSlice';
+import { useDispatch } from 'react-redux';
+
 import SearchAndSort from '../components/large/SearchAndSort';
 import Post from '../components/large/Post';
 import NavBar from '../components/large/NavBar';
@@ -32,6 +38,33 @@ const Item = styled(Paper)(({ theme }) => ({
   `
 
 function Feed(){
+
+  //fetching initial countries
+
+  const dispatch = useDispatch();
+
+    useEffect(() => {
+      fetch(`/geographies`,{
+        method: 'GET',
+        headers: {
+          'Content-Type': 'application/json',
+        }
+      })
+      .then(res=> {
+        if(res.ok){
+          return res.json()
+        }
+      })
+      .then(data => {
+        data.map(country => {
+          dispatch(setCountry(country))
+        })
+      })
+    },[dispatch])
+    
+  //accessing store
+    const search = useSelector((state) => state);
+    console.log(search, "search")
     return(
         <>
         <FixedContainer>
