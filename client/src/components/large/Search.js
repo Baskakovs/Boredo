@@ -7,7 +7,7 @@ import SearchRow from "./SearchRow";
 //redux imports
 import { useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { setCountries, setCategories } from '../../slices/searchSlice';
+import { setCountries, setCategories, setTitles } from '../../slices/searchSlice';
 
 const SearchContainer = styled.div`
     display: flex;
@@ -54,11 +54,9 @@ function Search(){
 
 //fetching categories associated with specific country
 const countrySelected = useSelector((state) => state.countrySelected);
-const categorySelected = useSelector((state) => state.categorySelected);
 
     useEffect(() => {
         if(countrySelected !== false){
-            console.log(countrySelected, "countrySelected")
             fetch(`/geographies/${countrySelected}`,{
                 method: 'GET',
                 headers: {
@@ -72,16 +70,38 @@ const categorySelected = useSelector((state) => state.categorySelected);
             })
             .then(categories => {
                 dispatch(setCategories(categories))
-    
             })
         }
     },[countrySelected])
+
+//fetching titles associated with specific category
+const categorySelected = useSelector((state) => state.categorySelected);
+
+    useEffect(() => {
+        if(categorySelected !== false){
+            fetch(`/categories/${categorySelected}`,{
+                method: 'GET',
+                headers: {
+                    'Content-Type': 'application/json',
+                }
+            })
+            .then(res=> {
+                if(res.ok){
+                    return res.json()
+                }
+            })
+            .then(categories => {
+                dispatch(setTitles(categories))
+            })
+        }
+    },[categorySelected])
 
   
 //accessing store
   const countries = useSelector((state) => state.countries);
   const categories = useSelector((state) => state.categories);
-  console.log(categories, "categories")
+  const titles = useSelector((state) => state.titles);        
+  console.log(titles, "titles")
     return(
         <SearchContainer>
             <Row>
@@ -94,10 +114,10 @@ const categorySelected = useSelector((state) => state.categorySelected);
                 </Row>
                 : null
             }
-                        {
+            {
                 countrySelected !== false ?
                 <Row>
-                    <SearchRow items={categories} type="category"/>
+                    <SearchRow items={titles} type="category"/>
                 </Row>
                 : null
             }

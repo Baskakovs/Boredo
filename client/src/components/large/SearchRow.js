@@ -2,7 +2,7 @@ import styled from "styled-components"
 
 //redux import
 import { useDispatch, useSelector } from "react-redux";
-import { setCountrySelected } from "../../slices/searchSlice";
+import { setCountrySelected, setCategorySelected, setTitleSelected } from "../../slices/searchSlice";
 
 //components
 import SearchButton from "../buttons/SearchButton";
@@ -28,16 +28,20 @@ function SearchRow({items, type}) {
     function handleItemClick(e){
         if(type == "country"){
             dispatch(setCountrySelected(e.target.name));
+        }else if(type == "category"){
+            dispatch(setCategorySelected(e.target.id));
+        }else if(type == "title"){
+            dispatch(setTitleSelected(e.target.id));
         }
     }
 
-    const sel = useSelector((state) => state.countrySelected);
+    const sel = useSelector((state) => state.categorySelected);
     console.log(sel, "sel")
     return (
         <SearchRowContainer>
             {
                 Array.isArray(items) ? items.map((item, index) => (
-                    <SearchButton key={index} name={item.name} onClick={handleItemClick}>
+                    <SearchButton key={index} id={item.id} name={item.name} onClick={handleItemClick}>
                         {item.name}
                     </SearchButton>
                 ))
