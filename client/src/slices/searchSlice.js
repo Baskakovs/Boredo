@@ -3,16 +3,30 @@ import { createSlice } from '@reduxjs/toolkit';
 const searchSlice = createSlice({
   name: 'search',
   initialState: {
-    country: [],
+    countries: [],
+    categories: [],
+    countrySelected: false,
+    categorySelected: false,
+    titleSelected: false,
   },
   reducers: {
-    setCountry: (state, action) => {
-      state.country.push(action.payload);
+    setCountries: (state, action) => {
+      state.countries.push(action.payload);
     },
+    setCountrySelected: (state, action) => {
+        state.countrySelected = action.payload;
+    },
+    setCategories: (state, action) => {
+        state.categories = action.payload;
+    },
+    setCategorySelected: (state) => {
+        state.categorySelected = !state.categoriescategorySelected;
+    },
+    setTitleSelected: (state) => {
+        state.titleSelected = !state.titleSelected;
+    }
   },
 });
 
-export const { setCountry } = searchSlice.actions;
+export const { setCountries, setCountrySelected, setCategories } = searchSlice.actions;
 export default searchSlice.reducer;
-
-

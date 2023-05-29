@@ -1,4 +1,8 @@
-import styled from "styled-components";
+import styled from "styled-components"
+
+//redux import
+import { useDispatch, useSelector } from "react-redux";
+import { setCountrySelected } from "../../slices/searchSlice";
 
 //components
 import SearchButton from "../buttons/SearchButton";
@@ -19,34 +23,26 @@ const SearchRowContainer = styled.div`
     overflow-x: auto;
 `
 
-function SearchRow() {
+function SearchRow({items, type}) {
+    const dispatch = useDispatch();
+    function handleItemClick(e){
+        if(type == "country"){
+            dispatch(setCountrySelected(e.target.name));
+        }
+    }
+
+    const sel = useSelector((state) => state.countrySelected);
+    console.log(sel, "sel")
     return (
         <SearchRowContainer>
-            <SearchButton>China</SearchButton>
-            <SearchButton>USA</SearchButton>
-            <SearchButton>UK</SearchButton>
-            <SearchButton>EU</SearchButton>
-            <SearchButton>Germany</SearchButton>
-            <SearchButton>France</SearchButton>
-            <SearchButton>Poland</SearchButton>
-            <SearchButton>South Africa</SearchButton>
-            <SearchButton>China</SearchButton>
-            <SearchButton>USA</SearchButton>
-            <SearchButton>China</SearchButton>
-            <SearchButton>USA</SearchButton>
-            <SearchButton>UK</SearchButton>
-            <SearchButton>EU</SearchButton>
-            <SearchButton>Germany</SearchButton>
-            <SearchButton>France</SearchButton>
-            <SearchButton>Poland</SearchButton>
-            <SearchButton>South Africa</SearchButton>
-            <SearchButton>China</SearchButton>
-            <SearchButton>USA</SearchButton>
-            <SearchButton>France</SearchButton>
-            <SearchButton>Poland</SearchButton>
-            <SearchButton>South Africa</SearchButton>
-            <SearchButton>China</SearchButton>
-            <SearchButton>USA</SearchButton>
+            {
+                Array.isArray(items) ? items.map((item, index) => (
+                    <SearchButton key={index} name={item.name} onClick={handleItemClick}>
+                        {item.name}
+                    </SearchButton>
+                ))
+                : null
+            }
         </SearchRowContainer>
     );
 }

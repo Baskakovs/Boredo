@@ -19,6 +19,7 @@ const SearchContainer = styled.div`
 
 
 function SearchAndSort(){
+
     return(
     <SearchContainer sx={{
       width: '100%',
