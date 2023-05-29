@@ -15,13 +15,26 @@ const searchSlice = createSlice({
       state.countries.push(action.payload);
     },
     setCountrySelected: (state, action) => {
-        state.countrySelected = action.payload;
+        if(action.payload === state.countrySelected){
+            state.countrySelected = false
+            state.categorySelected = false
+            state.titles = []
+        } else if (action.payload !== state.countrySelected){
+            state.countrySelected = action.payload;
+            state.categorySelected = false
+        }
     },
     setCategories: (state, action) => {
         state.categories = action.payload;
     },
     setCategorySelected: (state, action) => {
-        state.categorySelected = action.payload;
+        if(action.payload === state.categorySelected){
+            console.log("here 1")
+            state.categorySelected = false
+        }else if(action.payload !== state.categorySelected){
+            state.categorySelected = action.payload
+            state.titles = []
+        }
     },
     setTitles: (state, action) => {
         state.titles = action.payload;

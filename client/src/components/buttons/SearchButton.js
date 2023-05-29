@@ -1,4 +1,4 @@
-import styled from "styled-components";
+import styled, { css } from 'styled-components';
 
 const SearchButton = styled.button`
     box-sizing: border-box;
@@ -35,6 +35,13 @@ const SearchButton = styled.button`
     text-align: center;
 
     color: #609CFA;
-`
+    /* Define styles for the specific state */
+    ${props =>
+      props.onClicked &&
+      css`
+        background-color: #609CFA;
+        color: #FFFFFF;
+      `}
+  `;
 
 export default SearchButton;

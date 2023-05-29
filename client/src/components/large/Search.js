@@ -57,6 +57,7 @@ const countrySelected = useSelector((state) => state.countrySelected);
 
     useEffect(() => {
         if(countrySelected !== false){
+            console.log(countrySelected, "countrySelected")
             fetch(`/geographies/${countrySelected}`,{
                 method: 'GET',
                 headers: {
@@ -69,6 +70,7 @@ const countrySelected = useSelector((state) => state.countrySelected);
                 }
             })
             .then(categories => {
+                console.log(categories, "categories")
                 dispatch(setCategories(categories))
             })
         }
@@ -115,9 +117,9 @@ const categorySelected = useSelector((state) => state.categorySelected);
                 : null
             }
             {
-                countrySelected !== false ?
+                countrySelected !== false && categorySelected !== false ?
                 <Row>
-                    <SearchRow items={titles} type="category"/>
+                    <SearchRow items={titles} type="titles"/>
                 </Row>
                 : null
             }

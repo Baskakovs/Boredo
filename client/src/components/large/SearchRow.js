@@ -1,5 +1,5 @@
 import styled from "styled-components"
-
+import { useState } from "react";
 //redux import
 import { useDispatch, useSelector } from "react-redux";
 import { setCountrySelected, setCategorySelected, setTitleSelected } from "../../slices/searchSlice";
@@ -22,32 +22,46 @@ const SearchRowContainer = styled.div`
 
     overflow-x: auto;
 `
-
-function SearchRow({items, type}) {
+function SearchRow({ items, type }) {
     const dispatch = useDispatch();
-    function handleItemClick(e){
-        if(type == "country"){
-            dispatch(setCountrySelected(e.target.name));
-        }else if(type == "category"){
-            dispatch(setCategorySelected(e.target.id));
-        }else if(type == "title"){
-            dispatch(setTitleSelected(e.target.id));
-        }
+  
+    // Create a separate state to track the currently clicked button
+    const [selectedItemId, setSelectedItemId] = useState(null);
+  
+    function handleItemClick(itemId) {
+      if (type === 'country') {
+        dispatch(setCountrySelected(itemId));
+      } else if (type === 'category') {
+        dispatch(setCategorySelected(itemId));
+      } else if (type === 'title') {
+        dispatch(setTitleSelected(itemId));
+      }
+  
+      // Update the selected item ID based on the clicked button
+      setSelectedItemId(itemId === selectedItemId ? null : itemId);
     }
-
+  
     const sel = useSelector((state) => state.categorySelected);
-    console.log(sel, "sel")
+    console.log(sel, 'sel');
+  
     return (
-        <SearchRowContainer>
-            {
-                Array.isArray(items) ? items.map((item, index) => (
-                    <SearchButton key={index} id={item.id} name={item.name} onClick={handleItemClick}>
-                        {item.name}
-                    </SearchButton>
-                ))
-                : null
-            }
-        </SearchRowContainer>
+      <SearchRowContainer>
+        {Array.isArray(items)
+          ? items.map((item, index) => (
+              <SearchButton
+                key={index}
+                id={item.id}
+                name={item.name}
+                onClick={() => handleItemClick(item.id)} // Pass item.id as an argument
+                onClicked={item.id === selectedItemId} // Check if the button is currently selected
+              >
+                {item.name}
+              </SearchButton>
+            ))
+          : null}
+      </SearchRowContainer>
     );
-}
-export default SearchRow;
+  }
+  
+  export default SearchRow;
+  
