@@ -31,18 +31,21 @@ const searchSlice = createSlice({
     },
     setCategorySelected: (state, action) => {
         if(action.payload === state.categorySelected){
-            console.log("here 1")
             state.categorySelected = false
         }else if(action.payload !== state.categorySelected){
             state.categorySelected = action.payload
-            state.titles = []
+            // state.titles = []
         }
     },
     setTitles: (state, action) => {
         state.titles = action.payload;
     },
     setTitleSelected: (state, action) => {
-        state.titleSelected = action.payload;
+        if(action.payload === state.titleSelected){
+            state.titleSelected = false
+        }else if(action.payload !== state.categorySelected){
+            state.titleSelected = action.payload
+        }
     }
   },
 });

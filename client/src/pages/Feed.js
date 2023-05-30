@@ -37,8 +37,12 @@ const Item = styled(Paper)(({ theme }) => ({
   `
 
 function Feed(){
+
+  //accessing states from the redux store
   const countrySelected = useSelector((state) => state.search.countrySelected);
   const categorySelected = useSelector((state) => state.search.categorySelected);
+  const titleSelected = useSelector((state) => state.search.titleSelected);
+
     //fetching the initial feed of 15 random posts
     const dispatch = useDispatch();
     useEffect(() => {
@@ -56,7 +60,6 @@ function Feed(){
         })
         .then(data => {
           dispatch(setFeed(data))
-          console.log("4")
         }
         )
     }, [countrySelected]);
@@ -78,7 +81,6 @@ function Feed(){
         })
         .then(data => {
           dispatch(setFeed(data))
-          console.log("3")
         }
         )
       }
@@ -86,7 +88,7 @@ function Feed(){
 
     //fetching the feed when a category is selected
     useEffect(() => {
-      if(categorySelected !== false){
+      if(categorySelected !== false && titleSelected === false){
         fetch(`/posts/category/${categorySelected}`,
         {
           method: 'GET',
@@ -104,10 +106,9 @@ function Feed(){
         }
         )
       }
-    }, [categorySelected]);
+    }, [categorySelected, titleSelected]);
 
       //fetching the feed when a category is selected
-      const titleSelected = useSelector((state) => state.search.titleSelected);
       useEffect(() => {
         if(countrySelected !== false){
           fetch(`/posts/title/${titleSelected}`,
