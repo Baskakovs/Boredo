@@ -37,6 +37,8 @@ const Item = styled(Paper)(({ theme }) => ({
   `
 
 function Feed(){
+  const countrySelected = useSelector((state) => state.search.countrySelected);
+  const categorySelected = useSelector((state) => state.search.categorySelected);
     //fetching the initial feed of 15 random posts
     const dispatch = useDispatch();
     useEffect(() => {
@@ -54,14 +56,14 @@ function Feed(){
         })
         .then(data => {
           dispatch(setFeed(data))
+          console.log("4")
         }
         )
-    }, []);
+    }, [countrySelected]);
 
     //fetching the feed when a country is selected
-    const countrySelected = useSelector((state) => state.search.countrySelected);
     useEffect(() => {
-      if(countrySelected !== false){
+      if(countrySelected !== false && categorySelected === false){
         fetch(`/posts/country/${countrySelected}`,
         {
           method: 'GET',
@@ -76,15 +78,15 @@ function Feed(){
         })
         .then(data => {
           dispatch(setFeed(data))
+          console.log("3")
         }
         )
       }
-    }, [countrySelected]);
+    }, [countrySelected, categorySelected]);
 
     //fetching the feed when a category is selected
-    const categorySelected = useSelector((state) => state.search.categorySelected);
     useEffect(() => {
-      if(countrySelected !== false){
+      if(categorySelected !== false){
         fetch(`/posts/category/${categorySelected}`,
         {
           method: 'GET',

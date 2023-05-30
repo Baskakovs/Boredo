@@ -30,10 +30,8 @@ function SearchRow({ items, type }) {
   
     function handleItemClick(itemId) {
       if (type === 'country') {
-        console.log(itemId, '0')
         dispatch(setCountrySelected(itemId));
       } else if (type === 'category') {
-        console.log(itemId, '1')
         dispatch(setCategorySelected(itemId));
       } else if (type === 'title') {
         dispatch(setTitleSelected(itemId));

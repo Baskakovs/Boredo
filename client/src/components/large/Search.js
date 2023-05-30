@@ -90,8 +90,8 @@ const categorySelected = useSelector((state) => state.search.categorySelected);
                     return res.json()
                 }
             })
-            .then(categories => {
-                dispatch(setTitles(categories))
+            .then(titles => {
+                dispatch(setTitles(titles))
             })
         }
     },[categorySelected])

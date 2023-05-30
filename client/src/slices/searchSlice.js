@@ -18,12 +18,12 @@ const searchSlice = createSlice({
         if(action.payload === state.countrySelected){
             state.countrySelected = false
             state.categorySelected = false
-            state.titles = []
+            state.titleSelected = false
+            // state.titles = []
         } else if (action.payload !== state.countrySelected){
             state.countrySelected = action.payload;
             state.categorySelected = false
             state.titleSelected = false
-            state.titles = []
         }
     },
     setCategories: (state, action) => {
