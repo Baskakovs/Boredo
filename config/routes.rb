@@ -7,6 +7,7 @@ Rails.application.routes.draw do
   get '/posts_first', to: 'posts#first'
   get '/posts/country/:id', to: 'posts#country'
   get '/posts/category/:id', to: 'posts#category'
+  get 'posts/title/:id', to: 'posts#title'
 
   resources :titles, only: [:index, :show]
   get '/geographies', to: 'geographies#index'

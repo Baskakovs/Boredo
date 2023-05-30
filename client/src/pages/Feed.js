@@ -104,8 +104,32 @@ function Feed(){
       }
     }, [categorySelected]);
 
+      //fetching the feed when a category is selected
+      const titleSelected = useSelector((state) => state.search.titleSelected);
+      useEffect(() => {
+        if(countrySelected !== false){
+          fetch(`/posts/title/${titleSelected}`,
+          {
+            method: 'GET',
+            headers: {
+              'Content-Type': 'application/json',
+            },
+          })
+          .then(res =>{
+            if(res.ok){
+              return res.json()
+            }
+          })
+          .then(data => {
+            dispatch(setFeed(data))
+          }
+          )
+        }
+      }, [titleSelected]);
 
+    //fetching the feed when a title is selected
     const feed = useSelector((state) => state.feed.feed);
+    console.log(feed, 'feed')
     return(
         <>
         <FixedContainer>

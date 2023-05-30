@@ -116,7 +116,7 @@ const categorySelected = useSelector((state) => state.search.categorySelected);
             {
                 countrySelected !== false && categorySelected !== false ?
                 <Row>
-                    <SearchRow items={titles} type="titles"/>
+                    <SearchRow items={titles} type="title"/>
                 </Row>
                 : null
             }
