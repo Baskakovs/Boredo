@@ -1,7 +1,7 @@
 import styled from "styled-components"
 import { useState } from "react";
 //redux import
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import { setCountrySelected, setCategorySelected, setTitleSelected } from "../../slices/searchSlice";
 
 //components

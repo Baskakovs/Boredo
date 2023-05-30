@@ -1,6 +1,5 @@
 import styled from "styled-components";
 import { useState, useEffect } from "react";
-function Post({post}){
 const PostBox = styled.div`
 box-sizing: border-box;
 
@@ -143,9 +142,10 @@ border: none;
 margin-right: 8px;
 
 color: #000000;
-`
-const [date, setDate] = useState("");
+`;
 
+function Post({post}){
+const [date, setDate] = useState("");
 useEffect(() => {
     const dateString = post.created_at
     const [year, month, day] = dateString.split("T")[0].split("-");

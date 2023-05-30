@@ -57,7 +57,54 @@ function Feed(){
         }
         )
     }, []);
-  
+
+    //fetching the feed when a country is selected
+    const countrySelected = useSelector((state) => state.search.countrySelected);
+    useEffect(() => {
+      if(countrySelected !== false){
+        fetch(`/posts/country/${countrySelected}`,
+        {
+          method: 'GET',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+        })
+        .then(res =>{
+          if(res.ok){
+            return res.json()
+          }
+        })
+        .then(data => {
+          dispatch(setFeed(data))
+        }
+        )
+      }
+    }, [countrySelected]);
+
+    //fetching the feed when a category is selected
+    const categorySelected = useSelector((state) => state.search.categorySelected);
+    useEffect(() => {
+      if(countrySelected !== false){
+        fetch(`/posts/category/${categorySelected}`,
+        {
+          method: 'GET',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+        })
+        .then(res =>{
+          if(res.ok){
+            return res.json()
+          }
+        })
+        .then(data => {
+          dispatch(setFeed(data))
+        }
+        )
+      }
+    }, [categorySelected]);
+
+
     const feed = useSelector((state) => state.feed.feed);
     return(
         <>

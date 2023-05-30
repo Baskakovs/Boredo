@@ -5,6 +5,9 @@ Rails.application.routes.draw do
   resources :users
   resources :posts
   get '/posts_first', to: 'posts#first'
+  get '/posts/country/:id', to: 'posts#country'
+  get '/posts/category/:id', to: 'posts#category'
+
   resources :titles, only: [:index, :show]
   get '/geographies', to: 'geographies#index'
   get '/geographies/:id', to: 'categories#index_by_country'
