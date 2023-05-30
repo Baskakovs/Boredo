@@ -2,6 +2,11 @@ import { styled } from '@mui/material/styles';
 import Grid from '@mui/material/Grid';
 import Paper from '@mui/material/Paper';
 import Box from '@mui/material/Box';
+import { useEffect } from 'react';
+
+//redux import
+import { useDispatch, useSelector } from "react-redux";
+import { setFeed } from '../slices/feedSlice';
 
 import SearchAndSort from '../components/large/SearchAndSort';
 import Post from '../components/large/Post';
@@ -32,7 +37,28 @@ const Item = styled(Paper)(({ theme }) => ({
   `
 
 function Feed(){
+    //fetching the initial feed of 15 random posts
+    const dispatch = useDispatch();
+    useEffect(() => {
+        fetch(`posts_first`,
+        {
+          method: 'GET',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+        })
+        .then(res =>{
+          if(res.ok){
+            return res.json()
+          }
+        })
+        .then(data => {
+          dispatch(setFeed(data))
+        }
+        )
+    }, []);
   
+    const feed = useSelector((state) => state.feed.feed);
     return(
         <>
         <FixedContainer>
@@ -40,66 +66,17 @@ function Feed(){
         </FixedContainer>
         <ScrollableContainer>
           <Grid container spacing={2} sx={{display: 'flex', justifyContent:'center'}}>
-            {/* <Grid item xs={12} md={6} lg={4} sx={{display: 'flex', justifyContent:'center'}}>
-              <div>
-                <Post />
-              </div>
-            </Grid>
-            <Grid item xs={12} md={6} lg={4} sx={{display: 'flex', justifyContent:'center'}}>
-              <div>
-                <Post />
-              </div>
-            </Grid>
-            <Grid item xs={12} md={6} lg={4} sx={{display: 'flex', justifyContent:'center'}}>
-              <div>
-                <Post />
-              </div>
-            </Grid>
-            <Grid item xs={12} md={6} lg={4} sx={{display: 'flex', justifyContent:'center'}}>
-              <div>
-                <Post />
-              </div>
-            </Grid>
-            <Grid item xs={12} md={6} lg={4} sx={{display: 'flex', justifyContent:'center'}}>
-              <div>
-                <Post />
-              </div>
-            </Grid>
-            <Grid item xs={12} md={6} lg={4} sx={{display: 'flex', justifyContent:'center'}}>
-              <div>
-                <Post />
-              </div>
-            </Grid>
-            <Grid item xs={12} md={6} lg={4} sx={{display: 'flex', justifyContent:'center'}}>
-              <div>
-                <Post />
-              </div>
-            </Grid>
-            <Grid item xs={12} md={6} lg={4} sx={{display: 'flex', justifyContent:'center'}}>
-              <div>
-                <Post />
-              </div>
-            </Grid>
-            <Grid item xs={12} md={6} lg={4} sx={{display: 'flex', justifyContent:'center'}}>
-              <div>
-                <Post />
-              </div>
-            </Grid>
-            <Grid item xs={12} md={6} lg={4} sx={{display: 'flex', justifyContent:'center'}}>
-              <div>
-                <Post />
-              </div>
-            </Grid>
-            <Grid item xs={12} md={6} lg={4} sx={{display: 'flex', justifyContent:'center'}}>
-              <div>
-                <Post />
-              </div>
-            </Grid>
-            <Grid item xs={12} md={6} lg={4} sx={{display: 'flex', justifyContent:'center'}}>
-              <div>
-                <Post />
-              </div>
-            </Grid> */}
+            {
+              Array.isArray(feed) ? 
+              feed.map((post, index) => (
+                <Grid item xs={12} md={6} lg={4} sx={{display: 'flex', justifyContent:'center'}} key={index}>
+                  <div>
+                    <Post post={post}/>
+                  </div>
+                </Grid>
+              )) 
+              : null
+            }
           </Grid>
         </ScrollableContainer>
         <FixedContainer>

@@ -1,6 +1,6 @@
 import styled from "styled-components";
-
-function Post(){
+import { useState, useEffect } from "react";
+function Post({post}){
 const PostBox = styled.div`
 box-sizing: border-box;
 
@@ -144,18 +144,26 @@ margin-right: 8px;
 
 color: #000000;
 `
+const [date, setDate] = useState("");
+
+useEffect(() => {
+    const dateString = post.created_at
+    const [year, month, day] = dateString.split("T")[0].split("-");
+    const formattedDate = `${day}-${month}-${year}`;
+    setDate(formattedDate);
+}, [post.created_at]);
 
     return(
         <PostBox>
             <Header>
                 <HeaderText>
-                    <Author>Author</Author>
-                    <Date>2021-09-01</Date>
+                    <Author>{post.user.name}</Author>
+                    <Date>{date}</Date>
                 </HeaderText>
             </Header>
             <TextBox>
                 <Text>
-                    De standaard Lorem Ipsum passage, in gebruik sinds de 16e eeuw. "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
+                    {post.text}
                 </Text>
             </TextBox>
             <Footer>

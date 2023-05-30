@@ -4,6 +4,7 @@ Rails.application.routes.draw do
   resources :comments
   resources :users
   resources :posts
+  get '/posts_first', to: 'posts#first'
   resources :titles, only: [:index, :show]
   get '/geographies', to: 'geographies#index'
   get '/geographies/:id', to: 'categories#index_by_country'

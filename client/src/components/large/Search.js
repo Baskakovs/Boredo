@@ -53,11 +53,10 @@ function Search(){
   },[dispatch])
 
 //fetching categories associated with specific country
-const countrySelected = useSelector((state) => state.countrySelected);
+const countrySelected = useSelector((state) => state.search.countrySelected);
 
     useEffect(() => {
         if(countrySelected !== false){
-            console.log(countrySelected, "countrySelected")
             fetch(`/geographies/${countrySelected}`,{
                 method: 'GET',
                 headers: {
@@ -70,14 +69,13 @@ const countrySelected = useSelector((state) => state.countrySelected);
                 }
             })
             .then(categories => {
-                console.log(categories, "categories")
                 dispatch(setCategories(categories))
             })
         }
     },[countrySelected])
 
 //fetching titles associated with specific category
-const categorySelected = useSelector((state) => state.categorySelected);
+const categorySelected = useSelector((state) => state.search.categorySelected);
 
     useEffect(() => {
         if(categorySelected !== false){
@@ -100,10 +98,9 @@ const categorySelected = useSelector((state) => state.categorySelected);
 
   
 //accessing store
-  const countries = useSelector((state) => state.countries);
-  const categories = useSelector((state) => state.categories);
-  const titles = useSelector((state) => state.titles);        
-  console.log(titles, "titles")
+  const countries = useSelector((state) => state.search.countries);
+  const categories = useSelector((state) => state.search.categories);
+  const titles = useSelector((state) => state.search.titles);        
     return(
         <SearchContainer>
             <Row>
