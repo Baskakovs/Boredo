@@ -15,20 +15,20 @@ client = OpenAI::Client.new(access_token: "")
 
 
 puts "Clearing existing data..."
-User.destroy_all
+# User.destroy_all
 # Title.destroy_all
 # Category.destroy_all
-Geography.destroy_all
+# Geography.destroy_all
 
 
 # Generate 100 users with name, email, and date of birth
 puts "Seeding the database..."
 
-geographies = ["USA", "UK", "Germany", "China", "France", "Japan", "EU", "Poland", "Ukraine", "Brazil", "Canada", "India", "Russia", "Australia", "Mexico", "South Korea", "Italy", "Spain", "Netherlands", "Switzerland", "Sweden", "Norway", "Argentina", "Turkey", "Saudi Arabia", "United Arab Emirates", "South Africa", "Egypt", "Indonesia", "Singapore", "Thailand", "New Zealand", "Greece", "Belgium", "Austria", "Portugal", "Ireland", "Denmark", "Czech Republic", "Israel", "Finland", "Malaysia", "Colombia", "Chile", "Vietnam", "Philippines", "Iran", "Pakistan"]
+# geographies = ["USA", "UK", "Germany", "China", "France", "Japan", "EU", "Poland", "Ukraine", "Brazil", "Canada", "India", "Russia", "Australia", "Mexico", "South Korea", "Italy", "Spain", "Netherlands", "Switzerland", "Sweden", "Norway", "Argentina", "Turkey", "Saudi Arabia", "United Arab Emirates", "South Africa", "Egypt", "Indonesia", "Singapore", "Thailand", "New Zealand", "Greece", "Belgium", "Austria", "Portugal", "Ireland", "Denmark", "Czech Republic", "Israel", "Finland", "Malaysia", "Colombia", "Chile", "Vietnam", "Philippines", "Iran", "Pakistan"]
 
-geographies.each do |geography|
-  new_geography = Geography.create(name: geography)
-end
+# geographies.each do |geography|
+#   new_geography = Geography.create(name: geography)
+# end
 
 
 # # geographies = ["USA"]
@@ -84,5 +84,16 @@ end
 #     Post.create(text: content, geography_id: Geography.all.sample.id, category_id: Category.all.sample.id, title_id: Title.all.sample.id, user_id: user.id)
 #   end
 # end
+
+100.times do 
+
+  Comment.create(text: Faker::Lorem.paragraph, user_id: User.all.sample.id, post_id: Post.all.sample.id)
+  
+end
+
+50.times do
+  Subcomment.create(text: Faker::Lorem.paragraph, user_id: User.all.sample.id, comment_id: Comment.all.sample.id)
+end
+
 
 puts "Seeding completed!"

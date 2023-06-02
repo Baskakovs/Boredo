@@ -2,7 +2,6 @@ import styled from "styled-components";
 
 const Box = styled.div`
   width: 136px;
-  height: 30px;
   display: flex;
   flex: none;
   order: 3;
