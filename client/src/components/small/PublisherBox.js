@@ -38,10 +38,10 @@ const Date = styled.span`
   color: ${(props) => (props.grey ? "#BFBFBF" : "black")};
 `;
 
-function PublisherBox({ grey }) {
+function PublisherBox({ grey, user, date }) {
   return (
     <Box>
-      <Author grey={grey}>Author</Author>
+      <Author grey={grey}>{user}</Author>
       <Date grey={grey}>20/10/2021</Date>
     </Box>
   );

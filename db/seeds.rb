@@ -19,7 +19,7 @@ puts "Clearing existing data..."
 # Title.destroy_all
 # Category.destroy_all
 # Geography.destroy_all
-
+Subcomment.destroy_all
 
 # Generate 100 users with name, email, and date of birth
 puts "Seeding the database..."
@@ -85,13 +85,13 @@ puts "Seeding the database..."
 #   end
 # end
 
-100.times do 
+# 100.times do 
 
-  Comment.create(text: Faker::Lorem.paragraph, user_id: User.all.sample.id, post_id: Post.all.sample.id)
+#   Comment.create(text: Faker::Lorem.paragraph, user_id: User.all.sample.id, post_id: Post.all.sample.id)
   
-end
+# end
 
-50.times do
+200.times do
   Subcomment.create(text: Faker::Lorem.paragraph, user_id: User.all.sample.id, comment_id: Comment.all.sample.id)
 end
 

@@ -1,5 +1,11 @@
 require 'byebug'
 class PostsController < ApplicationController
+
+    def show
+        post = Post.find(params[:id])
+        render json: post.as_json(include: { comments: { include: :subcomments } })
+    end
+    
     def first
         posts = Post.order('RANDOM()').limit(15)
         render json: posts, status: 200

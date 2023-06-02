@@ -1,5 +1,6 @@
 import styled from "styled-components";
 import { useState, useEffect } from "react";
+import { Link } from "react-router-dom" 
 const PostBox = styled.div`
 box-sizing: border-box;
 
@@ -142,6 +143,7 @@ border: none;
 margin-right: 8px;
 
 color: #000000;
+cursor: pointer;
 `;
 
 function Post({post}){
@@ -167,7 +169,9 @@ useEffect(() => {
                 </Text>
             </TextBox>
             <Footer>
-                <ReadFurther>Read Further</ReadFurther>
+                <Link to={`/post/${post.id}`} style={{ textDecoration: 'none' }}>
+                    <ReadFurther>Read Further</ReadFurther>
+                </Link>
             </Footer>
         </PostBox>
     );

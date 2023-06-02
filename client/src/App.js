@@ -1,4 +1,5 @@
 import React from 'react';
+import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 
 //pages
 import Feed from './pages/Feed';
@@ -7,9 +8,12 @@ import ReadFurther from './pages/ReadFurther';
 
 function App() {
   return (
-    <>
-      <ReadFurther />
-    </>
+    <Router>
+      <Switch>
+        <Route path="/feed" exact component={Feed} />
+        <Route path="/post/:id" exact component={ReadFurther} />
+      </Switch>
+    </Router>
   );
 }
 

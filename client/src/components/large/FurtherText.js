@@ -1,3 +1,6 @@
+//redux import
+import { useSelector } from "react-redux";
+//components
 import styled from "styled-components";
 import HeaderText from "../small/HeaderSmall";
 import PublisherBox from "../small/PublisherBox";
@@ -88,7 +91,9 @@ flex-grow: 0;
 `
 
 
-function FurtherText(){
+function FurtherText({postId}){
+
+
     return(
         <Box>
             <HeaderBox>
@@ -98,10 +103,9 @@ function FurtherText(){
             </HeaderBox>
             <TextBox>
                 <Text>
-                De standaard Lorem Ipsum passage, in gebruik sinds de 16e eeuw. "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
                 </Text>
             </TextBox>
-            <PublisherBox/>
+            <PublisherBox />
         </Box>
     )
 }
