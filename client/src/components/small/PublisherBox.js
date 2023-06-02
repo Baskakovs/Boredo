@@ -1,15 +1,16 @@
 import styled from "styled-components";
-
+import {useEffect, useState} from "react";
 const Box = styled.div`
   width: 136px;
   display: flex;
   flex: none;
   order: 3;
   flex-grow: 0;
+  gap: 8px
 `;
 
 const Author = styled.span`
-  width: 55px;
+  width: auto;
   height: 15px;
   left: 0px;
   top: 202px;
@@ -24,7 +25,7 @@ const Author = styled.span`
 `;
 
 const Date = styled.span`
-  width: 68px;
+  width: auto;
   height: 15px;
   left: 68px;
   top: 202px;
@@ -39,10 +40,21 @@ const Date = styled.span`
 `;
 
 function PublisherBox({ grey, user, date }) {
+const [date2, setDate2] = useState("");
+useEffect(() => {
+    if(date !== undefined){
+    const dateString = date
+    const [year, month, day] = dateString.split("T")[0].split("-");
+    const formattedDate = `${day}-${month}-${year}`;
+    setDate2(formattedDate);
+    }
+}, [date]);
+
+    
   return (
     <Box>
       <Author grey={grey}>{user}</Author>
-      <Date grey={grey}>20/10/2021</Date>
+      <Date grey={grey}>{date2}</Date>
     </Box>
   );
 }

@@ -3,7 +3,7 @@ class PostsController < ApplicationController
 
     def show
         post = Post.find(params[:id])
-        render json: post.as_json(include: { comments: { include: :subcomments } })
+        render json: post, serializer: PostWithCommentsSerializer, status: 200
     end
     
     def first

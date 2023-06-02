@@ -1,5 +1,6 @@
 //redux import
 import { useSelector } from "react-redux";
+import { useEffect } from "react";
 //components
 import styled from "styled-components";
 import HeaderText from "../small/HeaderSmall";
@@ -91,22 +92,29 @@ flex-grow: 0;
 `
 
 
-function FurtherText({postId}){
+function FurtherText(){
 
-
+    const post = useSelector((state) => state.comments.comments);
+    console.log(post)
     return(
-        <Box>
+        <>
+        {
+            post === undefined || post.length == 0? null :
+            <Box>
             <HeaderBox>
                 <HeaderText>
-                China | Politics | 20th National Congress
+                {`${post.geography.name} | ${post.category.name} | ${post.title.name}`}
                 </HeaderText>
             </HeaderBox>
             <TextBox>
                 <Text>
+                {post.text}
                 </Text>
             </TextBox>
-            <PublisherBox />
-        </Box>
+            <PublisherBox user={post.user.name} date={post.created_at}/>
+            </Box>
+        }
+        </>
     )
 }
 export default FurtherText;

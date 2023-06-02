@@ -27,15 +27,12 @@ function ReadFurther() {
                 })
             }
         })
-    }
-        , [dispatch])
+    },[dispatch])
 
-    const comments = useSelector((state) => state.comments.comments);
-    console.log(comments, "comments");
     return (
         <div>
             <BackBar />
-            <FurtherText postId={id}/>
+            <FurtherText/>
             <CommentSection />
         </div>
     )
