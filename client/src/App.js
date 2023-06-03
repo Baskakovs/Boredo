@@ -12,6 +12,7 @@ function App() {
       <Switch>
         <Route path="/feed" exact component={Feed} />
         <Route path="/post/:id" exact component={ReadFurther} />
+        <Route path="/login" exact component={Login} />
       </Switch>
     </Router>
   );

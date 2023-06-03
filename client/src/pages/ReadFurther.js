@@ -2,7 +2,7 @@ import { useParams } from "react-router-dom";
 import {useEffect} from "react";
 
 //import redux
-import { useSelector, useDispatch } from "react-redux";
+import { useDispatch } from "react-redux";
 import { setComments } from "../slices/commentSlice";
 //components
 import FurtherText from "../components/large/FurtherText";
@@ -31,7 +31,7 @@ function ReadFurther() {
 
     return (
         <div>
-            <BackBar />
+            <BackBar/>
             <FurtherText/>
             <CommentSection />
         </div>
