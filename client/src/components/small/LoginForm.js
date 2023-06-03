@@ -16,7 +16,6 @@ justify-content: center;
 align-items: center;
 padding: 0px;
 gap: 8px;
-
 `
 
 function LoginForm(){
