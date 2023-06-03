@@ -27,15 +27,14 @@ const Text = styled.span`
   color: ${(props) => (props.grey ? "#BFBFBF" : "#000000")};
 `;
 
-function Comment(){
+function Comment({user, date, text}){
     return(
         <CommentBox>
         <CommentContainer>
           <Text>
-            Agree! De standaard Lorem Ipsum passage, in gebruik sinds de 16e
-            eeuw.
+            {text}
           </Text>
-          <PublisherBox grey/>
+          <PublisherBox user={user} date={date} grey/>
         </CommentContainer>
       </CommentBox>
     )

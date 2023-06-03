@@ -31,20 +31,14 @@ const Text = styled.span`
 
 `;
 
-function SubComment(){
+function SubComment({text, date, user}){
     return(
         <CommentBox>
         <CommentContainer>
           <Text>
-            Agree! De standaard Lorem Ipsum passage, in gebruik sinds de 16e
-            eeuw.
-            Agree! De standaard Lorem Ipsum passage, in gebruik sinds de 16e
-            eeuw.
-            Agree! De standaard Lorem Ipsum passage, in gebruik sinds de 16e
-            eeuw.
-            V
+            {text}
           </Text>
-          <PublisherBox grey/>
+          <PublisherBox date={date} user={user} grey/>
         </CommentContainer>
       </CommentBox>
     )

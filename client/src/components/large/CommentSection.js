@@ -1,5 +1,8 @@
 import styled from "@emotion/styled";
 
+//redux imports
+import { useSelector } from "react-redux";
+
 // components
 import HeaderSmall from "../small/HeaderSmall";
 import Comment from "../small/Comment";
@@ -34,25 +37,37 @@ const CommentContainer = styled.div`
 `;
 
 function CommentSection() {
+
+  const comments = useSelector((state) => state.comments.comments.comments);
+  console.log(comments);
   return (
     <Box>
       <HeaderBox>
         <HeaderSmall>Discussion</HeaderSmall>
       </HeaderBox>
       <CommentContainer>
-        <Comment />
-        <Subcomment />
-        <Subcomment />
-        <Comment />
-        <Comment />
-        <Subcomment />
-        <Subcomment />
-        <Comment />
-        <Subcomment />
-        <Subcomment />
-        <Comment />
-        <Subcomment />
-        <Subcomment />
+        {comments === undefined ? null : (
+          comments.map((comment) => (
+            <>
+              <Comment
+                id={comment.id}
+                text={comment.text}
+                date={comment.created_at}
+                user={comment.user.name}
+              />
+              {comment.subcomments.length > 0 &&
+                comment.subcomments.map((subcomment) => (
+                  <Subcomment
+                    key={subcomment.id}
+                    id={subcomment.id}
+                    text={subcomment.text}
+                    date={subcomment.created_at}
+                    user={subcomment.user}
+                  />
+                ))}
+            </>
+          ))
+        )}
       </CommentContainer>
     </Box>
   );
