@@ -3,6 +3,8 @@ Rails.application.routes.draw do
   resources :subcomments
   resources :comments
   resources :users
+  post '/signup/check_user', to: 'users#check_user_signup'
+
   resources :posts
   get '/posts_first', to: 'posts#first'
   get '/posts/country/:id', to: 'posts#country'

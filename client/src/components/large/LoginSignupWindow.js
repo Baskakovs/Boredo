@@ -23,7 +23,7 @@ const Box = styled.div`
   margin: auto;   
 `;
 
-const ToSignUp = styled.span`
+const ChangeAcion = styled.span`
 display: flex;
 flex-direction: row;
 align-items: center;
@@ -40,7 +40,6 @@ function LoginSignupWindow({children}){
     const login = useSelector((state) => state.login.login);
     const dispatch = useDispatch();
     function handleActionChange(){
-        console.log("clicked")
         dispatch(setLogin(!login))
     }
 
@@ -51,10 +50,24 @@ function LoginSignupWindow({children}){
             }
             {/* <Divider/> */}
             <AlternativeLogin/>
-            <ToSignUp>
-                <p>Don't have an account?</p>
-                <NoBorderBlueButton onClick={handleActionChange}>Sign Up</NoBorderBlueButton>
-            </ToSignUp>
+            <ChangeAcion>
+                {
+                    login ? 
+                    <>
+                    <p>Don't have an account?</p>
+                    <NoBorderBlueButton onClick={handleActionChange}>
+                        Signup
+                    </NoBorderBlueButton>
+                    </>
+                    : 
+                    <>
+                    <p>Already have an account?</p>
+                    <NoBorderBlueButton onClick={handleActionChange}>
+                        Log In
+                    </NoBorderBlueButton>
+                    </>
+                }
+            </ChangeAcion>
         </Box>
     )
 }

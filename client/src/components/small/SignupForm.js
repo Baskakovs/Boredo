@@ -48,6 +48,20 @@ function SignUpForm(){
           })
         );
       }
+
+    function handleNext(){
+        fetch('/signup/check_user',{
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+            },
+            body: JSON.stringify(signUpForm),
+        })
+        .then((r) => r.json())
+        .then((data) => {
+            console.log(data);
+        })
+    }
       
     return(
         <Box>
@@ -70,7 +84,7 @@ function SignUpForm(){
             value={signUpForm.date_of_birth} 
             handleChange={handleChange}/>
 
-            <ButtonBlueLarge>Next</ButtonBlueLarge>
+            <ButtonBlueLarge onClick={handleNext}>Next</ButtonBlueLarge>
             </>
             : 
             <>
