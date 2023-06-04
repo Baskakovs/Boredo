@@ -1,19 +1,33 @@
 class User < ApplicationRecord
 
     has_secure_password
-    # validates :password, presence: true, length: { minimum: 6 }
+    validate :password_complexity
+    validates :name, presence: true
+    validates :email, presence: true, uniqueness: true, format: { with:
+    URI::MailTo::EMAIL_REGEXP }
+    validate :date_of_birth_cannot_be_in_the_future
+    has_many :posts
+
+    private
+
+    def date_of_birth_cannot_be_in_the_future
+        if date_of_birth.present? && date_of_birth > Date.today
+          errors.add(:date_of_birth, "can't be in the future")
+        end
+    end
+
+    def password_complexity
+        if password.present? and not password.match(PASSWORD_REQUIREMENTS)
+            errors.add :password, "must include at least one lowercase letter, one uppercase letter, and one digit"
+        end
+    end
+
+    PASSWORD_REQUIREMENTS = /\A
+    (?=.{8,})          # Must contain 20 or more characters
+    (?=.*\d)            # Must contain a digit
+    (?=.*[a-z])         # Must contain a lowercase character
+    (?=.*[A-Z])         # Must contain an uppercase character
+    (?=.*[[:^alnum:]])  # Must contain a symbol
+  /x
 
 end
-
-#     PASSWORD_REQUIREMENTS = /\A
-#     (?=.{8,})          # Must contain 20 or more characters
-#     (?=.*\d)            # Must contain a digit
-#     (?=.*[a-z])         # Must contain a lowercase character
-#     (?=.*[A-Z])         # Must contain an uppercase character
-#     (?=.*[[:^alnum:]])  # Must contain a symbol
-#   /x
-  
-#     #Validations
-#     validates :name, presence: true
-#     validates :email, presence: true, uniqueness: true, format: { with: 
-#     URI::MailTo::EMAIL_REGEXP }
