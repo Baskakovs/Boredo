@@ -5,12 +5,12 @@ const loginSlice = createSlice({
     initialState: {
         login: true,
         signup: false,
-        signupStage1: true,
         signUpForm: {
             name: "",
             email: "",
             date_of_birth: "dd-mm-yyyy",
             password: "",
+            password_confirmation: "",
         }
     },
     reducers: {
@@ -18,12 +18,9 @@ const loginSlice = createSlice({
             state.login = !state.login;
             state.signup = !state.signup;
         },
-        setSignupStage1: (state) => {
-            state.signupStage1 = !state.signupStage1;
-        },
         setSignup: (state, action) => {
             state.signUpForm = action.payload;
-          }
+        }
 
     }
 });

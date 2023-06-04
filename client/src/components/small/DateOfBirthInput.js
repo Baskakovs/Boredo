@@ -9,7 +9,7 @@ const DateOfBirthInput = styled.div`
 
 const DateOfBirthLabel = styled.label`
   position: absolute;
-  top: 30px;
+  top: -7px;
   left: 10px;
   background: #FBFBFB;
   padding: 0 5px;

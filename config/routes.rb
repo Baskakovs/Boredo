@@ -2,8 +2,7 @@ Rails.application.routes.draw do
   
   resources :subcomments
   resources :comments
-  resources :users
-  post '/signup/check_user', to: 'users#check_user_signup'
+  resources :users, only: [:create, :show]
 
   resources :posts
   get '/posts_first', to: 'posts#first'

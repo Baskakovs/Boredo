@@ -24,7 +24,30 @@ gap: 8px;
 `
 
 function SignUpForm(){
-    const dispatch = useDispatch();
+    
+    function handleNext() {
+        console.log(signUpForm, "signUpForm");
+        fetch("/users", {
+            method: "POST",
+            headers: {
+            "Content-Type": "application/json",
+            },
+            body: JSON.stringify(signUpForm),
+        })
+            .then((res) => {
+            if (res.ok) {
+                res.json().then((user) => {
+                console.log(user);
+                });
+            }else{
+                res.json().then((errors) => {
+                    console.log(errors);
+                });
+            }
+            });
+        }
+          
+        const dispatch = useDispatch();
     const signUpForm = useSelector((state) => state.login.signUpForm);
     console.log(signUpForm, "signUpForm");
     const signupStage1 = useSelector((state) => state.login.signupStage1);
@@ -48,26 +71,8 @@ function SignUpForm(){
           })
         );
       }
-
-    function handleNext(){
-        fetch('/signup/check_user',{
-            method: "POST",
-            headers: {
-                "Content-Type": "application/json",
-            },
-            body: JSON.stringify(signUpForm),
-        })
-        .then((r) => r.json())
-        .then((data) => {
-            console.log(data);
-        })
-    }
-      
     return(
-        <Box>
-            {
-            signupStage1 ? 
-            <>
+        <>
             <BoredoTitle>Boredo</BoredoTitle>
             <InputBox placeholder="Full Name" 
             name="name"
@@ -84,19 +89,21 @@ function SignUpForm(){
             value={signUpForm.date_of_birth} 
             handleChange={handleChange}/>
 
-            <ButtonBlueLarge onClick={handleNext}>Next</ButtonBlueLarge>
-            </>
-            : 
-            <>
-            <BoredoTitle>Boredo</BoredoTitle>
-            <InputBox placeholder="Passowrd" type="password"
+            <InputBox
+            placeholder="Passowrd"
+            name="password"
+            value={signUpForm.password}
+            type="password"
             onChange={handleChange}/>
-            <InputBox placeholder="Repeat password" type="password"
-            handleChange={handleChange}/>
-            <ButtonBlueLarge>Signup</ButtonBlueLarge>
-            </>
-            }
-        </Box>
+
+            <InputBox 
+            name="password_confirmation"
+            value={signUpForm.password_confirmation}
+            placeholder="Repeat password"
+            type="password"
+            onChange={handleChange}/>
+            <ButtonBlueLarge onClick={handleNext}>Next</ButtonBlueLarge>
+        </>
     )
 }
 export default SignUpForm;
