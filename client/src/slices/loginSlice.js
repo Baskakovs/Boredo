@@ -12,15 +12,22 @@ const loginSlice = createSlice({
             password: "",
             password_confirmation: "",
         },
-        user:{}
+        loginForm:{
+            email: "",
+            password: ""
+        },
+        user: null
     },
     reducers: {
         setLogin: (state) => {
             state.login = !state.login;
             state.signup = !state.signup;
         },
-        setSignup: (state, action) => {
+        setSignupForm: (state, action) => {
             state.signUpForm = action.payload;
+        },
+        setLoginForm: (state, action) => {
+            state.loginForm = action.payload;
         },
         setUser: (state, action) =>{
             state.user = action.payload;
@@ -28,5 +35,5 @@ const loginSlice = createSlice({
     }
 });
 
-export const { setLogin, setSignupStage1, setSignup, setUser } = loginSlice.actions;
+export const { setLogin, setSignupStage1, setSignupForm, setUser, setLoginForm } = loginSlice.actions;
 export default loginSlice.reducer;

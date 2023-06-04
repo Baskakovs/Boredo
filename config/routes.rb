@@ -1,8 +1,11 @@
 Rails.application.routes.draw do
   
+  resources :sessions
   resources :subcomments
   resources :comments
   resources :users, only: [:create, :show]
+  post '/login', to: 'sessions#create'
+  get '/me', to: 'users#show' 
 
   resources :posts
   get '/posts_first', to: 'posts#first'

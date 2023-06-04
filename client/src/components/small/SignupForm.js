@@ -7,7 +7,7 @@ import DoBInput from "./DateOfBirthInput";
 
 //imoport redux
 import { useDispatch, useSelector } from "react-redux";
-import { setSignup, setUser } from "../../slices/loginSlice";
+import { setSignupForm, setUser } from "../../slices/loginSlice";
 
 import { useHistory } from "react-router-dom";
 
@@ -65,7 +65,7 @@ function SignUpForm(){
         }
       
         dispatch(
-          setSignup({
+          setSignupForm({
             ...signUpForm,
             [name]: updatedValue,
           })
