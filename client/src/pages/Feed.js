@@ -153,9 +153,6 @@ function Feed(){
             }
           </Grid>
         </ScrollableContainer>
-        <FixedContainer>
-          <NavBar />
-        </FixedContainer>
       </>
     )
 }
