@@ -1,5 +1,6 @@
 class User < ApplicationRecord
-
+    has_many :posts
+    
     has_secure_password
     validate :password_complexity
     validates :name, presence: true

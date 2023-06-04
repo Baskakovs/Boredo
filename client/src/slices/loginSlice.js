@@ -11,7 +11,8 @@ const loginSlice = createSlice({
             date_of_birth: "dd-mm-yyyy",
             password: "",
             password_confirmation: "",
-        }
+        },
+        user:{}
     },
     reducers: {
         setLogin: (state) => {
@@ -20,10 +21,12 @@ const loginSlice = createSlice({
         },
         setSignup: (state, action) => {
             state.signUpForm = action.payload;
+        },
+        setUser: (state, action) =>{
+            state.user = action.payload;
         }
-
     }
 });
 
-export const { setLogin, setSignupStage1, setSignup } = loginSlice.actions;
+export const { setLogin, setSignupStage1, setSignup, setUser } = loginSlice.actions;
 export default loginSlice.reducer;

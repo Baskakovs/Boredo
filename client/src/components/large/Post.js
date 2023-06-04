@@ -154,6 +154,7 @@ useEffect(() => {
     const formattedDate = `${day}-${month}-${year}`;
     setDate(formattedDate);
 }, [post.created_at]);
+console.log(post)
 
     return(
         <PostBox>

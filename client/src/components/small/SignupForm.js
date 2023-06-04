@@ -4,11 +4,12 @@ import BoredoTitle from "./BoredoTitle";
 import InputBox from "./Input";
 import ButtonBlueLarge from "./ButtonBlueLarge";
 import DoBInput from "./DateOfBirthInput";
-import { Button } from "@mui/material";
 
 //imoport redux
 import { useDispatch, useSelector } from "react-redux";
-import { setSignup, setSignupStage1 } from "../../slices/loginSlice";
+import { setSignup, setUser } from "../../slices/loginSlice";
+
+import { useHistory } from "react-router-dom";
 
 const Box = styled.div`
 /* Auto layout */
@@ -25,8 +26,8 @@ gap: 8px;
 
 function SignUpForm(){
     
+    const history = useHistory();
     function handleNext() {
-        console.log(signUpForm, "signUpForm");
         fetch("/users", {
             method: "POST",
             headers: {
@@ -37,20 +38,19 @@ function SignUpForm(){
             .then((res) => {
             if (res.ok) {
                 res.json().then((user) => {
-                console.log(user);
+                    dispatch(setUser(user))
+                    history.push("/feed");
                 });
             }else{
                 res.json().then((errors) => {
-                    console.log(errors);
+                    console.log(errors)
                 });
             }
-            });
-        }
+        })
+    }
           
-        const dispatch = useDispatch();
+    const dispatch = useDispatch();
     const signUpForm = useSelector((state) => state.login.signUpForm);
-    console.log(signUpForm, "signUpForm");
-    const signupStage1 = useSelector((state) => state.login.signupStage1);
     function handleChange(e) {
         const { name, value } = e.target;
         let updatedValue = value;
@@ -106,4 +106,4 @@ function SignUpForm(){
         </>
     )
 }
-export default SignUpForm;
+export default SignUpForm
