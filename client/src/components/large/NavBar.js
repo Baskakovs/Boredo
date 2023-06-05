@@ -60,7 +60,7 @@ function NavBar() {
         <img src={ProfileIcon} alt="Profile Icon" />
       </IconContainer>
       </Link>
-      <Link to="/wrtie">
+      <Link to="/write">
       <IconContainer>
         <img src={WriteIcon} alt="Write Icon" />
       </IconContainer>
