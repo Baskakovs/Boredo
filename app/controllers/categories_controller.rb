@@ -4,4 +4,5 @@ class CategoriesController < ApplicationController
         categories = country.categories
         render json: categories, status: 200
     end
+
 end

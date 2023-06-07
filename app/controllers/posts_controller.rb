@@ -29,4 +29,9 @@ class PostsController < ApplicationController
         render json: posts, each_serializer: PostsByTitleSerializer, status: 200
     end
 
+    def index
+        user = User.find(session[:user_id])
+        render json: user.posts, status: 200
+    end
+
 end

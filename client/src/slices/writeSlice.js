@@ -2,9 +2,6 @@ import { createSlice } from '@reduxjs/toolkit'
 
 const writeSlice = createSlice({
     name: 'write',
-    geography: false,
-    category: false,
-    title: false,
     initialState: {
         writeForm: {
             user_id: "",
@@ -13,17 +10,20 @@ const writeSlice = createSlice({
             title_id: "",
             text: "",
             published: true
-        }
+        },
+        geography: false,
+        category: "",
+        title: "",
     },
     reducers: {
         setWriteForm(state, action) {
             state.writeForm = action.payload
+        },
+        setGeography(state, action){
+            state.geography = action.payload
         }
-    },
-    setStateBoolean(state, action) {
-        state[action.payload] = !state[action.payload]
     }
 })
 
-export const { setWriteForm } = writeSlice.actions
+export const { setWriteForm, setGeography } = writeSlice.actions
 export default writeSlice.reducer

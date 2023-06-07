@@ -7,6 +7,7 @@ import SelectWithSearch from "../components/small/SelectWithSearch"
 //import redux
 import { useSelector, useDispatch } from "react-redux"
 import { setCountries, setCategories, setTitles } from "../slices/searchSlice"
+import { setWriteForm, setGeography } from "../slices/writeSlice"
 
 import { useEffect } from "react"
 
@@ -50,17 +51,46 @@ letter-spacing: 0.04em;
 const ViewArray = ['Publish', 'Archive']
 
 function Write(){
+    const writeForm = useSelector((state) => state.write.writeForm)
+    const countries = useSelector((state) => state.search.countries[0])
+    const categories = useSelector((state) => state.search.categories)
 
-    const dispatch = useDispatch();
+    const geography = useSelector((state) => state.write.geography)
+    console.log(geography, "geography")
+    const dispatch = useDispatch()
     useEffect(()=>{
         fetch("/geographies")
         .then((res) => res.json())
         .then((countries) => {
             dispatch(setCountries(countries))
-        });
+        })
     },[])
 
-    const countries = useSelector((state) => state.search.countries);
+    useEffect(()=>{
+        fetch("/categories")
+        .then((res) => res.json())
+        .then((categories) => {
+            dispatch(setCategories(categories))
+        })
+    },[geography])
+
+    function handleChange(e) {
+        const { name, value } = e.target;
+        let updatedValue = value;
+        dispatch(setWriteForm({ 
+            ...writeForm,
+            [name]: updatedValue,
+        }))
+    }
+
+    function handleSelectChange(e){
+        console.log(e.target, "id")
+        dispatch(setGeography({
+            name: e.target.value,
+            id: e.target.id
+        })) 
+    }
+
     return(
         <Box>
             <Row>
@@ -69,15 +99,33 @@ function Write(){
             </Row>
         <InputBox
         placeholder="Write your post here..."
+        name="text"
+        value={writeForm.text}
+        onChange={handleChange}
         autoFocus
         />
         <Row>
-        <SelectWithSearch optionArray={countries}/>
-        <SelectWithSearch optionArray={countries}/>
-        <SelectWithSearch optionArray={countries}/>
+        <SelectWithSearch
+        name="geography"
+        value={writeForm.geography}
+        optionArray={countries}
+        placeholder={"Geography"}
+        handleSelectChange={handleSelectChange}
+        />
+        {
+            geography !== false ?
+            <SelectWithSearch
+            name="category"
+            value={writeForm.category}
+            optionArray={categories}
+            placeholder={"Category"}
+            />
+            :
+            null
+        }
         </Row>
 
         </Box>
     )
 }
-export default Write;
+export default Write

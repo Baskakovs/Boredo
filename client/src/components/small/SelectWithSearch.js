@@ -1,5 +1,6 @@
-import React, { useState } from "react";
-import styled from "styled-components";
+import React, { useState } from "react"
+import styled from "styled-components"
+
 
 const SelectInput = styled.input`
 box-sizing: border-box;
@@ -21,26 +22,25 @@ const OptionList = styled.datalist`
   /* Add styling for the datalist element */
 `;
 
-function SelectWithSearch({optionArray}) {
-  const [selectedValue, setSelectedValue] = useState("");
-
-  const handleInputChange = (event) => {
-    setSelectedValue(event.target.value);
-  };
+function SelectWithSearch({optionArray, name, value, handleSelectChange, placeholder}) {
 
   return (
     <div>
       <SelectInput
         type="text"
-        value={selectedValue}
-        onChange={handleInputChange}
+        name={name}
+        value={value}
+        onChange={(e)=>handleSelectChange(e)}
         list="options"
-        placeholder="Geography..."
+        placeholder={placeholder}
       />
       <OptionList id="options">
         {
             Array.isArray(optionArray) && optionArray.map((option) => (
-                <option key={option.id} value={option.name} />
+                <option 
+                key={option.id}
+                id={option.id}
+                value={option.name} />
             ))
         }
       </OptionList>

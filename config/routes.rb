@@ -3,7 +3,9 @@ Rails.application.routes.draw do
   resources :sessions
   resources :subcomments
   resources :comments
-  resources :users, only: [:create, :show]
+  resources :users, only: [:create, :show] do
+    resources :posts, only: [:index]
+  end
   post '/login', to: 'sessions#create'
   get '/me', to: 'users#show' 
 

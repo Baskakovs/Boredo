@@ -13,6 +13,7 @@ import ReadFurther from './pages/ReadFurther';
 import Profile from './pages/Profile';
 import Write from './pages/Write';
 import NavBar from './components/large/NavBar';
+import UserPosts from './pages/UserPosts'
 
 function App() {
   const user = useSelector((state) => state.login.user)
@@ -40,6 +41,7 @@ function App() {
         <Route path="/login" exact component={Login} />
         <Route path="/profile" exact component={Profile} />
         <Route path="/write" exact component={Write} />
+        <Route path="/profile/posts" component={UserPosts}/>
         </>
       }
       </Switch>

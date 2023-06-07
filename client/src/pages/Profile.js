@@ -1,5 +1,7 @@
 import styled from "styled-components";
 
+import { Link } from "react-router-dom"
+
 //components
 import TitleM from "../components/small/TitleM"
 import MenuText from "../components/small/MenuText";
@@ -45,18 +47,24 @@ function Profile(){
 
             <TitleM>Account Infomration</TitleM>
             <MenuBox>
+                <Link to={'/profile/posts'}>
                 <Option>
                     <MenuText>Posts</MenuText>
                     <Icon src={Right} alt="arrow-right"/>
                 </Option>
+                </Link>
+                <Link to={'/profile/comments'}>
                 <Option>
                     <MenuText>Comments</MenuText>
                     <Icon src={Right} alt="arrow-right"/>
                 </Option>
+                </Link>
+                <Link to={'/profile/settings'}>
                 <Option>
                     <MenuText>Account Settings</MenuText>
                     <Icon src={Right} alt="arrow-right"/>
                 </Option>
+                </Link>
             </MenuBox>
         </Box>
     )
