@@ -9,7 +9,7 @@ Rails.application.routes.draw do
   post '/login', to: 'sessions#create'
   get '/me', to: 'users#show' 
 
-  resources :posts
+  resources :posts, only: [:create ]
   get '/posts_first', to: 'posts#first'
   get '/posts/country/:id', to: 'posts#country'
   get '/posts/category/:id', to: 'posts#category'
@@ -17,8 +17,11 @@ Rails.application.routes.draw do
 
   resources :titles, only: [:index, :show]
   resources :geographies, only: [:index, :show] do
-    resources :categories, only: [:index]
-  end
+    resources :categories, only: [:index] do
+      resources :titles, only: [:index]
+    end
+  end 
+
   get '/geographies', to: 'geographies#index'
   get '/geographies/:id', to: 'categories#index_by_country'
   resources :categories, only: [:index]

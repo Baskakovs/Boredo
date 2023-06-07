@@ -1,41 +1,49 @@
 import styled from "styled-components";
 
+import Grid from '@mui/material/Grid';
+
 import DropDownButton from "../components/small/DropDownButton"
 import SmallBlueButton from "../components/small/SmallBlueButton"
 import SelectWithSearch from "../components/small/SelectWithSearch"
+import ToggleSwitch from "../components/small/toggleSwitch"
 
 //import redux
 import { useSelector, useDispatch } from "react-redux"
-import { setWriteForm, setGeographiesList, setGeographySelected, setCategoriesList } from "../slices/writeSlice"
+import { setVisibility, setText, setGeographiesList, setGeographySelected, setCategoriesList, setCategorySelected, setTitlesList, setTitleSelected} from "../slices/writeSlice"
 
 import { useEffect } from "react"
-import { setCategories } from "../slices/searchSlice";
+import { useHistory } from "react-router-dom"
 
-const Box = styled.div`
-display: flex;
-flex-direction: column;
-align-items: center;
-`
+const Box = styled(Grid)`
+  display: flex;
+  flex-direction: column;
+  align-items: space-between;
+  justify-content: center;
+  width: 100%;
+    height: 100vh;
+`;
+
 const Row = styled.div`
-width: 375px;
+width: 100%;
 display: flex;
 flex-direction: row;
-justify-content: space-between;
+justify-content: ${props => props.justifyContent};
 padding-bottom: 16px;
 `
 
-const InputBox = styled.input`
+
+const InputBox = styled.textarea`
 display: flex;
-flex-direction: row;
+flex-direction: column;
 align-items: flex-start;
 padding: 0px 0px 0px 6px;
 gap: 32px;
 
-width: 365px;
+width: 100%;
 
 border: none;
 
-font-style: normal;
+font-family: Helvetica Neue;
 font-weight: 400;
 font-size: 16px;
 line-height: 22px;
@@ -52,14 +60,30 @@ const ViewArray = ['Publish', 'Archive']
 
 function Write(){
     const writeForm = useSelector((state) => state.write.writeForm)
-    const geographiesList = useSelector((state) => state.write.geographiesList)
-    const categoriesList = useSelector((state) => state.write.categoriesList)
-    const geographySelected = useSelector((state) => state.write.geography_selected)
-    const categorySelected = useSelector((state) => state.write.category_selected)
-
-    console.log(geographySelected)
 
     const dispatch = useDispatch()
+    const history = useHistory()
+
+    //handling visibility input
+    function handleVisibilityChange(){
+        console.log("hi")
+        dispatch(setVisibility())
+    }
+
+    //handling text input
+    function handleTextChange(e){
+        dispatch(setText({...writeForm, text: e.target.value}))
+    }
+
+    //Geography, category and title selection 
+
+    const geographiesList = useSelector((state) => state.write.geographiesList)
+    const categoriesList = useSelector((state) => state.write.categoriesList)
+    const titlesList = useSelector((state) => state.write.titlesList)
+    const geographySelected = useSelector((state) => state.write.geography_selected)
+    const categorySelected = useSelector((state) => state.write.category_selected)
+    const titleSelected = useSelector((state) => state.write.title_selected)
+    const user_id = useSelector((state) => state.login.user.id)
 
     useEffect(()=>{
         fetch(`/geographies`,{
@@ -96,29 +120,85 @@ function Write(){
         }
       }, [geographySelected])
 
+      useEffect(() => {
+        if(geographySelected && categorySelected) {
+fetch(`/geographies/${geographySelected.id}/categories/${categorySelected.id}/titles`, {
+            method: "GET",
+            headers: {
+              "Content-Type": "application/json",
+            },
+          })
+            .then((res) => {
+              if (res.ok) {
+                res.json().then((titles) => {
+                  dispatch(setTitlesList(titles))
+                })
+              }
+            })
+        }
+      }, [categorySelected])
+
     function handleSelectChange(e){
         const { name, value } = e.target
-        let selectedGeography
         if(name === "geography"){
-            selectedGeography = geographiesList.find((geography) => geography.name == value && geography.id !== undefined)
+            let selectedGeography = geographiesList.find((geography) => geography.name == value && geography.id !== undefined)
             dispatch(setGeographySelected(selectedGeography))
+        }
+        if(name === "category"){
+            let selectedCategory = categoriesList.find((category) => category.name == value && category.id !== undefined)
+            dispatch(setCategorySelected(selectedCategory))
+        }
+        if(name === "title"){
+            let selectedTitle = titlesList.find((title) => title.name == value && title.id !== undefined)
+            dispatch(setTitleSelected(selectedTitle))
         }
     }
 
+    function handlePublish(){
+        fetch(`posts`,{
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+            },
+            body: JSON.stringify({
+                text: writeForm.text,
+                published: writeForm.published,
+                geography_id: geographySelected.id,
+                category_id: categorySelected.id,
+                title_id: titleSelected.id,
+                user_id: user_id
+            })
+        })
+        .then((res) =>{ if(res.ok){
+            res.json().then((post) => {
+                history.push(`/`)
+            })
+        }
+        })
+    }
+
     return(
-        <Box>
-            <Row>
-            <DropDownButton optionsArray={ViewArray}/>
-            <SmallBlueButton/>
+        <Box container>
+        <Grid container xs={12} md={4} sx={{alignItems: "center"}} >
+            <Row justifyContent="space-between">
+                <ToggleSwitch
+                optionsArray={ViewArray}
+                handleVisibilityChange={handleVisibilityChange}
+                label="Visibility"
+                />
+                <SmallBlueButton onClick={handlePublish}/>
             </Row>
         <InputBox
         placeholder="Write your post here..."
         name="text"
         value={writeForm.text}
-        // onChange={handleChange}
+        onChange={handleTextChange}
+        rows={8}
         autoFocus
         />
-        <Row>
+        <Row 
+        justifyContent="start"
+        >
         <SelectWithSearch
         key={1}
         name="geography"
@@ -131,15 +211,27 @@ function Write(){
             <SelectWithSearch
             key={2}
             name="category"
-            // value={categorySelected}
             options={categoriesList}
             placeholder={"Category"}
+            handleSelectChange={handleSelectChange}
+            />
+            :
+            null
+        }
+        {
+            categorySelected !== false ?
+            <SelectWithSearch
+            key={3}
+            name="title"
+            options={titlesList}
+            placeholder={"Title"}
+            handleSelectChange={handleSelectChange}
             />
             :
             null
         }
         </Row>
-
+        </Grid>
         </Box>
     )
 }

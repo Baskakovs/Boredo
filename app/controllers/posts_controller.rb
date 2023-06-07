@@ -34,4 +34,21 @@ class PostsController < ApplicationController
         render json: user.posts, status: 200
     end
 
+    def create
+        post = Post.create!(post_params)
+        render json: post, status: 201
+    rescue ActiveRecord::RecordInvalid => e
+        unprocessable_entity(e)
+    end
+
+    private
+
+    def post_params
+        params.require(:post).permit(:text, :title_id, :category_id, :geography_id, :user_id, :published)
+    end
+
+    def unprocessable_entity(e)
+        render json: { errors: e.record.errors }, status: :unprocessable_entity
+    end
+
 end

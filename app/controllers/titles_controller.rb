@@ -4,4 +4,9 @@ class TitlesController < ApplicationController
         titles = category.titles
         render json: titles, status: 200
     end
+
+    def index
+        category = Category.find(params[:category_id])
+        render json: category.titles, status: 200
+    end
 end
