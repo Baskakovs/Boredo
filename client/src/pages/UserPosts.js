@@ -9,9 +9,7 @@ import { useEffect } from 'react'
 import { useDispatch, useSelector } from "react-redux";
 import { setUserPosts } from '../slices/settingsSlice'
 
-import SearchAndSort from '../components/large/SearchAndSort'
 import Post from '../components/large/Post'
-import NavBar from '../components/large/NavBar'
 
 const Item = styled(Paper)(({ theme }) => ({
     backgroundColor: theme.palette.mode === 'dark' ? '#1A2027' : '#fff',
@@ -73,7 +71,7 @@ function UserPosts(){
               userPosts.map((post, index) => (
                 <Grid item xs={12} md={6} lg={4} sx={{display: 'flex', justifyContent:'center'}} key={index}>
                   <div>
-                    <Post post={post}/>
+                    <Post post={post} edit/>
                   </div>
                 </Grid>
               )) 

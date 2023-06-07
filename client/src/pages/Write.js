@@ -6,10 +6,10 @@ import SelectWithSearch from "../components/small/SelectWithSearch"
 
 //import redux
 import { useSelector, useDispatch } from "react-redux"
-import { setCountries, setCategories, setTitles } from "../slices/searchSlice"
-import { setWriteForm, setGeography } from "../slices/writeSlice"
+import { setWriteForm, setGeographiesList, setGeographySelected, setCategoriesList } from "../slices/writeSlice"
 
 import { useEffect } from "react"
+import { setCategories } from "../slices/searchSlice";
 
 const Box = styled.div`
 display: flex;
@@ -52,43 +52,57 @@ const ViewArray = ['Publish', 'Archive']
 
 function Write(){
     const writeForm = useSelector((state) => state.write.writeForm)
-    const countries = useSelector((state) => state.search.countries[0])
-    const categories = useSelector((state) => state.search.categories)
+    const geographiesList = useSelector((state) => state.write.geographiesList)
+    const categoriesList = useSelector((state) => state.write.categoriesList)
+    const geographySelected = useSelector((state) => state.write.geography_selected)
+    const categorySelected = useSelector((state) => state.write.category_selected)
 
-    const geography = useSelector((state) => state.write.geography)
-    console.log(geography, "geography")
+    console.log(geographySelected)
+
     const dispatch = useDispatch()
+
     useEffect(()=>{
-        fetch("/geographies")
-        .then((res) => res.json())
-        .then((countries) => {
-            dispatch(setCountries(countries))
+        fetch(`/geographies`,{
+            method: "GET",
+            headers: {
+                "Content-Type": "application/json",
+            },
+        })
+        .then((res) =>{ if(res.ok){
+            res.json().then((geographies) => {
+                console.log(geographies, "11")
+                dispatch(setGeographiesList(geographies))
+            })
+        }
         })
     },[])
 
-    useEffect(()=>{
-        fetch("/categories")
-        .then((res) => res.json())
-        .then((categories) => {
-            dispatch(setCategories(categories))
-        })
-    },[geography])
-
-    function handleChange(e) {
-        const { name, value } = e.target;
-        let updatedValue = value;
-        dispatch(setWriteForm({ 
-            ...writeForm,
-            [name]: updatedValue,
-        }))
-    }
+    useEffect(() => {
+        if (geographySelected) {
+          fetch(`/geographies/${geographySelected.id}/categories`, {
+            method: "GET",
+            headers: {
+              "Content-Type": "application/json",
+            },
+          })
+            .then((res) => {
+              if (res.ok) {
+                res.json().then((categories) => {
+                    console.log(categories, "categories")
+                  dispatch(setCategoriesList(categories))
+                })
+              }
+            })
+        }
+      }, [geographySelected])
 
     function handleSelectChange(e){
-        console.log(e.target, "id")
-        dispatch(setGeography({
-            name: e.target.value,
-            id: e.target.id
-        })) 
+        const { name, value } = e.target
+        let selectedGeography
+        if(name === "geography"){
+            selectedGeography = geographiesList.find((geography) => geography.name == value && geography.id !== undefined)
+            dispatch(setGeographySelected(selectedGeography))
+        }
     }
 
     return(
@@ -101,23 +115,24 @@ function Write(){
         placeholder="Write your post here..."
         name="text"
         value={writeForm.text}
-        onChange={handleChange}
+        // onChange={handleChange}
         autoFocus
         />
         <Row>
         <SelectWithSearch
+        key={1}
         name="geography"
-        value={writeForm.geography}
-        optionArray={countries}
+        options={geographiesList}
         placeholder={"Geography"}
         handleSelectChange={handleSelectChange}
         />
         {
-            geography !== false ?
+            geographySelected !== false ?
             <SelectWithSearch
+            key={2}
             name="category"
-            value={writeForm.category}
-            optionArray={categories}
+            // value={categorySelected}
+            options={categoriesList}
             placeholder={"Category"}
             />
             :

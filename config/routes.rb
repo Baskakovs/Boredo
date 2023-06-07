@@ -16,6 +16,9 @@ Rails.application.routes.draw do
   get 'posts/title/:id', to: 'posts#title'
 
   resources :titles, only: [:index, :show]
+  resources :geographies, only: [:index, :show] do
+    resources :categories, only: [:index]
+  end
   get '/geographies', to: 'geographies#index'
   get '/geographies/:id', to: 'categories#index_by_country'
   resources :categories, only: [:index]

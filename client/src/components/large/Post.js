@@ -1,6 +1,10 @@
 import styled from "styled-components";
 import { useState, useEffect } from "react";
 import { Link } from "react-router-dom" 
+
+import EditPostButton from "../small/EditPostButton";
+import zIndex from "@mui/material/styles/zIndex";
+
 const PostBox = styled.div`
 box-sizing: border-box;
 
@@ -25,15 +29,16 @@ flex-grow: 0;
 `
 
 const Header = styled.div`
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    padding: 3px 4px;
+display: flex;
+flex-direction: row;
+align-items: center;
+justify-content: space-between;
+padding: 3px 0px;
 
-    width: 376px;
-    height: 26px;
+width: 376px;
+height: 26px;
 
-    background: #FBFBFB;
+background: #FBFBFB;
 `
 const HeaderText = styled.div`
 /* Auto layout */
@@ -43,6 +48,7 @@ flex-direction: row;
 align-items: flex-start;
 padding: 0px;
 gap: 9px;
+margin-left: 4px
 `
 
 const Author = styled.p`
@@ -58,7 +64,6 @@ color: #000000;
 `
 
 const Date = styled.p`
-font-family: 'Inter';
 font-style: normal;
 font-weight: 400;
 font-size: 10px;
@@ -144,9 +149,13 @@ margin-right: 8px;
 
 color: #000000;
 cursor: pointer;
-`;
+`
 
-function Post({post}){
+const EditButtonBox = styled.div`
+margin-right: 4px;
+`
+
+function Post({post, edit}){
 const [date, setDate] = useState("");
 useEffect(() => {
     const dateString = post.created_at
@@ -163,6 +172,10 @@ console.log(post)
                     <Author>{post.user.name}</Author>
                     <Date>{date}</Date>
                 </HeaderText>
+                {
+                    edit ? <EditButtonBox><EditPostButton/></EditButtonBox> 
+                    : null
+                }
             </Header>
             <TextBox>
                 <Text>

@@ -1,6 +1,9 @@
 import React, { useState } from "react"
 import styled from "styled-components"
 
+//importing redux
+import { useSelector } from "react-redux";
+
 const SelectInput = styled.input`
 box-sizing: border-box;
 display: flex;
@@ -21,32 +24,34 @@ const OptionList = styled.datalist`
   /* Add styling for the datalist element */
 `;
 
-function SelectWithSearch({options, name, value,  placeholder, handleSelectChange}) {
+function SelectCategoryWithSearch(handleSelectChange) {
+
+  const categoriesList = useSelector((state) => state.write.categoriesList)
+
+  console.log(categoriesList, "categoriesList")
 
   return (
     <div>
       <SelectInput
         type="text"
-        name={name}
-        value={value}
+        name={"geography"}
         onChange={(e)=>handleSelectChange(e)}
-        list={name}
-        placeholder={placeholder}
-        key={name}
+        list="options2"
+        placeholder={"Category"}
       />
 
-      <OptionList id={name}>
+      <OptionList id="options2">
         {
-            Array.isArray(options) && options.map((option) => (
-                <option
-                key={option.id}
-                id={option.id}
-                value={option.name} />
-            ))
+          categoriesList.map((option) => (
+            <option 
+            key={option.id}
+            id={option.id}
+            value={option.name} />
+          ))
         }
       </OptionList>
     </div>
   );
 }
 
-export default SelectWithSearch;
+export default SelectCategoryWithSearch;
