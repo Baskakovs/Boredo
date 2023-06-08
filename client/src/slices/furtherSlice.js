@@ -23,13 +23,25 @@ const furtherSlice = createSlice({
                 id: ""
             },
             created_at: ""
+        },
+        subCommentForm: {
+            text: "",
+            comment_id: "",
+            post_id: "",
+            user_id: ""
         }
     },
     reducers: {
         setPost(state, action) {
             state.post = action.payload
+        },
+        setSubcommentForm(state, action) {
+            state.subCommentForm = action.payload
+        },
+        setComments(state, action) {
+            state.post.comments = action.payload
         }
     }
 })
 export default furtherSlice.reducer
-export const { setPost } = furtherSlice.actions
+export const { setPost, setSubcommentForm, setComments} = furtherSlice.actions

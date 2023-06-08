@@ -1,5 +1,9 @@
-import styled from "styled-components";
-import PublisherBox from "../small/PublisherBox";
+import styled from "styled-components"
+import PublisherBox from "../small/PublisherBox"
+import NoBorderBlueButton from "../small/NoBorderBlueButton"
+import ReplyContainer from "./ReplyContainer"
+
+import { useState } from "react"
 
 const CommentBox = styled.div`
   display: flex;
@@ -25,18 +29,38 @@ const Text = styled.span`
   align-items: center;
   letter-spacing: 0.04em;
   color: ${(props) => (props.grey ? "#BFBFBF" : "#000000")};
-`;
+`
 
-function Comment({user, date, text}){
-    return(
-        <CommentBox>
-        <CommentContainer>
-          <Text>
-            {text}
-          </Text>
-          <PublisherBox user={user} date={date} grey/>
-        </CommentContainer>
-      </CommentBox>
-    )
+const Row = styled.div`
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+`
+
+const ReplyButton = styled(NoBorderBlueButton)`
+  font-size: 12px;
+  color: #BFBFBF;
+  `
+
+function Comment({ user, date, text, id }) {
+  const [writeComment, setWriteComment] = useState(false)
+
+  function handleWriteComment() {
+    setWriteComment(!writeComment)
+  }
+  return (
+    <CommentBox>
+      <CommentContainer>
+        <Text>{text}</Text>
+        <Row>
+          <PublisherBox user={user} date={date} grey />
+          <ReplyButton onClick={handleWriteComment}>Reply</ReplyButton>
+        </Row>
+      </CommentContainer>
+      {
+        !writeComment ? null : <ReplyContainer comment_id={id}/>
+      }
+    </CommentBox>
+  )
 }
 export default Comment;

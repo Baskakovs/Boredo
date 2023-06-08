@@ -17,9 +17,9 @@ background: #609CFA;
 border-radius: 129px;
 border: none;
 `
-function SmallBlueButton({onClick}) {
+function SmallBlueButton({onClick, text}) {
     return (
-        <Button onClick={onClick}>Update</Button>
+        <Button onClick={onClick}>{text}</Button>
     )
 }
 export default SmallBlueButton;

@@ -4,7 +4,6 @@ const Box = styled.div`
   width: 136px;
   display: flex;
   flex: none;
-  order: 3;
   flex-grow: 0;
   gap: 8px
 `;

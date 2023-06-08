@@ -224,7 +224,7 @@ fetch(`/geographies/${geographySelected.id}/categories/${categorySelected.id}/ti
                 handleVisibilityChange={handleVisibilityChange}
                 label="Visibility"
                 />
-                <SmallBlueButton onClick={handleUpdate}/>
+                <SmallBlueButton onClick={handleUpdate} text={"Update"}/>
             </Row>
         <InputBox
         placeholder="Write your post here..."
