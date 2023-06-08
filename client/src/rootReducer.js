@@ -6,6 +6,7 @@ import commentReducer from './slices/commentSlice';
 import loginSlice from './slices/loginSlice';
 import writeSlice from './slices/writeSlice';
 import settingsSlice from './slices/settingsSlice';
+import editSlice from './slices/editSlice';
 
 const rootReducer = combineReducers({
   search: searchReducer,
@@ -14,6 +15,7 @@ const rootReducer = combineReducers({
   login: loginSlice,
   write: writeSlice,
   settings: settingsSlice,
+  edit: editSlice,
 });
 
 export default rootReducer;

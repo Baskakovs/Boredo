@@ -10,8 +10,9 @@ import ToggleSwitch from "../components/small/toggleSwitch"
 import { useSelector, useDispatch } from "react-redux"
 import { setVisibility, setText, setGeographiesList, setGeographySelected, setCategoriesList, setCategorySelected, setTitlesList, setTitleSelected} from "../slices/writeSlice"
 
-import { useEffect } from "react"
-import { useHistory } from "react-router-dom"
+import { useEffect, useState } from "react"
+import { useHistory, useParams } from "react-router-dom"
+import { setUserPosts } from "../slices/settingsSlice";
 
 const Box = styled(Grid)`
   display: flex;
@@ -57,7 +58,36 @@ letter-spacing: 0.04em;
 
 const ViewArray = ['Publish', 'Archive']
 
-function Write(){
+function Edit(){
+
+    const params = useParams()
+    const userPosts = useSelector((state)=> state.settings.userPosts)
+
+    const [userPost, setUserPost] = useState({})
+
+    useEffect(() => {
+        if (userPosts.length > 0) {
+          const filteredPost = userPosts.find((post) => post.id == params.id);
+          setUserPost(filteredPost);
+        }
+      }, [userPosts, params.id]);
+      
+      useEffect(() => {
+        const handleUserPostChange = () => {
+          console.log(userPost, "userPost 2")
+          dispatch(setText(userPost.text))
+          dispatch(setVisibility(userPost.visibility))
+          dispatch(setGeographySelected(userPost.geography))
+          dispatch(setCategorySelected(userPost.category))
+          dispatch(setTitleSelected(userPost.title))
+        };
+      
+        handleUserPostChange();
+      }, [userPost]);
+
+    
+
+
     const writeForm = useSelector((state) => state.write.writeForm)
 
     const dispatch = useDispatch()
@@ -70,7 +100,7 @@ function Write(){
 
     //handling text input
     function handleTextChange(e){
-        dispatch(setText({...writeForm, text: e.target.value}))
+        dispatch(setText(e.target.value))
     }
 
     //Geography, category and title selection 
@@ -82,6 +112,7 @@ function Write(){
     const categorySelected = useSelector((state) => state.write.category_selected)
     const titleSelected = useSelector((state) => state.write.title_selected)
     const user_id = useSelector((state) => state.login.user.id)
+    console.log(userPost, "categorySelected")
 
     useEffect(()=>{
         fetch(`/geographies`,{
@@ -175,6 +206,7 @@ fetch(`/geographies/${geographySelected.id}/categories/${categorySelected.id}/ti
         })
     }
 
+
     return(
         <Box container>
         <Grid container xs={12} md={4} sx={{alignItems: "center"}} >
@@ -189,7 +221,7 @@ fetch(`/geographies/${geographySelected.id}/categories/${categorySelected.id}/ti
         <InputBox
         placeholder="Write your post here..."
         name="text"
-        value={writeForm.text}
+        value={writeForm ? writeForm.text : ""}
         onChange={handleTextChange}
         rows={8}
         autoFocus
@@ -201,7 +233,8 @@ fetch(`/geographies/${geographySelected.id}/categories/${categorySelected.id}/ti
         key={1}
         name="geography"
         options={geographiesList}
-        placeholder={"Geography"}
+        placeholder={geographySelected ? geographySelected.name : "Geography"}
+        // vlaue={geographySelected ? geographySelected.name : ""}
         handleSelectChange={handleSelectChange}
         />
         {
@@ -210,7 +243,7 @@ fetch(`/geographies/${geographySelected.id}/categories/${categorySelected.id}/ti
             key={2}
             name="category"
             options={categoriesList}
-            placeholder={"Category"}
+            placeholder={categorySelected ? categorySelected.name : "Category"}
             handleSelectChange={handleSelectChange}
             />
             :
@@ -222,7 +255,7 @@ fetch(`/geographies/${geographySelected.id}/categories/${categorySelected.id}/ti
             key={3}
             name="title"
             options={titlesList}
-            placeholder={"Title"}
+            placeholder={titleSelected ? titleSelected.name : "Title"}
             handleSelectChange={handleSelectChange}
             />
             :
@@ -233,4 +266,4 @@ fetch(`/geographies/${geographySelected.id}/categories/${categorySelected.id}/ti
         </Box>
     )
 }
-export default Write
+export default Edit

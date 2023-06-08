@@ -3,7 +3,7 @@ class PostsController < ApplicationController
 
     def show
         post = Post.find(params[:id])
-        render json: post, serializer: PostWithCommentsSerializer, status: 200
+        render json: post, status: 200
     end
     
     def first
@@ -31,7 +31,7 @@ class PostsController < ApplicationController
 
     def index
         user = User.find(session[:user_id])
-        render json: user.posts, status: 200
+        render json: user.posts.limit(50), each_serializer: PostWithInfoSerializerSerializer, status: 200
     end
 
     def create

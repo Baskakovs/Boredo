@@ -14,6 +14,7 @@ import Profile from './pages/Profile';
 import Write from './pages/Write';
 import NavBar from './components/large/NavBar';
 import UserPosts from './pages/UserPosts'
+import Edit from './pages/Edit'
 
 function App() {
   const user = useSelector((state) => state.login.user)
@@ -21,9 +22,10 @@ function App() {
   useEffect(() => {
     fetch("/me")
       .then((r) => {
+        if (r.ok) {
         r.json().then((user) => {
           dispatch(setUser(user));
-        });
+        })}
       });
   }, []);
 
@@ -42,6 +44,7 @@ function App() {
         <Route path="/profile" exact component={Profile} />
         <Route path="/write" exact component={Write} />
         <Route path="/profile/posts" component={UserPosts}/>
+        <Route path="/edit/:id" component={Edit}/>
         </>
       }
       </Switch>

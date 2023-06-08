@@ -7,9 +7,9 @@ Rails.application.routes.draw do
     resources :posts, only: [:index]
   end
   post '/login', to: 'sessions#create'
+  delete '/logout', to: 'sessions#destroy'
   get '/me', to: 'users#show' 
-
-  resources :posts, only: [:create ]
+  resources :posts, only: [:create, :show ]
   get '/posts_first', to: 'posts#first'
   get '/posts/country/:id', to: 'posts#country'
   get '/posts/category/:id', to: 'posts#category'

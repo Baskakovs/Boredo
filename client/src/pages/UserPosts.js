@@ -24,7 +24,6 @@ const Item = styled(Paper)(({ theme }) => ({
     margin: auto;
     flex-grow: 1;
     overflow-y: auto;
-    padding-top: 200px;
     padding-bottom: 100px /* Adjust this value based on the height of the NavBar */
   `
   

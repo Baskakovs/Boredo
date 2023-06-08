@@ -3,7 +3,6 @@ import { useState, useEffect } from "react";
 import { Link } from "react-router-dom" 
 
 import EditPostButton from "../small/EditPostButton";
-import zIndex from "@mui/material/styles/zIndex";
 
 const PostBox = styled.div`
 box-sizing: border-box;
@@ -163,7 +162,6 @@ useEffect(() => {
     const formattedDate = `${day}-${month}-${year}`;
     setDate(formattedDate);
 }, [post.created_at]);
-console.log(post)
 
     return(
         <PostBox>
@@ -173,7 +171,12 @@ console.log(post)
                     <Date>{date}</Date>
                 </HeaderText>
                 {
-                    edit ? <EditButtonBox><EditPostButton/></EditButtonBox> 
+                    edit ? 
+                    <Link to={`/edit/${post.id}`}>
+                        <EditButtonBox>
+                            <EditPostButton/>
+                        </EditButtonBox> 
+                    </Link>
                     : null
                 }
             </Header>

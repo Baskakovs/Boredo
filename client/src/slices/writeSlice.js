@@ -23,7 +23,7 @@ const writeSlice = createSlice({
             state.writeForm.published = !state.writeForm.published
         },
         setText(state, action) {
-            state.writeForm = action.payload
+            state.writeForm.text = action.payload
         },
         setGeographiesList(state, action){
             state.geographiesList = action.payload
