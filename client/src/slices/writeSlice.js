@@ -19,9 +19,13 @@ const writeSlice = createSlice({
         title_selected: false,
     },
     reducers: {
-        setVisibility(state){
-            state.writeForm.published = !state.writeForm.published
-        },
+        setVisibility(state, action) {
+            if (action.payload === "true_false") {
+              state.writeForm.published = !state.writeForm.published
+            } else if (action.payload !== undefined) {
+              state.writeForm.published = action.payload
+            }
+          },
         setText(state, action) {
             state.writeForm.text = action.payload
         },

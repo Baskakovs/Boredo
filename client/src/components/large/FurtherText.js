@@ -93,11 +93,12 @@ flex-grow: 0;
 
 
 function FurtherText(){
-    const post = useSelector((state) => state.comments.comments);
+    const post = useSelector(state => state.further.post)
+    console.log(post, "post")
     return(
         <>
         {
-            post === undefined || post.length == 0 ? null :
+            post.length  == 0 ? null :
             <Box>
             <HeaderBox>
                 <HeaderText>

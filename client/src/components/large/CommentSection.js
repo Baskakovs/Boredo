@@ -38,15 +38,15 @@ const CommentContainer = styled.div`
 
 function CommentSection() {
 
-  const comments = useSelector((state) => state.comments.comments.comments);
-  console.log(comments);
+  const comments = useSelector((state) => state.further.post.comments);
+  console.log(comments, "comments")
   return (
     <Box>
       <HeaderBox>
         <HeaderSmall>Discussion</HeaderSmall>
       </HeaderBox>
       <CommentContainer>
-        {comments === undefined ? null : (
+        {comments.length <! 0 ? null : (
           comments.map((comment) => (
             <>
               <Comment

@@ -3,11 +3,12 @@ class PostsController < ApplicationController
 
     def show
         post = Post.find(params[:id])
-        render json: post, status: 200
+        render json: post, serializer: PostWithCommentsSerializer, status: 200
     end
     
     def first
-        posts = Post.order('RANDOM()').limit(15)
+        # posts = Post.order('RANDOM()').limit(15)
+        posts = Post.all.limit(15)
         render json: posts, status: 200
     end
 
@@ -31,12 +32,20 @@ class PostsController < ApplicationController
 
     def index
         user = User.find(session[:user_id])
-        render json: user.posts.limit(50), each_serializer: PostWithInfoSerializerSerializer, status: 200
+        render json: user.posts.limit(12), each_serializer: PostWithInfoSerializerSerializer, status: 200
     end
 
     def create
         post = Post.create!(post_params)
         render json: post, status: 201
+    rescue ActiveRecord::RecordInvalid => e
+        unprocessable_entity(e)
+    end
+
+    def update
+        post = Post.find(params[:id])
+        post.update!(post_params)
+        render json: post, each_serializer: PostWithInfoSerializerSerializer, status: 200
     rescue ActiveRecord::RecordInvalid => e
         unprocessable_entity(e)
     end

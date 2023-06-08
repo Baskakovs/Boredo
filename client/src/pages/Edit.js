@@ -74,7 +74,6 @@ function Edit(){
       
       useEffect(() => {
         const handleUserPostChange = () => {
-          console.log(userPost, "userPost 2")
           dispatch(setText(userPost.text))
           dispatch(setVisibility(userPost.visibility))
           dispatch(setGeographySelected(userPost.geography))
@@ -95,7 +94,7 @@ function Edit(){
 
     //handling visibility input
     function handleVisibilityChange(){
-        dispatch(setVisibility())
+        dispatch(setVisibility("true_false"))
     }
 
     //handling text input
@@ -112,7 +111,6 @@ function Edit(){
     const categorySelected = useSelector((state) => state.write.category_selected)
     const titleSelected = useSelector((state) => state.write.title_selected)
     const user_id = useSelector((state) => state.login.user.id)
-    console.log(userPost, "categorySelected")
 
     useEffect(()=>{
         fetch(`/geographies`,{
@@ -123,7 +121,6 @@ function Edit(){
         })
         .then((res) =>{ if(res.ok){
             res.json().then((geographies) => {
-                console.log(geographies, "11")
                 dispatch(setGeographiesList(geographies))
             })
         }
@@ -141,7 +138,6 @@ function Edit(){
             .then((res) => {
               if (res.ok) {
                 res.json().then((categories) => {
-                    console.log(categories, "categories")
                   dispatch(setCategoriesList(categories))
                 })
               }
@@ -165,17 +161,20 @@ fetch(`/geographies/${geographySelected.id}/categories/${categorySelected.id}/ti
               }
             })
         }
-      }, [categorySelected])
+      }, [categorySelected, titleSelected])
 
     function handleSelectChange(e){
         const { name, value } = e.target
         if(name === "geography"){
             let selectedGeography = geographiesList.find((geography) => geography.name == value && geography.id !== undefined)
             dispatch(setGeographySelected(selectedGeography))
+            dispatch(setCategorySelected(false))
+            dispatch(setTitleSelected(false))
         }
         if(name === "category"){
             let selectedCategory = categoriesList.find((category) => category.name == value && category.id !== undefined)
             dispatch(setCategorySelected(selectedCategory))
+            dispatch(setTitleSelected(false))
         }
         if(name === "title"){
             let selectedTitle = titlesList.find((title) => title.name == value && title.id !== undefined)
@@ -183,9 +182,9 @@ fetch(`/geographies/${geographySelected.id}/categories/${categorySelected.id}/ti
         }
     }
 
-    function handlePublish(){
-        fetch(`posts`,{
-            method: "POST",
+    function handleUpdate(){
+        fetch(`/posts/${userPost.id}`,{
+            method: "PATCH",
             headers: {
                 "Content-Type": "application/json",
             },
@@ -200,7 +199,16 @@ fetch(`/geographies/${geographySelected.id}/categories/${categorySelected.id}/ti
         })
         .then((res) =>{ if(res.ok){
             res.json().then((post) => {
-                history.push(`/`)
+                let newUserPosts = userPosts.map((userPost) => {
+                    if(userPost.id === post.id){
+                        return post
+                    }else{
+                        return userPost
+                    }
+                })
+                dispatch(setUserPosts(newUserPosts))
+
+                history.goBack()
             })
         }
         })
@@ -216,7 +224,7 @@ fetch(`/geographies/${geographySelected.id}/categories/${categorySelected.id}/ti
                 handleVisibilityChange={handleVisibilityChange}
                 label="Visibility"
                 />
-                <SmallBlueButton onClick={handlePublish}/>
+                <SmallBlueButton onClick={handleUpdate}/>
             </Row>
         <InputBox
         placeholder="Write your post here..."
@@ -234,7 +242,6 @@ fetch(`/geographies/${geographySelected.id}/categories/${categorySelected.id}/ti
         name="geography"
         options={geographiesList}
         placeholder={geographySelected ? geographySelected.name : "Geography"}
-        // vlaue={geographySelected ? geographySelected.name : ""}
         handleSelectChange={handleSelectChange}
         />
         {

@@ -2,8 +2,9 @@ import { useParams } from "react-router-dom";
 import {useEffect} from "react";
 
 //import redux
-import { useDispatch } from "react-redux";
-import { setComments } from "../slices/commentSlice";
+import { useDispatch } from "react-redux"
+import { setPost } from "../slices/furtherSlice"
+
 //components
 import FurtherText from "../components/large/FurtherText";
 import CommentSection from "../components/large/CommentSection";
@@ -22,8 +23,8 @@ function ReadFurther() {
         })
         .then((res) => {
             if (res.ok) {
-                return res.json().then((comments)=>{
-                    dispatch(setComments(comments))
+                return res.json().then((post)=>{
+                    dispatch(setPost(post))
                 })
             }
         })
