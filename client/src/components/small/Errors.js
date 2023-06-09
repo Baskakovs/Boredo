@@ -5,7 +5,7 @@ import TitleM from './TitleM'
 import { useSelector } from 'react-redux'
 
 const Box = styled.div`
-diplay: flex;
+display: flex;
 flex-direction: column;
 width: 100%;
 border-radius: 5px;
@@ -19,24 +19,35 @@ padding-left: 16px;
 `
 
 const ErrorsList = styled.ul`
+font-size: 16px;
+padding: 16px;
 `
 
 
 function Errors(props) {
     const errors = useSelector(state => state.errors.errors.errors)
-    console.log(errors, 'errors')
+    console.log(errors, "errors")
     return(
         <>
         {
-            errors && errors.length > 0 ?
+            errors ?
             <Box>
                 <Title>{`Something went wrong :(`}</Title>
                 <ErrorsList>
                     {
-                        errors !== undefined ?
+                    errors.lenght > 0 ?
                     errors.map((error, index) => {
-                            return <li key={index}>{error}</li>
-                        })
+                        if(Array.isArray(error)){
+                            console.log("hi")
+                            return error.map((err, index) => {
+                                return <li key={index}>{err}</li>
+                            })
+                        // }else{
+                        //     return <li key={index}>{error}</li>
+                        // }
+                        // return <li key={index}>{error}</li>
+                        // })
+                        }})
                         : null
                     }
                 </ErrorsList>

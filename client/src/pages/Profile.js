@@ -100,10 +100,8 @@ function Profile(){
                 </Option>
                 </Link>
             </MenuBox>
-        <Footer>
-        <LogoutDeleteButton onClick={handleLogout}/>
-        </Footer>
         </Grid>
+        <LogoutDeleteButton onClick={handleLogout} text={"Logout"}/>
         </Box>
         </>
     )

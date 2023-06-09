@@ -1,5 +1,7 @@
 class User < ApplicationRecord
     has_many :posts
+    has_many :comments
+    has_many :subcomments
     
     has_secure_password
     validate :password_complexity

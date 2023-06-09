@@ -1,5 +1,5 @@
 Rails.application.routes.draw do
-  
+namespace :api do
   resources :sessions
   resources :subcomments
   resources :comments
@@ -29,6 +29,7 @@ Rails.application.routes.draw do
   get '/geographies/:id', to: 'categories#index_by_country'
   resources :categories, only: [:index]
   get '/categories/:id', to: 'titles#index_by_category'
+end
 
   # Routing logic: fallback requests for React Router.
   # Leave this here to help deploy your app later!

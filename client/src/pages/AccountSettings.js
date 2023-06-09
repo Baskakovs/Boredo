@@ -9,6 +9,7 @@ import { useState } from "react"
 import TitleM from "../components/small/TitleM"
 import SmallBlueButton from "../components/small/SmallBlueButton"
 import NoBorderBlueButton from "../components/small/NoBorderBlueButton"
+import LogoutDeleteButton from "../components/small/LogoutDeleteButton"
 
 const Box = styled.div`
     display: flex;
@@ -94,6 +95,13 @@ justify-content: space-between;
 margin-top: 8px;
 padding-top: 8px;
 `
+
+const Footer = styled.div`
+position: fixed;
+width: 390px;
+bottom: 68px;
+z-index: 1;
+`
 function AccountSettings(){
 
     const dispatch = useDispatch()
@@ -154,7 +162,18 @@ function AccountSettings(){
         }})
     }
 
+    function handleDeleteAccount(){
+        fetch(`/users/${user.id}`,{
+            method: "DELETE",
+        })
+        .then(res=>{ if(res.status === 204) {
+            dispatch(setUser(null))
+         }
+        })
+    }
+
     return(
+        <>
         <Box
         flexDirection={"column"}
         >
@@ -293,8 +312,11 @@ function AccountSettings(){
 
                 }
             </MethodBox>
-        
+            <LogoutDeleteButton text={"Delete Account"}
+            onClick={handleDeleteAccount}
+            />
         </Box>
+        </>
     )
 }
 export default AccountSettings

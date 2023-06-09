@@ -7,6 +7,10 @@ display: flex;
 flex-direction: row;
 justify-content: center;
 border-top: 1px solid #DDDFE4;
+position: fixed;
+width: 390px;
+bottom: 68px;
+z-index: 1;
 `
 
 const Button = styled.button`
@@ -30,10 +34,16 @@ align-items: center;
 color: #FA6060;
 cursor: pointer;
 `
-function LogoutDeleteButton({onClick}){
+const Footer = styled.div`
+position: fixed;
+width: 390px;
+bottom: 68px;
+z-index: 1;
+`
+function LogoutDeleteButton({onClick, text}){
     return(
         <Box>
-            <Button onClick={onClick}>Logout</Button>
+            <Button onClick={onClick}>{text}</Button>
         </Box>
     )
 }

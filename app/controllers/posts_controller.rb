@@ -8,31 +8,31 @@ class PostsController < ApplicationController
     
     def first
         # posts = Post.order('RANDOM()').limit(15)
-        posts = Post.all.limit(15)
+        posts = Post.all.limit(15).where(published: true)
         render json: posts, status: 200
     end
 
     def country
         country = Geography.find(params[:id])
-        posts = country.posts.limit(15)
+        posts = country.posts.limit(15).where(published: true)
         render json: posts, each_serializer: PostsByCountrySerializer, status: 200
     end
 
     def category
         category = Category.find(params[:id])
-        posts = category.posts.limit(15)
+        posts = category.posts.limit(15).where(published: true)
         render json: posts, each_serializer: PostsByCategorySerializer, status: 200
     end
 
     def title
         title = Title.find(params[:id])
-        posts = title.posts
+        posts = title.posts.limit(15).where(published: true)
         render json: posts, each_serializer: PostsByTitleSerializer, status: 200
     end
 
     def index
         user = User.find(session[:user_id])
-        render json: user.posts.limit(12), each_serializer: PostWithInfoSerializerSerializer, status: 200
+        render json: user.posts.limit(12).where(published: true), each_serializer: PostWithInfoSerializerSerializer, status: 200
     end
 
     def create

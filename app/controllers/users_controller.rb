@@ -47,6 +47,16 @@ class UsersController < ApplicationController
     rescue ActiveRecord::RecordInvalid => e
         unprocessable_entity(e)
     end
+
+    def destroy
+        @user = User.find_by(id: session[:user_id])
+        @user.posts.destroy_all
+        @user.comments.destroy_all
+        @user.subcomments.destroy_all
+        @user.destroy
+        head :no_content
+    end
+
     private
   
     def user_params
