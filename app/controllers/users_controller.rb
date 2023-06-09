@@ -1,4 +1,5 @@
 require 'byebug'
+require 'googleauth'
 class UsersController < ApplicationController
     skip_before_action :authorize, only: :create
     def create
@@ -37,6 +38,15 @@ class UsersController < ApplicationController
         end
     end
   
+    def google_oauth
+        data = Google::Auth::IDTokens.verify_oidc params[:token], aud: "767405110986-cl5aotldrqd1k03p18tsc7apq3leedpr.apps.googleusercontent.com"
+        @user = User.find_or_create_by(email: data['email'], google?: true, name: data['name']) 
+        @user.save(validate: false)
+        render json: @user, status: :created
+        session[:user_id] = @user.id
+    rescue ActiveRecord::RecordInvalid => e
+        unprocessable_entity(e)
+    end
     private
   
     def user_params

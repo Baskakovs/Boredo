@@ -4,7 +4,8 @@ Rails.application.routes.draw do
   resources :subcomments
   resources :comments
   resources :users
-  patch '/users/update_password', to: 'users#update_password'
+  post 'users/google', to: 'users#google_oauth'
+  post '/users/update_password', to: 'users#update_password'
   resources :users, only: [:create, :show] do
     resources :posts, only: [:index]
   end

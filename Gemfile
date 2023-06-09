@@ -55,3 +55,5 @@ gem 'dotenv', require: 'dotenv/load'
 gem "ruby-openai"
 
 gem 'faker', '~> 3.2'
+
+gem 'googleauth'
