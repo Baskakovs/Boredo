@@ -10,6 +10,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { setSignupForm, setUser } from "../../slices/loginSlice";
 
 import { useHistory } from "react-router-dom";
+import { setErrors } from "../../slices/errorsSlice";
 
 const Box = styled.div`
 /* Auto layout */
@@ -43,7 +44,7 @@ function SignUpForm(){
                 });
             }else{
                 res.json().then((errors) => {
-                    console.log(errors)
+                    dispatch(setErrors(errors.errors))
                 });
             }
         })

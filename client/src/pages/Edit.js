@@ -13,7 +13,7 @@ import { setVisibility, setText, setGeographiesList, setGeographySelected, setCa
 
 import { useEffect, useState } from "react"
 import { useHistory, useParams } from "react-router-dom"
-import { setUserPosts } from "../slices/settingsSlice";
+import { setUserPosts } from "../slices/settingsSlice"
 
 const Box = styled(Grid)`
   display: flex;
@@ -269,12 +269,14 @@ fetch(`/geographies/${geographySelected.id}/categories/${categorySelected.id}/ti
                 color={"#F87171"}
                 text={"Delete"}
                 border={"1px solid #F87171"}
-                onClick={()=>{handleConfirmtationAction()}}
+                onClick={()=>handleConfirmtationAction()}
+                active
                 />
-                <SmallBlueButton 
-                onClick={handleUpdate}
-                text={"Update"}/>
-                
+                <SmallBlueButton
+                  onClick={writeForm.text != "" ? ()=>{handleUpdate()} : null}
+                  text={"Update"}
+                  active={writeForm.text != "" ? true : false}
+                />
                 </ButtonGroup>
             </Row>
         <InputBox

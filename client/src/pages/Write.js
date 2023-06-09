@@ -196,7 +196,9 @@ fetch(`/geographies/${geographySelected.id}/categories/${categorySelected.id}/ti
                     "Publish"
                     :
                     "Archive"}
-                onClick={handlePublish}/>
+                onClick={writeForm.text == "" ? null : handlePublish}
+                active={writeForm.text == "" ? false : true}
+                />
             </Row>
         <InputBox
         placeholder="Write your post here..."
@@ -241,7 +243,6 @@ fetch(`/geographies/${geographySelected.id}/categories/${categorySelected.id}/ti
             null
         }
         </Row>
-        <Errors/>
         </Grid>
         </Box>
     )
