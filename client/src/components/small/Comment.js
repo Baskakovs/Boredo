@@ -54,7 +54,9 @@ function Comment({ user, date, text, id }) {
         <Text>{text}</Text>
         <Row>
           <PublisherBox user={user} date={date} grey />
-          <ReplyButton onClick={handleWriteComment}>Reply</ReplyButton>
+          <ReplyButton onClick={handleWriteComment}>{
+            writeComment ? 'Cancel' : 'Reply'
+          }</ReplyButton>
         </Row>
       </CommentContainer>
       {

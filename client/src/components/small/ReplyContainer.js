@@ -65,10 +65,11 @@ function ReplyContainer({comment_id}) {
                     return comment;
                   }
                 });
-                dispatch(setComments(updatedComments));
-              });
+                dispatch(setComments(updatedComments))
+                dispatch(setSubcommentForm({text: ""}))
+              })
             }
-          });
+          })
       }
 
 
