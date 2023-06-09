@@ -99,6 +99,12 @@ function AccountSettings(){
     const dispatch = useDispatch()
 
     const [isUpdateMain, setIsUpdateMain] = useState(false)
+    const [isUpdatePassword, setIsUpdatePassword] = useState(false)
+    const [newPassword, setNewPassword] = useState({
+        old_password: "",
+        password: "",
+        password_confirmation: ""
+    })
 
     const user = useSelector(state => state.login.user)
 
@@ -122,6 +128,28 @@ function AccountSettings(){
             res.json().then(user=>{
                 dispatch(setUser(user))
                 setIsUpdateMain(!isUpdateMain)
+            })
+        }})
+    }
+
+    function handleChangePassword(e){
+        setNewPassword({
+            ...newPassword,
+            [e.target.name]: e.target.value
+        })
+    }
+
+    function handleUpdatePassword(){
+        fetch(`/users/update_password`,{
+            method: "PATCH",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify(newPassword),
+        })
+        .then(res=>{ if(res.ok) {
+            res.json().then(user=>{
+                setIsUpdatePassword(!isUpdatePassword)
             })
         }})
     }
@@ -204,11 +232,66 @@ function AccountSettings(){
                     </MethodBox>
                 }
                 <PasswordRow>
-                    <Heading>Password</Heading>
-                    <UpdateButton
-                    text={"Update"}
-                    />
+                    {
+                        !isUpdatePassword ?
+                        <>
+                        <Heading>Password</Heading>
+                        <UpdateButton
+                        text={"Update"}
+                        onClick={()=>setIsUpdatePassword(!isUpdatePassword)}
+                        />
+                        </>
+                        :
+                        <>
+                        <NoBorderBlueButton 
+                        onClick={()=>setIsUpdatePassword(!isUpdatePassword)}
+                        >
+                        Cancel
+                        </NoBorderBlueButton>
+                        <UpdateButton
+                        text={"Save"}
+                        onClick={handleUpdatePassword}
+                        />
+                        </>
+                    }
                 </PasswordRow>
+                {
+                    !isUpdatePassword ?
+                    null :
+                    <MethodBox>
+                        <MethodBoxRow>
+                            <Heading>Type Old Password</Heading>
+                            <InformationInput
+                            type={"password"}
+                            name={"old_password"}
+                            value={newPassword.old_password}
+                            placeholder="••••••••••••"
+                            onChange={handleChangePassword}
+                            />
+                        </MethodBoxRow>
+                        <MethodBoxRow>
+                            <Heading>Type New Password</Heading>
+                            <InformationInput
+                            type={"password"}
+                            name={"password"}
+                            value={newPassword.password}
+                            placeholder="••••••••••••"
+                            onChange={handleChangePassword}
+                            />
+                        </MethodBoxRow>
+                        <MethodBoxRow>
+                            <Heading>Repeat New Password</Heading>
+                            <InformationInput
+                            type={"password"}
+                            name={"password_confirmation"}
+                            value={newPassword.password_confirmation}
+                            placeholder="••••••••••••"
+                            onChange={handleChangePassword}
+                            />
+                        </MethodBoxRow>
+                    </MethodBox>
+
+                }
             </MethodBox>
         
         </Box>
