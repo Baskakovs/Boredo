@@ -59,18 +59,18 @@ const ViewArray = ['Publish', 'Archive']
 
 function Write(){
     const writeForm = useSelector((state) => state.write.writeForm)
-
+  console.log(writeForm, "writeForm")
     const dispatch = useDispatch()
     const history = useHistory()
 
     //handling visibility input
     function handleVisibilityChange(){
-        dispatch(setVisibility())
+        dispatch(setVisibility("true_false"))
     }
 
     //handling text input
     function handleTextChange(e){
-        dispatch(setText({...writeForm, text: e.target.value}))
+        dispatch(setText(e.target.value))
     }
 
     //Geography, category and title selection 
@@ -175,6 +175,8 @@ fetch(`/geographies/${geographySelected.id}/categories/${categorySelected.id}/ti
         })
     }
 
+    console.log(writeForm.published, "writeForm.published")
+
     return(
         <Box container>
         <Grid container xs={12} md={4} sx={{alignItems: "center"}} >
@@ -184,7 +186,12 @@ fetch(`/geographies/${geographySelected.id}/categories/${categorySelected.id}/ti
                 handleVisibilityChange={handleVisibilityChange}
                 label="Visibility"
                 />
-                <SmallBlueButton onClick={handlePublish}/>
+                <SmallBlueButton text={
+                    writeForm.published === true ?
+                    "Publish"
+                    :
+                    "Archive"}
+                onClick={handlePublish}/>
             </Row>
         <InputBox
         placeholder="Write your post here..."
