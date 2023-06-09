@@ -29,6 +29,7 @@ function SearchAndSort(){
       position: 'sticky', top: 0, zIndex: 1,
       backgroundColor: '#FFFFFF',
       marginBottom: '16px',
+
     }}>
         <Grid item xs={12} sx={{ marginBottom: '32px' }}>
           <div>
@@ -37,7 +38,7 @@ function SearchAndSort(){
         </Grid>
         <Grid item xs={12} md={6} lg={4}>
           <div>
-            <SortFilter />
+            {/* <SortFilter /> */}
           </div>
         </Grid>
     </SearchContainer> 

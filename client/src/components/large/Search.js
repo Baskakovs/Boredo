@@ -17,6 +17,8 @@ const SearchContainer = styled.div`
     gap: 24px;
     width: 100%;
     height: 100%;
+    border-bottom: 0.3px solid #8A8A8A;
+
 `
 
 const Row = styled.div`
@@ -26,6 +28,7 @@ const Row = styled.div`
     gap: 8px;
     width: 100%;
     overflow-x: auto;
+    
 `
 
 function Search(){
