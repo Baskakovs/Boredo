@@ -2,7 +2,6 @@ import styled from "styled-components"
 
 //importing redux
 import { useSelector, useDispatch } from "react-redux"
-import { setMainInfoForm } from "../slices/accountSettingsSlice"
 import { setUser } from "../slices/loginSlice"
 
 import { useState } from "react"
@@ -100,13 +99,13 @@ function AccountSettings(){
     const dispatch = useDispatch()
 
     const [isUpdateMain, setIsUpdateMain] = useState(false)
-    const mainInfoForm = useSelector(state => state.accountSettings.mainInfoForm)
+
     const user = useSelector(state => state.login.user)
 
     function handleChange(e){
         const {name, value} = e.target
-        dispatch(setMainInfoForm({
-            ...mainInfoForm,
+        dispatch(setUser({
+            ...user,
             [name]: value
         }))
     }
@@ -117,7 +116,7 @@ function AccountSettings(){
             headers: {
                 "Content-Type": "application/json"
             },
-            body: JSON.stringify(mainInfoForm),
+            body: JSON.stringify(user),
         })
         .then(res=>{ if(res.ok) {
             res.json().then(user=>{
@@ -179,9 +178,8 @@ function AccountSettings(){
                         <MethodBoxRow>
                             <Heading>Name</Heading>
                             <InformationInput
-                            placeholder={user.name}
                             name={"name"}
-                            value={mainInfoForm.name}
+                            value={user.name}
                             onChange={handleChange}
                             />
                         </MethodBoxRow>
@@ -189,9 +187,8 @@ function AccountSettings(){
                             <Heading>Date of Birth</Heading>
                             <InformationInput
                             type="date"
-                            defaultValue={user.date_of_birth}
                             name={"date_of_birth"}
-                            value={mainInfoForm.date_of_birth}
+                            value={user.date_of_birth}
                             onChange={handleChange}
                             />
                         </MethodBoxRow>
@@ -200,7 +197,7 @@ function AccountSettings(){
                             <InformationInput
                             placeholder={user.email}
                             name={"email"}
-                            value={mainInfoForm.email}
+                            value={user.email}
                             onChange={handleChange}
                             />
                         </MethodBoxRow>
