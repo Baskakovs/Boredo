@@ -15,6 +15,14 @@ ActiveRecord::Schema.define(version: 2023_06_07_205740) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
+  create_table "admins", force: :cascade do |t|
+    t.string "email"
+    t.string "password_digest"
+    t.string "name"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
+
   create_table "categories", force: :cascade do |t|
     t.string "name"
     t.datetime "created_at", precision: 6, null: false
@@ -34,6 +42,30 @@ ActiveRecord::Schema.define(version: 2023_06_07_205740) do
     t.string "name"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+  end
+
+  create_table "locations", force: :cascade do |t|
+    t.float "latitude"
+    t.float "longitude"
+    t.string "address_name"
+    t.string "building_number"
+    t.string "street"
+    t.string "city"
+    t.string "postcode"
+    t.integer "admin_id"
+    t.boolean "show"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
+
+  create_table "news", force: :cascade do |t|
+    t.string "image_src"
+    t.string "title"
+    t.string "description"
+    t.string "admin_id"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.string "date"
   end
 
   create_table "posts", force: :cascade do |t|
@@ -67,6 +99,12 @@ ActiveRecord::Schema.define(version: 2023_06_07_205740) do
     t.datetime "updated_at", precision: 6, null: false
     t.integer "geography_id"
     t.integer "category_id"
+  end
+
+  create_table "u_admins", force: :cascade do |t|
+    t.string "email"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
   end
 
   create_table "users", force: :cascade do |t|

@@ -18,9 +18,7 @@ const Box = styled.div`
   padding: 32px;
   gap: 10px;
   background: #FFFFFF;
-  border: 1px solid #C2C2C2;
   border-radius: 4px;
-  margin: auto;   
 `;
 
 const ChangeAcion = styled.span`

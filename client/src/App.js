@@ -48,7 +48,9 @@ function App() {
         </>
       }
       </Switch>
-      <NavBar/>
+      {
+        user ? <NavBar/> : null
+      }
     </Router>
     </>
   );

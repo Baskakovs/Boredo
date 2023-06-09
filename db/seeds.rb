@@ -11,7 +11,7 @@ require 'openai'
 require 'faker'
 
 # client = OpenAI::Client.new
-client = OpenAI::Client.new(access_token: "")
+client = OpenAI::Client.new(access_token: "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")
 
 
 puts "Clearing existing data..."
@@ -19,7 +19,7 @@ puts "Clearing existing data..."
 # Title.destroy_all
 # Category.destroy_all
 # Geography.destroy_all
-Subcomment.destroy_all
+# Subcomment.destroy_all
 
 # Generate 100 users with name, email, and date of birth
 puts "Seeding the database..."
@@ -31,42 +31,42 @@ puts "Seeding the database..."
 # end
 
 
-# # geographies = ["USA"]
+geographies = ["USA"]
 
-# geographies.each do |geography|
-#     new_geography = Geography.create(name: geography)
+geographies.each do |geography|
+    new_geography = Geography.create(name: geography)
   
-#     prompt = "Generate broad categories (for example: economics, sports, politics) that are unique to #{geography}. Each category should be maximum three words long. No need to include the name of the country where it is not relevant."
-#     response = client.chat(
-#       parameters: {
-#           model: "gpt-3.5-turbo", # Required.
-#           messages: [{ role: "user", content: prompt}], # Required.
-#           temperature: 0.7,
-#           n: 5
-#       })
+    prompt = "Generate broad categories (for example: economics, sports, politics) that are unique to #{geography}. Each category should be maximum three words long. No need to include the name of the country where it is not relevant."
+    response = client.chat(
+      parameters: {
+          model: "gpt-3.5-turbo", # Required.
+          messages: [{ role: "user", content: prompt}], # Required.
+          temperature: 0.7,
+          n: 5
+      })
   
-#     categories = response['choices'].first['message']['content'].lines.map(&:strip)
-#     categories.each do |category|
-#       category_name = category.split("\n").first(3).join(" ").strip[3..-1] # Extract first 2-3 words
-#       new_category = Category.create(name: category_name, geography_id: new_geography.id)
-#       puts new_category.name
+    categories = response['choices'].first['message']['content'].lines.map(&:strip)
+    categories.each do |category|
+      category_name = category.split("\n").first(3).join(" ").strip[3..-1] # Extract first 2-3 words
+      new_category = Category.create(name: category_name, geography_id: new_geography.id)
+      puts new_category.name
   
-#       prompt = "Generate titles (for example: the 20th National Congress of the CCP) that are associated with #{geography} and the category #{category}. They should be more specific than the categories but maximum 4 words long."
-#       response = client.chat(
-#           parameters: {
-#               model: "gpt-3.5-turbo", # Required.
-#               messages: [{ role: "user", content: prompt}], # Required.
-#               temperature: 0.7,
-#               n: 10
-#           })
-#       title_response = response['choices'].first['message']['content']
-#       titles = title_response.lines.map(&:strip)
-#       titles.each do |title|
-#         title_name = title.split("\n").first(3).join(" ").strip[3..-1] # Extract first 2-3 words
-#         Title.create(name: title_name, geography_id: new_geography.id, category_id: new_category.id)
-#       end
-#     end
-#   end
+      prompt = "Generate titles (for example: the 20th National Congress of the CCP) that are associated with #{geography} and the category #{category}. They should be more specific than the categories but maximum 4 words long."
+      response = client.chat(
+          parameters: {
+              model: "gpt-3.5-turbo", # Required.
+              messages: [{ role: "user", content: prompt}], # Required.
+              temperature: 0.7,
+              n: 10
+          })
+      title_response = response['choices'].first['message']['content']
+      titles = title_response.lines.map(&:strip)
+      titles.each do |title|
+        title_name = title.split("\n").first(3).join(" ").strip[3..-1] # Extract first 2-3 words
+        Title.create(name: title_name, geography_id: new_geography.id, category_id: new_category.id)
+      end
+    end
+  end
 
 # 100.times do
 #   name = Faker::Name.name
@@ -91,9 +91,9 @@ puts "Seeding the database..."
   
 # end
 
-200.times do
-  Subcomment.create(text: Faker::Lorem.paragraph, user_id: User.all.sample.id, comment_id: Comment.all.sample.id)
-end
+# 200.times do
+#   Subcomment.create(text: Faker::Lorem.paragraph, user_id: User.all.sample.id, comment_id: Comment.all.sample.id)
+# end
 
 
 puts "Seeding completed!"
