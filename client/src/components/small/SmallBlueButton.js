@@ -9,13 +9,16 @@ padding: 3px 6px 3px 6px;
 gap: 10px;
 
 color: #FFFFFF;
-width: 57px;
+width: auto;
+min-width: 57px;
 height: 25px;
+min-height: 25px;
 text-align: center;
 
 background: #609CFA;
 border-radius: 129px;
 border: none;
+cursor: pointer;
 `
 function SmallBlueButton({onClick, text}) {
     return (

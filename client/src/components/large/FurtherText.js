@@ -5,6 +5,8 @@ import { useEffect } from "react";
 import styled from "styled-components";
 import HeaderText from "../small/HeaderSmall";
 import PublisherBox from "../small/PublisherBox";
+import NoBorderBlueButton from "../small/NoBorderBlueButton"
+
 
 const Box = styled.div`
 display: flex;
@@ -35,7 +37,6 @@ height: 22px;
 /* Inside auto layout */
 
 flex: none;
-order: 0;
 flex-grow: 0;
 `
 
@@ -60,7 +61,6 @@ color: #000000;
 /* Inside auto layout */
 
 flex: none;
-order: 1;
 flex-grow: 0;
 `
 
@@ -87,8 +87,19 @@ color: #000000;
 /* Inside auto layout */
 
 flex: none;
-order: 1;
 flex-grow: 0;
+`
+
+const Row = styled.div`
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+  justify-content: space-between;
+`
+
+const ReplyButton = styled(NoBorderBlueButton)`
+  font-size: 12px;
+  color: #000000;
 `
 
 

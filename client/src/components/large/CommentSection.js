@@ -1,12 +1,17 @@
 import styled from "@emotion/styled";
 
 //redux imports
-import { useSelector } from "react-redux";
+import { useSelector } from "react-redux"
+
+import { useState } from "react";
 
 // components
-import HeaderSmall from "../small/HeaderSmall";
-import Comment from "../small/Comment";
-import Subcomment from "../small/SubComment";
+import HeaderSmall from "../small/HeaderSmall"
+import Comment from "../small/Comment"
+import Subcomment from "../small/SubComment"
+import NoBorderBlueButton from "../small/NoBorderBlueButton"
+import SmallBlueButton from "../small/SmallBlueButton"
+import ReplyContainer from "../small/ReplyContainer";
 
 const Box = styled.div`
   display: flex;
@@ -24,7 +29,7 @@ const Box = styled.div`
 const HeaderBox = styled.div`
   display: flex;
   flex-direction: column;
-  align-items: flex-start;
+  align-items: center;
   padding: 0px;
   width: 352px;
   height: 22px;
@@ -34,17 +39,59 @@ const CommentContainer = styled.div`
   display: flex;
   flex-direction: column;
   gap: 24px;
-`;
+  margin-top: 16px;
+`
+
+const ReplyButton = styled(NoBorderBlueButton)`
+  font-size: 12px;
+  color: #000000;
+`
+const Row = styled.div`
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+  justify-content: ${props => props.justifyContent || "space-between"};
+`
+
+const CancelButton = styled(NoBorderBlueButton)`
+color: #000000;
+`
 
 function CommentSection() {
 
-  const comments = useSelector((state) => state.further.post.comments);
-  console.log(comments, "comments")
+  const comments = useSelector((state) => state.further.post.comments)
+  const [isComment, setIsComment] = useState(false)
+
+  function handleComment() {
+    setIsComment(!isComment)
+  }
+
   return (
     <Box>
       <HeaderBox>
-        <HeaderSmall>Discussion</HeaderSmall>
+        <Row>
+          <HeaderSmall>Comments</HeaderSmall>
+        </Row>
+        <Row 
+        justifyContent={"flex-end"}
+        >
+          {
+            isComment ? 
+            <CancelButton
+            onClick={handleComment}
+            >Cancel</CancelButton> 
+            :
+            <SmallBlueButton 
+            text={"Write a reply"}
+            onClick={handleComment}
+            />
+          }
+        </Row>
       </HeaderBox>
+      {
+        !isComment ? null :
+        <ReplyContainer/>
+      }
       <CommentContainer>
         {comments.length <! 0 ? null : (
           comments.map((comment) => (
