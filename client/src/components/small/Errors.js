@@ -30,24 +30,15 @@ function Errors(props) {
     return(
         <>
         {
-            errors ?
+            errors && errors.length > 0 ?
             <Box>
                 <Title>{`Something went wrong :(`}</Title>
                 <ErrorsList>
                     {
-                    errors.lenght > 0 ?
+                        errors !== undefined ?
                     errors.map((error, index) => {
-                        if(Array.isArray(error)){
-                            console.log("hi")
-                            return error.map((err, index) => {
-                                return <li key={index}>{err}</li>
-                            })
-                        // }else{
-                        //     return <li key={index}>{error}</li>
-                        // }
-                        // return <li key={index}>{error}</li>
-                        // })
-                        }})
+                            return <li key={index}>{error}</li>
+                        })
                         : null
                     }
                 </ErrorsList>

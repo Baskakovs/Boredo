@@ -8,7 +8,6 @@ import DoBInput from "./DateOfBirthInput";
 //imoport redux
 import { useDispatch, useSelector } from "react-redux";
 import { setSignupForm, setUser } from "../../slices/loginSlice";
-import { setErrors } from "../../slices/errorsSlice";
 
 import { useHistory } from "react-router-dom";
 
@@ -40,11 +39,11 @@ function SignUpForm(){
             if (res.ok) {
                 res.json().then((user) => {
                     dispatch(setUser(user))
-                    history.push("/");
+                    history.push("/feed");
                 });
             }else{
                 res.json().then((errors) => {
-                    dispatch(setErrors(errors))
+                    console.log(errors)
                 });
             }
         })
@@ -70,8 +69,7 @@ function SignUpForm(){
             ...signUpForm,
             [name]: updatedValue,
           })
-        )
-        dispatch(setErrors({}))
+        );
       }
     return(
         <>
