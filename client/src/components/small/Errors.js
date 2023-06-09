@@ -1,47 +1,51 @@
 import styled from 'styled-components'
 import TitleM from './TitleM'
 
-//importing redux
+// Importing redux
 import { useSelector } from 'react-redux'
 
 const Box = styled.div`
-display: flex;
-flex-direction: column;
-width: 100%;
-border-radius: 5px;
-background-color: #f8d7da;
-border: 1px solid #EF4444;
-margin: 16px 0;
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  border-radius: 5px;
+  background-color: #f8d7da;
+  border: 1px solid #ef4444;
+  margin: 16px 0;
 `
 
 const Title = styled(TitleM)`
-padding-left: 16px;
+  padding-left: 16px;
 `
 
 const ErrorsList = styled.ul`
-font-size: 16px;
-padding: 16px;
+  font-size: 16px;
+  padding: 16px;
 `
 
-
 function Errors(props) {
-    const errors = useSelector(state => state.errors.errors.errors)
-    console.log(errors, "errors")
-    return(
-        <Box>
-            <Title>{`Something went wrong :(`}</Title>
-            <ErrorsList>
-                {
-                    errors !== undefined ?
-                   errors.map((error, index) => {
-                          return <li key={index}>{error}</li>
-                    })
-                    : null
-                }
-            </ErrorsList>
-            <Title>{`Hope that helps 🤔 :)`}</Title>
-        </Box>
-    )
+  const errors = useSelector(state => state.errors.errors)
+
+  const renderErrorMessages = () => {
+    const errorList = [];
+    for (const field in errors) {
+      const fieldErrors = errors[field];
+      fieldErrors.forEach((error) => {
+        errorList.push(<li key={`${field}-${error}`}>{`${field} ${error}`}</li>);
+      });
+    }
+    return errorList;
+  }
+
+  return (
+    <Box>
+      <Title>{`Something went wrong :(`}</Title>
+      <ErrorsList>
+        {renderErrorMessages()}
+      </ErrorsList>
+      <Title>{`Hope that helps 🤔 :)`}</Title>
+    </Box>
+  )
 }
 
 export default Errors

@@ -5,10 +5,12 @@ import Grid from '@mui/material/Grid';
 import SmallBlueButton from "../components/small/SmallBlueButton"
 import SelectWithSearch from "../components/small/SelectWithSearch"
 import ToggleSwitch from "../components/small/toggleSwitch"
+import Errors from "../components/small/Errors"
 
 //import redux
 import { useSelector, useDispatch } from "react-redux"
 import { setVisibility, setText, setGeographiesList, setGeographySelected, setCategoriesList, setCategorySelected, setTitlesList, setTitleSelected} from "../slices/writeSlice"
+import { setErrors } from "../slices/errorsSlice"
 
 import { useEffect } from "react"
 import { useHistory } from "react-router-dom"
@@ -171,11 +173,14 @@ fetch(`/geographies/${geographySelected.id}/categories/${categorySelected.id}/ti
             res.json().then((post) => {
                 history.push(`/`)
             })
+        }else{
+            res.json().then((errors) => {
+                dispatch(setErrors(errors.errors))
+            })
         }
         })
     }
 
-    console.log(writeForm.published, "writeForm.published")
 
     return(
         <Box container>
@@ -236,6 +241,7 @@ fetch(`/geographies/${geographySelected.id}/categories/${categorySelected.id}/ti
             null
         }
         </Row>
+        <Errors/>
         </Grid>
         </Box>
     )
