@@ -60,7 +60,9 @@ function Comment({ user, date, text, id }) {
         </Row>
       </CommentContainer>
       {
-        !writeComment ? null : <ReplyContainer comment_id={id}/>
+        !writeComment ? null : <ReplyContainer
+        action={"subcomment"}
+        comment_id={id}/>
       }
     </CommentBox>
   )

@@ -24,6 +24,11 @@ const furtherSlice = createSlice({
             },
             created_at: ""
         },
+        commentForm: {
+            text: "",
+            post_id: "",
+            user_id: ""
+        },
         subCommentForm: {
             text: "",
             comment_id: "",
@@ -35,6 +40,9 @@ const furtherSlice = createSlice({
         setPost(state, action) {
             state.post = action.payload
         },
+        setCommentForm(state, action) {
+            state.commentForm = action.payload
+        },
         setSubcommentForm(state, action) {
             state.subCommentForm = action.payload
         },
@@ -44,4 +52,4 @@ const furtherSlice = createSlice({
     }
 })
 export default furtherSlice.reducer
-export const { setPost, setSubcommentForm, setComments} = furtherSlice.actions
+export const { setPost, setCommentForm, setSubcommentForm, setComments} = furtherSlice.actions

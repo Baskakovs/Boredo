@@ -5,6 +5,8 @@ import { useSelector } from "react-redux"
 
 import { useState } from "react";
 
+import { useParams } from "react-router-dom";
+
 // components
 import HeaderSmall from "../small/HeaderSmall"
 import Comment from "../small/Comment"
@@ -59,6 +61,7 @@ color: #000000;
 
 function CommentSection() {
 
+  const params = useParams()
   const comments = useSelector((state) => state.further.post.comments)
   const [isComment, setIsComment] = useState(false)
 
@@ -90,7 +93,10 @@ function CommentSection() {
       </HeaderBox>
       {
         !isComment ? null :
-        <ReplyContainer/>
+        <ReplyContainer
+        action={"comment"}
+        post_id={params.id}
+        />
       }
       <CommentContainer>
         {comments.length <! 0 ? null : (
