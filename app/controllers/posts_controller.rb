@@ -50,6 +50,12 @@ class PostsController < ApplicationController
         unprocessable_entity(e)
     end
 
+    def destroy
+        post = Post.find(params[:id])
+        post.destroy
+        head :no_content, status: 204
+    end
+
     private
 
     def post_params

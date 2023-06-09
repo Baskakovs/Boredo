@@ -5,6 +5,7 @@ import Grid from '@mui/material/Grid';
 import SmallBlueButton from "../components/small/SmallBlueButton"
 import SelectWithSearch from "../components/small/SelectWithSearch"
 import ToggleSwitch from "../components/small/toggleSwitch"
+import DeleteConfirmtion from "../components/large/DeleteConfirmation"
 
 //import redux
 import { useSelector, useDispatch } from "react-redux"
@@ -54,6 +55,18 @@ letter-spacing: 0.04em;
 &:focus {
     outline: none;
 }
+`
+
+const ButtonGroup = styled.div`
+display: flex;
+flex-direction: row;
+justify-content: space-between;
+align-items: center;
+gap: 8px;
+`
+
+const ButtonDelete = styled(SmallBlueButton)`
+background: #000;
 `
 
 const ViewArray = ['Publish', 'Archive']
@@ -214,9 +227,35 @@ fetch(`/geographies/${geographySelected.id}/categories/${categorySelected.id}/ti
         })
     }
 
+    //handling delete post
+
+    const [deleteConfirmation, setDeleteConfirmation] = useState(false)
+    function handleConfirmtationAction(){
+      setDeleteConfirmation(!deleteConfirmation)
+    }
+
+    function handleDelete(){
+      fetch(`/posts/${userPost.id}`,{
+        method: "DELETE"
+      })
+      .then((res) =>{ 
+        if(res.status === 204){
+        history.goBack()
+      }
+      })
+    }
 
     return(
         <Box container>
+          {
+            !deleteConfirmation ? null : 
+            <>
+            <DeleteConfirmtion
+            closeAction={handleConfirmtationAction}
+            deletePost={handleDelete}
+            />
+            </>
+          }
         <Grid container xs={12} md={4} sx={{alignItems: "center"}} >
             <Row justifyContent="space-between">
                 <ToggleSwitch
@@ -224,7 +263,19 @@ fetch(`/geographies/${geographySelected.id}/categories/${categorySelected.id}/ti
                 handleVisibilityChange={handleVisibilityChange}
                 label="Visibility"
                 />
-                <SmallBlueButton onClick={handleUpdate} text={"Update"}/>
+                <ButtonGroup>
+                <SmallBlueButton 
+                background={"none"}
+                color={"#F87171"}
+                text={"Delete"}
+                border={"1px solid #F87171"}
+                onClick={()=>{handleConfirmtationAction()}}
+                />
+                <SmallBlueButton 
+                onClick={handleUpdate}
+                text={"Update"}/>
+                
+                </ButtonGroup>
             </Row>
         <InputBox
         placeholder="Write your post here..."

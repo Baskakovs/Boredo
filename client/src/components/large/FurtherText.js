@@ -89,20 +89,6 @@ color: #000000;
 flex: none;
 flex-grow: 0;
 `
-
-const Row = styled.div`
-  display: flex;
-  flex-direction: row;
-  width: 100%;
-  justify-content: space-between;
-`
-
-const ReplyButton = styled(NoBorderBlueButton)`
-  font-size: 12px;
-  color: #000000;
-`
-
-
 function FurtherText(){
     const post = useSelector(state => state.further.post)
     console.log(post, "post")
