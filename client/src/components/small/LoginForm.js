@@ -1,8 +1,9 @@
 import styled from "styled-components";
 
 //import redux
-import { useDispatch, useSelector } from "react-redux";
-import { setLoginForm, setUser } from "../../slices/loginSlice";
+import { useDispatch, useSelector } from "react-redux"
+import { setLoginForm, setUser } from "../../slices/loginSlice"
+import { setErrors } from "../../slices/errorsSlice"
 
 import { useHistory } from "react-router-dom";
 
@@ -12,8 +13,6 @@ import ButtonBlueLarge from "./ButtonBlueLarge";
 import NoBorderBlueButton from "./NoBorderBlueButton";
 import BoredoTitle from "./BoredoTitle";
 const Box = styled.div`
-/* Auto layout */
-
 width: 338px;
 height: 259px;
 display: flex;
@@ -37,8 +36,6 @@ function LoginForm(){
         }));
     }
 
-    console.log(loginForm)
-
     function handleSubmit(e) {
         e.preventDefault();
         fetch("/login", {
@@ -55,7 +52,7 @@ function LoginForm(){
                 });
             }else{
                 res.json().then((errors) => {
-                    console.log(errors)
+                    dispatch(setErrors(errors))
                 });
             }
         })

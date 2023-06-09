@@ -9,6 +9,7 @@ import settingsSlice from './slices/settingsSlice'
 import editSlice from './slices/editSlice'
 import furtherSlice from './slices/furtherSlice';
 import accountSettingsSlice from './slices/accountSettingsSlice';
+import errorsSlice from './slices/errorsSlice';
 
 const rootReducer = combineReducers({
   search: searchReducer,
@@ -20,6 +21,7 @@ const rootReducer = combineReducers({
   edit: editSlice,
   further: furtherSlice,
   accountSettings: accountSettingsSlice,
+  errors: errorsSlice
 });
 
 export default rootReducer;

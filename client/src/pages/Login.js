@@ -1,8 +1,8 @@
 import React from 'react';
 import styled from 'styled-components';
-import Grid from '@mui/material/Grid';
 import LoginSignupWindow from '../components/large/LoginSignupWindow';
-import BackgroundImage from '../images/BusanImage.svg';
+import BackgroundImage from '../images/BusanImage.svg'
+import Errors from '../components/small/Errors';
 
 const Box = styled.div`
   display: flex;
@@ -73,6 +73,7 @@ const Login = () => {
     <Box>
       <ContentWrapper>
         <LoginSignupWindow />
+        <Errors/>
       </ContentWrapper>
       <ImageTitle>Busan, South Korea</ImageTitle>
       <ImageBackground src={BackgroundImage} />
