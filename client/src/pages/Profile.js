@@ -88,10 +88,10 @@ function Profile(){
                 </Option>
                 </Link>
                 <Link to={'/profile/comments'}>
-                <Option>
+                {/* <Option>
                     <MenuText>Comments</MenuText>
                     <Icon src={Right} alt="arrow-right"/>
-                </Option>
+                </Option> */}
                 </Link>
                 <Link to={'/profile/settings'}>
                 <Option>
