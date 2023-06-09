@@ -12,6 +12,7 @@ import InputBox from "./Input";
 import ButtonBlueLarge from "./ButtonBlueLarge";
 import NoBorderBlueButton from "./NoBorderBlueButton";
 import BoredoTitle from "./BoredoTitle";
+import { useEffect } from "react";
 const Box = styled.div`
 width: 338px;
 height: 259px;
@@ -29,11 +30,12 @@ function LoginForm(){
     const loginForm = useSelector((state) => state.login.loginForm)
 
     function handleChange(e) {
-        const { name, value } = e.target;
+        const { name, value } = e.target
         dispatch(setLoginForm({
             ...loginForm,
             [name]: value,
-        }));
+        }))
+        dispatch(setErrors([]))
     }
 
     function handleSubmit(e) {

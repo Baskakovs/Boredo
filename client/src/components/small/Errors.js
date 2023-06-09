@@ -26,19 +26,25 @@ function Errors(props) {
     const errors = useSelector(state => state.errors.errors.errors)
     console.log(errors, 'errors')
     return(
-        <Box>
-            <Title>{`Something went wrong :(`}</Title>
-            <ErrorsList>
-                {
-                    errors !== undefined ?
-                   errors.map((error, index) => {
-                          return <li key={index}>{error}</li>
-                    })
-                    : null
-                }
-            </ErrorsList>
-            <Title>{`Hope that helps 🤔 :)`}</Title>
-        </Box>
+        <>
+        {
+            errors && errors.length > 0 ?
+            <Box>
+                <Title>{`Something went wrong :(`}</Title>
+                <ErrorsList>
+                    {
+                        errors !== undefined ?
+                    errors.map((error, index) => {
+                            return <li key={index}>{error}</li>
+                        })
+                        : null
+                    }
+                </ErrorsList>
+                <Title>{`Hope that helps 🤔 :)`}</Title>
+            </Box>
+            : null
+        }
+        </>
     )
 }
 
