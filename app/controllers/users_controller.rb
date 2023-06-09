@@ -16,6 +16,15 @@ class UsersController < ApplicationController
             render json: { error: "Not authorized" }, status: :unauthorized
         end
     end
+
+    def update
+        @user = User.find_by(id: session[:user_id])
+        @user.update!(user_params)
+        render json: @user
+    rescue ActiveRecord::RecordInvalid => e
+        unprocessable_entity(e)
+    end
+    
   
     private
   

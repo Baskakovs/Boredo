@@ -14,7 +14,8 @@ const loginSlice = createSlice({
         },
         loginForm:{
             email: "",
-            password: ""
+            password: "",
+            date_of_birth: "",
         },
         user: null
     },

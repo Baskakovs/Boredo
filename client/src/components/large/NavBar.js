@@ -4,8 +4,9 @@ import styled from 'styled-components';
 import { Link } from 'react-router-dom';
 
 import Box from '@mui/material/Box'
-import WriteIcon from '../../images/WriteIcon.png';
-import ProfileIcon from '../../images/ProfileIcon.png';
+import WriteIcon from '../../images/WriteIcon.png'
+import ProfileIcon from '../../images/ProfileIcon.png'
+import FeedIcon from '../../images/FeedIcon.svg'
 
 const Container = styled.div`
   box-sizing: border-box;
@@ -38,7 +39,6 @@ const IconContainer = styled.button`
   /* Inside auto layout */
 
   flex: none;
-  order: 0;
   flex-grow: 0;
   border: none;
   background-color: transparent;
@@ -55,6 +55,11 @@ function NavBar() {
   return (
     <FixedContainer>
     <Container>
+    <Link to="/">
+      <IconContainer>
+        <img src={FeedIcon} alt="Feed Icon" />
+      </IconContainer>
+      </Link>
       <Link to="/profile">
       <IconContainer>
         <img src={ProfileIcon} alt="Profile Icon" />

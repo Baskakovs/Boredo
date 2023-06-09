@@ -15,6 +15,7 @@ import Write from './pages/Write';
 import NavBar from './components/large/NavBar';
 import UserPosts from './pages/UserPosts'
 import Edit from './pages/Edit'
+import AccountSettings from './pages/AccountSettings';
 
 function App() {
   const user = useSelector((state) => state.login.user)
@@ -45,6 +46,7 @@ function App() {
         <Route path="/write" exact component={Write} />
         <Route path="/profile/posts" component={UserPosts}/>
         <Route path="/edit/:id" component={Edit}/>
+        <Route path="/profile/settings" component={AccountSettings}/>
         </>
       }
       </Switch>

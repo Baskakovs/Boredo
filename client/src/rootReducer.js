@@ -8,6 +8,7 @@ import writeSlice from './slices/writeSlice'
 import settingsSlice from './slices/settingsSlice'
 import editSlice from './slices/editSlice'
 import furtherSlice from './slices/furtherSlice';
+import accountSettingsSlice from './slices/accountSettingsSlice';
 
 const rootReducer = combineReducers({
   search: searchReducer,
@@ -17,7 +18,8 @@ const rootReducer = combineReducers({
   write: writeSlice,
   settings: settingsSlice,
   edit: editSlice,
-  further: furtherSlice
+  further: furtherSlice,
+  accountSettings: accountSettingsSlice,
 });
 
 export default rootReducer;

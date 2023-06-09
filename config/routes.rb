@@ -3,6 +3,7 @@ Rails.application.routes.draw do
   resources :sessions
   resources :subcomments
   resources :comments
+  resources :users
   resources :users, only: [:create, :show] do
     resources :posts, only: [:index]
   end
