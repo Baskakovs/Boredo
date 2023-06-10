@@ -12,7 +12,8 @@ const SearchRowContainer = styled.div`
     flex-direction: row;
     align-items: flex-start;
     gap: 8px;
-    width: 100%;
+    width: 100vw;
+    padding: 80px;
 
     ::-webkit-scrollbar {
         display: none;
@@ -21,6 +22,7 @@ const SearchRowContainer = styled.div`
     position: absolute;
 
     overflow-x: auto;
+
 `
 function SearchRow({ items, type }) {
     const dispatch = useDispatch();

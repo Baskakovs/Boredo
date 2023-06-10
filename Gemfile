@@ -50,10 +50,11 @@ end
 
 gem "active_model_serializers", "~> 0.10.12"
 
-gem 'dotenv', require: 'dotenv/load'
+gem 'dotenv', '~> 2.7'
 
 gem "ruby-openai"
 
 gem 'faker', '~> 3.2'
 
 gem 'googleauth'
+

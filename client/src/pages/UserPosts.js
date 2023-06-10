@@ -1,5 +1,4 @@
-
-import { styled } from '@mui/material/styles'
+import styled from "styled-components";
 import Grid from '@mui/material/Grid'
 import Paper from '@mui/material/Paper'
 import Box from '@mui/material/Box'
@@ -10,6 +9,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { setUserPosts } from '../slices/settingsSlice'
 
 import Post from '../components/large/Post'
+import BackNav from '../components/large/BackNav'
 
 const Item = styled(Paper)(({ theme }) => ({
     backgroundColor: theme.palette.mode === 'dark' ? '#1A2027' : '#fff',
@@ -18,13 +18,18 @@ const Item = styled(Paper)(({ theme }) => ({
     textAlign: 'center',
     color: theme.palette.text.secondary,
   }))
+
+  const Container = styled.div`
+    display: flex;
+    flex-direction: column;`
   
   const ScrollableContainer = styled(Box)`
     width: 90%
-    margin: auto;
+    margin: auto auto;
     flex-grow: 1;
     overflow-y: auto;
-    padding-bottom: 100px /* Adjust this value based on the height of the NavBar */
+    padding: 58px 0px 69px 0px /* Adjust this value based on the height of the NavBar */
+    
   `
   
   const FixedContainer = styled(Box)`
@@ -32,7 +37,9 @@ const Item = styled(Paper)(({ theme }) => ({
     top: 0;
     z-index: 1;
     background-color: #ffffff;
-    `
+    marin-bottom: 100px;
+    width: 100px;
+  `
 
 function UserPosts(){
 
@@ -55,13 +62,10 @@ function UserPosts(){
             }
         })
     },[])
-
-    console.log(userPosts, 'user_posts')
-
     return(
-        <>
+        <Box>
         <FixedContainer>
-          <h1>Your Posts</h1>
+          <BackNav/>
         </FixedContainer>
         <ScrollableContainer>
           <Grid container spacing={2} sx={{display: 'flex', justifyContent:'center'}}>
@@ -78,7 +82,7 @@ function UserPosts(){
             }
           </Grid>
         </ScrollableContainer>
-      </>
+      </Box>
     )
 }
 

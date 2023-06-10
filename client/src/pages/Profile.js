@@ -22,7 +22,7 @@ display: flex;
 flex-direction: column;
 justify-content: center;
 align-items: center;
-padding: 0px;
+padding-left: 0px;
 
 `
 
@@ -35,6 +35,7 @@ z-index: 1;
 
 const MenuBox = styled(Box)`
 align-items: center;
+width: 100vw;
 `
 const Option = styled(MenuBox)`
 box-sizing: border-box;
@@ -47,14 +48,23 @@ justify-content: space-between;
 align-items: center;
 padding: 20px 16px;
 
-width: 390px;
+width: 100vw;
 height: 64px;
 
 border-bottom: 1px solid #E8EAED;
+
+@media (min-width: 768px) {
+    width: 390px;
+    height: 64px;
+}
 `
 const Icon = styled.img`
 width: 24px;
 height: 24px;
+`
+
+const Title = styled(TitleM)`
+    margin-left: 4px;
 `
 
 function Profile(){
@@ -79,8 +89,8 @@ function Profile(){
         <>
         <Box>
             <Grid  spacing={2} sm={12} md={4}>
-            <TitleM>Account Infomration</TitleM>
             <MenuBox>
+            <Title>Account Infomration</Title>
                 <Link to={'/profile/posts'}>
                 <Option>
                     <MenuText>Posts</MenuText>

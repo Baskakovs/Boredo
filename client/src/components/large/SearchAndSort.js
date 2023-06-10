@@ -15,6 +15,7 @@ const SearchContainer = styled.div`
     top: 0;
     z-index: 1;
     background-color: #FFFFFF;
+    
 `
 
 

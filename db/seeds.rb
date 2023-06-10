@@ -11,8 +11,8 @@ require 'openai'
 require 'faker'
 
 # client = OpenAI::Client.new
-client = OpenAI::Client.new(access_token: "")
 
+client = OpenAI::Client.new(access_token: "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")
 
 puts "Clearing existing data..."
 # User.destroy_all
@@ -32,6 +32,80 @@ puts "Seeding the database..."
 
 
 # geographies = ["USA"]
+
+# 10.times do 
+#   User.create(name: Faker::Name.name, email: Faker::Internet.email, date_of_birth: Faker::Date.birthday(min_age: 18, max_age: 65))
+# end
+
+# geographies = Geography.all
+
+# geographies.each do |geography|
+#   prompt = "Generate broad categories (for example: economics, sports, politics) that are unique to #{geography}. Each category should be maximum three words long. No need to include the name of the country where it is not relevant."
+#     response = client.chat(
+#       parameters: {
+#           model: "gpt-3.5-turbo", # Required.
+#           messages: [{ role: "user", content: prompt}], # Required.
+#           temperature: 0.7,
+#           n: 1
+#       })
+  
+#     categories = response['choices'].first['message']['content'].lines.map(&:strip)
+#     categories.each do |category|
+#       category_name = category.split("\n").first(3).join(" ").strip[3..-1] # Extract first 2-3 words
+#       new_category = Category.create(name: category_name, geography_id: geography.id)
+#       puts new_category.name
+  
+#       prompt = "Generate titles (for example: the 20th National Congress of the CCP) that are associated with #{geography} and the category #{category}. They should be more specific than the categories but maximum 4 words long."
+#       response = client.chat(
+#           parameters: {
+#               model: "gpt-3.5-turbo", # Required.
+#               messages: [{ role: "user", content: prompt}], # Required.
+#               temperature: 0.7,
+#               n: 1
+#           })
+#       title_response = response['choices'].first['message']['content']
+#       titles = title_response.lines.map(&:strip)
+#       titles.each do |title|
+#         title_name = title.split("\n").first(3).join(" ").strip[3..-1] # Extract first 2-3 words
+#         Title.create(name: title_name, geography_id: geography.id, category_id: new_category.id)
+#       end
+#     end
+# end
+
+categories = Category.all
+
+# categories.each do |category|
+#   prompt = "Generate titles (for example: the 20th National Congress of the CCP) that are associated with #{category}."
+#     response = client.chat(
+#       parameters: {
+#           model: "gpt-3.5-turbo", # Required.
+#           messages: [{ role: "user", content: prompt}], # Required.
+#           temperature: 0.7,
+#           n: 1
+#       })
+  
+#     titles = response['choices'].first['message']['content'].lines.map(&:strip)
+#     titles.each do |category|
+#       category_name = category.split("\n").first(3).join(" ").strip[3..-1] # Extract first 2-3 words
+#       new_title = Title.create(name: category_name, geography_id: Geography.all.sample(), category_id: Category.all.sample())
+#     end
+#   end
+
+  titles = Title.all
+
+  titles.each do |title|
+    prompt = "Generate a few sentences talking about #{title}."
+    response = client.chat(
+      parameters: {
+          model: "gpt-3.5-turbo", # Required.
+          messages: [{ role: "user", content: prompt}], # Required.
+          temperature: 0.7,
+          n: 1
+      })
+      new_post = Post.create(title_id: title.id, text: response['choices'].first['message']['content'], category_id: title.category_id, geography_id: title.geography_id, user_id: User.all.sample())
+      end
+    
+
 
 # geographies.each do |geography|
 #     new_geography = Geography.create(name: geography)
@@ -82,18 +156,18 @@ puts "Seeding the database..."
   #   # title = Faker::Lorem.sentence(word_count: 3)
   #   content = Faker::Lorem.paragraph
 
-  #   Post.create(text: content, geography_id: Geography.all.sample.id, category_id: Category.all.sample.id, title_id: Title.all.sample.id, user_id: 1)
+  #   Post.create(text: content, geography_id: Geography.all.all.sample().id, category_id: Category.all.all.sample().id, title_id: Title.all.all.sample().id, user_id: 1)
   # end
 
-100.times do 
+# 100.times do 
 
-  Comment.create(text: Faker::Lorem.paragraph, user_id: User.all.sample.id, post_id: Post.all.sample.id)
+#   Comment.create(text: Faker::Lorem.paragraph, user_id: User.all.all.sample().id, post_id: Post.all.all.sample().id)
   
-end
+# end
 
-200.times do
-  Subcomment.create(text: Faker::Lorem.paragraph, user_id: User.all.sample.id, comment_id: Comment.all.sample.id)
-end
+# 200.times do
+#   Subcomment.create(text: Faker::Lorem.paragraph, user_id: User.all.all.sample().id, comment_id: Comment.all.all.sample().id)
+# end
 
 
 puts "Seeding completed!"

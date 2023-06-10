@@ -25,8 +25,9 @@ const Item = styled(Paper)(({ theme }) => ({
     margin: auto;
     flex-grow: 1;
     overflow-y: auto;
-    padding-top: 200px;
     padding-bottom: 100px /* Adjust this value based on the height of the NavBar */
+    position: relative;
+    padding: 100px /* Adjust this value based on the height of the NavBar */
   `
   
   const FixedContainer = styled(Box)`
@@ -34,6 +35,7 @@ const Item = styled(Paper)(({ theme }) => ({
     top: 0;
     z-index: 1;
     background-color: #ffffff;
+
   `
 
 function Feed(){
@@ -133,7 +135,7 @@ function Feed(){
     //fetching the feed when a title is selected
     const feed = useSelector((state) => state.feed.feed)
     return(
-        <>
+        <Box>
         <FixedContainer>
           <SearchAndSort />
         </FixedContainer>
@@ -152,7 +154,7 @@ function Feed(){
             }
           </Grid>
         </ScrollableContainer>
-      </>
+      </Box>
     )
 }
 export default Feed;

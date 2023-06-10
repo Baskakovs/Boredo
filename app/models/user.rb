@@ -3,13 +3,13 @@ class User < ApplicationRecord
     has_many :comments
     has_many :subcomments
     
-    has_secure_password
-    validate :password_complexity
-    validates :name, presence: true
-    validates :email, presence: true, uniqueness: true, format: { with:
-    URI::MailTo::EMAIL_REGEXP }
-    validate :date_of_birth_cannot_be_in_the_future
-    has_many :posts
+    # has_secure_password
+    # validate :password_complexity
+    # validates :name, presence: true
+    # validates :email, presence: true, uniqueness: true, format: { with:
+    # URI::MailTo::EMAIL_REGEXP }
+    # validate :date_of_birth_cannot_be_in_the_future
+    # has_many :posts
 
     private
 
@@ -19,11 +19,11 @@ class User < ApplicationRecord
         end
     end
 
-    def password_complexity
-        if password.present? and not password.match(PASSWORD_REQUIREMENTS)
-            errors.add :password, "must include at least one lowercase letter, one uppercase letter, and one digit"
-        end
-    end
+    # def password_complexity
+    #     if password.present? and not password.match(PASSWORD_REQUIREMENTS)
+    #         errors.add :password, "must include at least one lowercase letter, one uppercase letter, and one digit"
+    #     end
+    # end
 
     PASSWORD_REQUIREMENTS = /\A
     (?=.{8,})          # Must contain 20 or more characters

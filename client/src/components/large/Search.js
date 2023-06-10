@@ -16,9 +16,6 @@ const SearchContainer = styled.div`
     align-items: flex-start;
     padding: 8px 4px;
     gap: 24px;
-    width: 100%;
-    height: 100%;
-    border-bottom: 0.3px solid #8A8A8A;
 
 `
 
@@ -29,9 +26,7 @@ const Row = styled.div`
     gap: 8px;
     width: 100%;
     overflow-x: auto;
-    
 `
-
 function Search(){
 //fetching initial countries
 

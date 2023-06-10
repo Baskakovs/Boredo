@@ -14,7 +14,7 @@ flex-direction: column;
 align-items: center;
 margin-bottom: 8px;
 
-width: 376px;
+width: 360px;
 
 border-width: 0.2px 0px;
 border-style: solid;
@@ -25,6 +25,8 @@ border-color: #656565;
 flex: none;
 order: 0;
 flex-grow: 0;
+margin-right: 8px;
+margin-left: 8px;
 `
 
 const Header = styled.div`
@@ -34,7 +36,7 @@ align-items: center;
 justify-content: space-between;
 padding: 3px 0px;
 
-width: 376px;
+width: 370px;
 height: 26px;
 
 background: #FBFBFB;
@@ -76,7 +78,7 @@ const TextBox = styled.div`
 display: flex;
 flex-direction: row;
 align-items: center;
-padding: 48px 10px;
+padding: 48px 0px;
 gap: 12px;
 
 width: 376px;
@@ -105,7 +107,7 @@ display: flex;
 align-items: center;
 letter-spacing: 0.04em;
 text-align: left;
-margin: 8px 0px;
+margin-left: 16px;
 
 color: #000000;
 `
@@ -117,7 +119,6 @@ display: flex;
 flex-direction: row;
 justify-content: flex-end;
 align-items: center;
-padding: 4px;
 
 width: 376px;
 height: 24px;
