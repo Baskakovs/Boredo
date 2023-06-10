@@ -21,11 +21,10 @@ const Box = styled.div`
   align-items: flex-start;
   padding: 0px 0px 0px 8px;
   gap: 24px;
-  position: absolute;
   width: 360px;
   height: 387px;
-  left: 16px;
-  top: 297px;
+  margin-top: 32px;
+
 `;
 
 const HeaderBox = styled.div`
@@ -42,12 +41,9 @@ const CommentContainer = styled.div`
   flex-direction: column;
   gap: 24px;
   margin-top: 16px;
+  
 `
 
-const ReplyButton = styled(NoBorderBlueButton)`
-  font-size: 12px;
-  color: #000000;
-`
 const Row = styled.div`
   display: flex;
   flex-direction: row;

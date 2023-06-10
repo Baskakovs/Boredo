@@ -19,9 +19,6 @@ const Item = styled(Paper)(({ theme }) => ({
     color: theme.palette.text.secondary,
   }))
 
-  const Container = styled.div`
-    display: flex;
-    flex-direction: column;`
   
   const ScrollableContainer = styled(Box)`
     width: 90%

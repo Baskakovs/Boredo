@@ -19,7 +19,7 @@ const CommentContainer = styled.div`
 `;
 
 
-const Text = styled.span`
+const Text = styled.p`
   font-style: normal;
   font-weight: 400;
   font-size: 12px;
@@ -27,6 +27,7 @@ const Text = styled.span`
   display: flex;
   align-items: center;
   letter-spacing: 0.04em;
+  max-width: 100px;
   color: ${(props) => (props.grey ? "#BFBFBF" : "#000000")};
 
 `;

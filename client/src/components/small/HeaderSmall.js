@@ -1,7 +1,7 @@
 import styled from "styled-components";
 
 const HeaderSmallText = styled.span`
-width: 382px;
+width: 360px;
 height: 22px;
 
 font-style: normal;

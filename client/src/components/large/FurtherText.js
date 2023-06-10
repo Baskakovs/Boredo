@@ -16,11 +16,10 @@ align-items: flex-start;
 padding: 0px;
 gap: 24px;
 
-position: absolute;
 width: 362px;
 height: 217px;
 left: 16px;
-top: 42px;
+top: 8px;
 `
 const HeaderBox = styled.div`
 /* Auto layout */

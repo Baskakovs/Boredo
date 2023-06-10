@@ -1,10 +1,8 @@
 import styled from "styled-components";
 import {useEffect, useState} from "react";
 const Box = styled.div`
-  width: 136px;
+  width: auto
   display: flex;
-  flex: none;
-  flex-grow: 0;
   gap: 8px
 `;
 
