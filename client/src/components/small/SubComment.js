@@ -27,9 +27,14 @@ const Text = styled.p`
   display: flex;
   align-items: center;
   letter-spacing: 0.04em;
-  max-width: 100px;
   color: ${(props) => (props.grey ? "#BFBFBF" : "#000000")};
-
+  display: inline-block;
+  word-break: break-word;
+  display: flex;
+  align-items: center;
+  letter-spacing: 0.04em;
+  color: ${(props) => (props.grey ? "#BFBFBF" : "#000000")};
+  width: 100%;
 `;
 
 function SubComment({text, date, user}){
