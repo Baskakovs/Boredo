@@ -18,16 +18,19 @@ Rails.application.routes.draw do
   get 'posts/title/:id', to: 'posts#title'
 
   resources :titles, only: [:index, :show]
+
   resources :geographies, only: [:index, :show] do
-    resources :categories, only: [:index] do
-      resources :titles, only: [:index]
-    end
+    resources :categories, only: [:index]
   end 
 
+  resources :categories, only: [:index, :show] do
+    resources :titles, only: [:index]
+  end
+
   get '/geographies', to: 'geographies#index'
-  get '/geographies/:id', to: 'categories#index_by_country'
+  # get '/geographies/:id', to: 'categories#index_by_country'
   resources :categories, only: [:index]
-  get '/categories/:id', to: 'titles#index_by_category'
+  # get '/categories/:id', to: 'titles#index_by_category'xw
 
   # Routing logic: fallback requests for React Router.
   # Leave this here to help deploy your app later!

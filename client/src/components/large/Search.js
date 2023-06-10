@@ -7,7 +7,8 @@ import SearchRow from "./SearchRow";
 //redux imports
 import { useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { setCountries, setCategories, setTitles } from '../../slices/searchSlice';
+import { setCountries, setCategories, setTitles, setCategorySelected } from '../../slices/searchSlice';
+import { setTitleSelected } from "../../slices/writeSlice";
 
 const SearchContainer = styled.div`
     display: flex;
@@ -60,7 +61,7 @@ const countrySelected = useSelector((state) => state.search.countrySelected);
 
     useEffect(() => {
         if(countrySelected !== false){
-            fetch(`/geographies/${countrySelected}`,{
+            fetch(`/geographies/${countrySelected}/categories`,{
                 method: 'GET',
                 headers: {
                     'Content-Type': 'application/json',
@@ -68,11 +69,13 @@ const countrySelected = useSelector((state) => state.search.countrySelected);
             })
             .then(res=> {
                 if(res.ok){
-                    return res.json()
+                    return res.json().then(
+                        data => {
+                            dispatch(setCategories(data))
+                            dispatch(setCategorySelected(true))
+                        }
+                    )
                 }
-            })
-            .then(categories => {
-                dispatch(setCategories(categories))
             })
         }
     },[countrySelected])
@@ -81,8 +84,8 @@ const countrySelected = useSelector((state) => state.search.countrySelected);
 const categorySelected = useSelector((state) => state.search.categorySelected);
 
     useEffect(() => {
-        if(categorySelected !== false){
-            fetch(`/categories/${categorySelected}`,{
+        if(categorySelected != false){
+            fetch(`/categories/${categorySelected}/titles`,{
                 method: 'GET',
                 headers: {
                     'Content-Type': 'application/json',
@@ -90,20 +93,23 @@ const categorySelected = useSelector((state) => state.search.categorySelected);
             })
             .then(res=> {
                 if(res.ok){
-                    return res.json()
+                    return res.json().then(
+                        data => {
+                            dispatch(setTitles(data))
+                            dispatch(setTitleSelected(true))
+                        }
+                    )
                 }
-            })
-            .then(titles => {
-                dispatch(setTitles(titles))
             })
         }
     },[categorySelected])
 
   
 //accessing store
-  const countries = useSelector((state) => state.search.countries);
-  const categories = useSelector((state) => state.search.categories);
-  const titles = useSelector((state) => state.search.titles);        
+  const countries = useSelector((state) => state.search.countries)
+  const categories = useSelector((state) => state.search.categories)
+  const titles = useSelector((state) => state.search.titles) 
+  
     return(
         <SearchContainer>
             <Row>
@@ -117,7 +123,7 @@ const categorySelected = useSelector((state) => state.search.categorySelected);
                 : null
             }
             {
-                countrySelected !== false && categorySelected !== false ?
+                categorySelected !== false ?
                 <Row>
                     <SearchRow items={titles} type="title"/>
                 </Row>

@@ -131,8 +131,7 @@ function Feed(){
       }, [titleSelected]);
 
     //fetching the feed when a title is selected
-    const feed = useSelector((state) => state.feed.feed);
-    console.log(feed, 'feed')
+    const feed = useSelector((state) => state.feed.feed)
     return(
         <>
         <FixedContainer>

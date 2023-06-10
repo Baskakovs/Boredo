@@ -4,7 +4,7 @@ const searchSlice = createSlice({
   name: 'search',
   initialState: {
     countries: [],
-    categories: [],
+    categories: "",
     titles: [],
     countrySelected: false,
     categorySelected: false,
@@ -19,22 +19,27 @@ const searchSlice = createSlice({
             state.countrySelected = false
             state.categorySelected = false
             state.titleSelected = false
-            // state.titles = []
+            state.categories = []
+            state.titles = []
         } else if (action.payload !== state.countrySelected){
             state.countrySelected = action.payload;
             state.categorySelected = false
             state.titleSelected = false
+            state.categories = []
+            state.titles = []
         }
     },
     setCategories: (state, action) => {
-        state.categories = action.payload;
+        state.categories = action.payload
     },
     setCategorySelected: (state, action) => {
         if(action.payload === state.categorySelected){
             state.categorySelected = false
+            state.titleSelected = false
+            state.categories = []
+            state.titles = []
         }else if(action.payload !== state.categorySelected){
             state.categorySelected = action.payload
-            // state.titles = []
         }
     },
     setTitles: (state, action) => {

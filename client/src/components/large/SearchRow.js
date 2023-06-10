@@ -29,8 +29,8 @@ function SearchRow({ items, type }) {
     const [selectedItemId, setSelectedItemId] = useState(null);
   
     function handleItemClick(itemId) {
-      if (type === 'country') {
-        dispatch(setCountrySelected(itemId));
+      if (type == 'country') {
+        dispatch(setCountrySelected(itemId))
       } else if (type === 'category') {
         dispatch(setCategorySelected(itemId));
       } else if (type === 'title') {
@@ -40,6 +40,7 @@ function SearchRow({ items, type }) {
       // Update the selected item ID based on the clicked button
       setSelectedItemId(itemId === selectedItemId ? null : itemId);
     }
+    console.log(items, "items");
   
     return (
       <SearchRowContainer>
