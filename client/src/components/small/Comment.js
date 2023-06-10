@@ -29,6 +29,9 @@ const Text = styled.span`
   align-items: center;
   letter-spacing: 0.04em;
   color: ${(props) => (props.grey ? "#BFBFBF" : "#000000")};
+  display: inline-block;
+  word-break: break-word;
+  width: 100%;
 `
 
 const Row = styled.div`
