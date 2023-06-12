@@ -8,7 +8,7 @@ const Nav = styled.div`
     position: absolute;
     top: 0;
     left: 0;
-    width: 370px;
+    width: 100vw;
     height: 50px;
     display: flex;
     flex-direction: row;

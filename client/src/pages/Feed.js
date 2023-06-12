@@ -34,7 +34,7 @@ const Item = styled(Paper)(({ theme }) => ({
     top: 0;
     z-index: 1;
     background-color: #ffffff;
-    margin-bottom: 100px;
+    margin-bottom: 160px;
   `
 
 function Feed(){

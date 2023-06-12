@@ -61,21 +61,15 @@ function ReadFurther() {
     },[dispatch])
 
     return (
-        // <div>
-        //     <BackNav/>
-        //     <FurtherText/>
-        //     <CommentSection />
-        // </div>
-
-<Box>
-<FixedContainer>
-  <BackNav/>
-</FixedContainer>
-<ScrollableContainer>
-    <FurtherText/>
-    <CommentSection />
-</ScrollableContainer>
-</Box>
+        <Box>
+        <FixedContainer>
+        <BackNav destination={'/'}/>
+        </FixedContainer>
+        <ScrollableContainer>
+            <FurtherText/>
+            <CommentSection />
+        </ScrollableContainer>
+        </Box>
     )
 }
 export default ReadFurther;

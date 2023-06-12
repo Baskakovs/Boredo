@@ -3,7 +3,7 @@ require 'googleauth'
 class UsersController < ApplicationController
     skip_before_action :authorize, only: :create
     def create
-        @user = User.create!(user_params)
+        @user = User.create!(name: user_params[:name], email: user_params[:email], password: params[:password], password_confirmation: params[:password_confirmation], date_of_birth: user_params[:date_of_birth])
         render json: @user, status: :created
     rescue ActiveRecord::RecordInvalid => e
         unprocessable_entity(e)
@@ -60,8 +60,7 @@ class UsersController < ApplicationController
     private
   
     def user_params
-    # byebug
-      params.permit(:name, :email, :date_of_birth, :password)
+      params.require(:user).permit(:name, :email, :date_of_birth)
     end
 
     def password_params

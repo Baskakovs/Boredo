@@ -26,7 +26,9 @@ gap: 8px;
 `
 
 function SignUpForm(){
-    
+
+    const signUpForm = useSelector((state) => state.login.signUpForm)
+    console.log(signUpForm, "signUpForm")
     const history = useHistory();
     function handleNext() {
         fetch("/users", {
@@ -34,13 +36,19 @@ function SignUpForm(){
             headers: {
             "Content-Type": "application/json",
             },
-            body: JSON.stringify(signUpForm),
+            body: JSON.stringify({
+                name: signUpForm.name,
+                email: signUpForm.email,
+                date_of_birth: signUpForm.date_of_birth,
+                password: signUpForm.password,
+                password_confirmation: signUpForm.password_confirmation,
+            })
         })
             .then((res) => {
             if (res.ok) {
                 res.json().then((user) => {
                     dispatch(setUser(user))
-                    history.push("/feed");
+                    history.push("/");
                 });
             }else{
                 res.json().then((errors) => {
@@ -51,7 +59,6 @@ function SignUpForm(){
     }
           
     const dispatch = useDispatch();
-    const signUpForm = useSelector((state) => state.login.signUpForm);
     function handleChange(e) {
         const { name, value } = e.target;
         let updatedValue = value;

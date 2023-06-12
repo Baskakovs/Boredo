@@ -32,7 +32,7 @@ class PostsController < ApplicationController
 
     def index
         user = User.find(session[:user_id])
-        render json: user.posts.limit(12).where(published: true), each_serializer: PostWithInfoSerializerSerializer, status: 200
+        render json: user.posts.limit(12) , each_serializer: PostWithInfoSerializerSerializer, status: 200
     end
 
     def create
