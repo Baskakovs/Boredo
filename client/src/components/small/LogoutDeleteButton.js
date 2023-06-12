@@ -10,7 +10,8 @@ border-top: 1px solid #DDDFE4;
 position: fixed;
 width: 390px;
 bottom: 68px;
-z-index: 1;
+z-index: 2;
+background: #FFFFFF;
 `
 
 const Button = styled.button`

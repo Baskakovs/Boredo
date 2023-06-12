@@ -2,9 +2,15 @@ class User < ApplicationRecord
     has_many :posts
     has_many :comments
     has_many :subcomments
+
+    attr_accessor :skip_password_validation
+
+    def skip_password_validation
+      @skip_password_validation ||= false
+    end
     
     has_secure_password
-    validate :password_complexity
+    validate :password_complexity, if: -> { @skip_password_validation != true }
     validates :email, presence: true, uniqueness: true, format: { with:
     URI::MailTo::EMAIL_REGEXP }
     validate :date_of_birth_cannot_be_in_the_future

@@ -48,6 +48,7 @@ function SignUpForm(){
             if (res.ok) {
                 res.json().then((user) => {
                     dispatch(setUser(user))
+                    dispatch(setErrors([]))
                     history.push("/");
                 });
             }else{

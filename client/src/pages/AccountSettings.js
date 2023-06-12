@@ -3,6 +3,7 @@ import styled from "styled-components"
 //importing redux
 import { useSelector, useDispatch } from "react-redux"
 import { setUser } from "../slices/loginSlice"
+import {setErrors} from "../slices/errorsSlice"
 
 import { useState } from "react"
 
@@ -11,12 +12,23 @@ import SmallBlueButton from "../components/small/SmallBlueButton"
 import NoBorderBlueButton from "../components/small/NoBorderBlueButton"
 import LogoutDeleteButton from "../components/small/LogoutDeleteButton"
 import BackNav from '../components/large/BackNav'
+import Errors from '../components/small/Errors'
 
 const Container = styled.div`
   display: flex;
-  justify-content: center;
+    flex-direction: column;
+    align-items: center;
+  justify-content: ${prop => prop.justifyContent || "center"};
   margin-top: 50px;
 `;
+
+const ScrollableContainer = styled.div`
+width: 100%
+margin: auto;
+flex-grow: 1;
+overflow-y: auto;
+padding-bottom: 140px
+`
 
 const Box = styled.div`
   display: flex;
@@ -142,20 +154,32 @@ function AccountSettings(){
         }))
     }
 
+
+
     function handleUpdateMainInfo(){
         fetch(`/users/${user.id}`,{
             method: "PATCH",
             headers: {
                 "Content-Type": "application/json"
             },
-            body: JSON.stringify(user),
+            body: JSON.stringify({
+                name: user.name,
+                email: user.email,
+                date_of_birth: user.date_of_birth
+            }),
         })
         .then(res=>{ if(res.ok) {
             res.json().then(user=>{
                 dispatch(setUser(user))
                 setIsUpdateMain(!isUpdateMain)
+                dispatch(setErrors(null))
             })
-        }})
+            }else{
+                res.json().then(err=>{
+                    dispatch(setErrors(err.errors))
+                })
+            }
+        })
     }
 
     function handleChangePassword(e){
@@ -177,7 +201,13 @@ function AccountSettings(){
             res.json().then(user=>{
                 setIsUpdatePassword(!isUpdatePassword)
             })
-        }})
+            }else{
+                res.json().then(err=>{
+                    dispatch(setErrors(err.errors))
+                    console.log(err, "errors")
+                })
+        }
+    })
     }
 
     function handleDeleteAccount(){
@@ -190,12 +220,14 @@ function AccountSettings(){
         })
     }
 
+
     return(
         <>
         <FixedContainer>
         <BackNav destination={'/profile'}/>
       </FixedContainer>
-        <Container>
+      <Container alignItems={"space-evenly"}>
+        <ScrollableContainer>
         <Box>
             <MethodBoxRow alignItems={"flex-start"}>
                 <TitleM>Account Settings</TitleM>
@@ -270,6 +302,8 @@ function AccountSettings(){
                         </MethodBoxRow>
                     </MethodBox>
                 }
+                {
+                    !user.google ? 
                 <PasswordRow>
                     {
                         !isUpdatePassword ?
@@ -294,6 +328,8 @@ function AccountSettings(){
                         </>
                     }
                 </PasswordRow>
+                : null
+                }
                 {
                     !isUpdatePassword ?
                     null :
@@ -332,10 +368,12 @@ function AccountSettings(){
 
                 }
             </MethodBox>
-            <LogoutDeleteButton text={"Delete Account"}
-            onClick={handleDeleteAccount}
-            />
+            <Errors/>
         </Box>
+        </ScrollableContainer>
+        <LogoutDeleteButton text={"Delete Account"}
+            onClick={handleDeleteAccount}
+        />
         </Container>
         </>
     )

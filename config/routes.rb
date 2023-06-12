@@ -1,10 +1,11 @@
 Rails.application.routes.draw do
+  namespace :api do
   resources :sessions
   resources :subcomments
   resources :comments
+  patch '/users/update_password', to: 'users#update_password'
   resources :users
   post 'users/google', to: 'users#google_oauth'
-  post '/users/update_password', to: 'users#update_password'
   resources :users, only: [:create, :show] do
     resources :posts, only: [:index]
   end
@@ -30,6 +31,8 @@ Rails.application.routes.draw do
   get '/geographies', to: 'geographies#index'
   # get '/geographies/:id', to: 'categories#index_by_country'
   resources :categories, only: [:index]
+
+end
   # get '/categories/:id', to: 'titles#index_by_category'xw
 
   # Routing logic: fallback requests for React Router.
