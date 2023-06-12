@@ -11,27 +11,34 @@ import SmallBlueButton from "../components/small/SmallBlueButton"
 import NoBorderBlueButton from "../components/small/NoBorderBlueButton"
 import LogoutDeleteButton from "../components/small/LogoutDeleteButton"
 
+const Container = styled.div`
+  display: flex;
+  justify-content: center;
+`;
+
 const Box = styled.div`
-    display: flex;
-    flex-direction: column;
-    width: 100%;
-    align-items: ${props => props.alignItems || "center"}
-`
+  display: flex;
+  flex-direction: column;
+  width: 375px;
+  align-items: center;
+`;
+
 
 const MethodBox = styled.div`
     display: flex;
     flex-direction: ${prop => prop.flexDirection || "column"};
     align-items: flex-start;
+    
     gap: 24px;
-    width: 100vw;
+    width: 100%;
 `
 const MethodBoxRow = styled.div`
 display: flex;
 flex-direction: column;
 align-items: ${prop => prop.alignItems || "flex-start"}};
 gap: 8px;
-width: 35vw;
 height: 42px;
+width: 100%;
 @media screen and (max-width: 400px) {
     width: 100vw;
 }
@@ -44,9 +51,10 @@ font-weight: 600;
 font-size: 14px;
 line-height: 17px;
 /* identical to box height */
-
 display: flex;
 align-items: center;
+align-self: flex-start;
+margin-left: 8px;
 `
 
 const InformationText = styled.span`
@@ -56,9 +64,9 @@ font-weight: 500;
 font-size: 14px;
 line-height: 17px;
 /* identical to box height */
-
 display: flex;
 align-items: center;
+margin-left: 8px;
 
 color: #9F9F9F;
 `
@@ -70,18 +78,22 @@ align-items: center;
 padding: 10px;
 gap: 10px;
 
-width: 100%;
+width: 345px;
 height: 48px;
-
+margin-right: auto;
+margin-left: auto;
 background: #FBFBFB;
 border: 1px solid #9F9F9F;
 border-radius: 4px;
+
 `
 
 const Row = styled.div`
 display: flex;
 flex-direction: row;
 gap: 8px;
+margin-right: 8px;
+margin-left: 8px;
 `
 
 const UpdateButton = styled(SmallBlueButton)`
@@ -94,14 +106,9 @@ flex-direction: row;
 justify-content: space-between;
 margin-top: 8px;
 padding-top: 8px;
+align-items: center;
 `
 
-const Footer = styled.div`
-position: fixed;
-width: 390px;
-bottom: 68px;
-z-index: 1;
-`
 function AccountSettings(){
 
     const dispatch = useDispatch()
@@ -173,11 +180,9 @@ function AccountSettings(){
     }
 
     return(
-        <>
-        <Box
-        flexDirection={"column"}
-        >
-            <MethodBoxRow>
+        <Container>
+        <Box>
+            <MethodBoxRow alignItems={"flex-start"}>
                 <TitleM>Account Settings</TitleM>
             </MethodBoxRow>
             <MethodBoxRow
@@ -316,7 +321,7 @@ function AccountSettings(){
             onClick={handleDeleteAccount}
             />
         </Box>
-        </>
+        </Container>
     )
 }
 export default AccountSettings
