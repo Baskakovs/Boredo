@@ -6,6 +6,7 @@ import SmallBlueButton from "../components/small/SmallBlueButton"
 import SelectWithSearch from "../components/small/SelectWithSearch"
 import ToggleSwitch from "../components/small/toggleSwitch"
 import DeleteConfirmtion from "../components/large/DeleteConfirmation"
+import BackNav from "../components/large/BackNav"
 
 //import redux
 import { useSelector, useDispatch } from "react-redux"
@@ -21,7 +22,7 @@ const Box = styled(Grid)`
   align-items: space-between;
   justify-content: center;
   width: 100%;
-    height: 100vh;
+  height: 100vh
 `;
 
 const Row = styled.div`
@@ -112,7 +113,7 @@ function Edit(){
 
     //handling text input
     function handleTextChange(e){
-        dispatch(setText(e.target.value))
+        dispatch(setText(e.target.value));
     }
 
     //Geography, category and title selection 
@@ -195,15 +196,19 @@ fetch(`/categories/${categorySelected.id}/titles`, {
         }
     }
 
-    const [validity, setValidity] = useState(false)
+    const [validity, setValidity] = useState(true)
 
-    useEffect(()=>{
-      if(writeForm.text !== "" && writeForm.geography_id != "", writeForm.category_id !="" && writeForm.title_id !==""){
-        setValidity(true)
+    useEffect(() => {
+      if (writeForm.text && writeForm.text.trim().length !== 0 && writeForm.geography_id !== "" && writeForm.category_id !== "" && writeForm.title_id) {
+        setValidity(true);
+      } else {
+        setValidity(false);
       }
-    },[writeForm])
+    }, [writeForm]);
+
 
     function handleUpdate(){
+        if(validity){
         fetch(`/posts/${userPost.id}`,{
             method: "PATCH",
             headers: {
@@ -233,6 +238,7 @@ fetch(`/categories/${categorySelected.id}/titles`, {
             })
         }
         })
+      }
     }
 
     //handling delete post
@@ -253,7 +259,17 @@ fetch(`/categories/${categorySelected.id}/titles`, {
       })
     }
 
+    const FixedContainer = styled(Box)`
+position: sticky;
+top: 0;
+z-index: 1;
+background-color: #ffffff;
+marin-bottom: 100px;
+width: 100px;
+`
+
     return(
+      <>
         <Box container>
           {
             !deleteConfirmation ? null : 
@@ -332,6 +348,7 @@ fetch(`/categories/${categorySelected.id}/titles`, {
         </Row>
         </Grid>
         </Box>
+        </>
     )
 }
 export default Edit

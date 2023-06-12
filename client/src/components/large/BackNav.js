@@ -36,7 +36,7 @@ const Text = styled.p`
 function BackNav(props) {
     const history = useHistory();
     function handleBack(){
-        history.goBack();
+        history.push(`${props.destination}`);
     }
     return (
         <Nav onClick={props.onClick}>

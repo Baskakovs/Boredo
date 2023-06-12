@@ -10,10 +10,12 @@ import TitleM from "../components/small/TitleM"
 import SmallBlueButton from "../components/small/SmallBlueButton"
 import NoBorderBlueButton from "../components/small/NoBorderBlueButton"
 import LogoutDeleteButton from "../components/small/LogoutDeleteButton"
+import BackNav from '../components/large/BackNav'
 
 const Container = styled.div`
   display: flex;
   justify-content: center;
+  margin-top: 50px;
 `;
 
 const Box = styled.div`
@@ -21,7 +23,16 @@ const Box = styled.div`
   flex-direction: column;
   width: 375px;
   align-items: center;
-`;
+`
+
+const FixedContainer = styled(Box)`
+position: sticky;
+top: 0;
+z-index: 1;
+background-color: #ffffff;
+marin-bottom: 100px;
+width: 100px;
+`
 
 
 const MethodBox = styled.div`
@@ -180,6 +191,10 @@ function AccountSettings(){
     }
 
     return(
+        <>
+        <FixedContainer>
+        <BackNav destination={'/profile'}/>
+      </FixedContainer>
         <Container>
         <Box>
             <MethodBoxRow alignItems={"flex-start"}>
@@ -322,6 +337,7 @@ function AccountSettings(){
             />
         </Box>
         </Container>
+        </>
     )
 }
 export default AccountSettings

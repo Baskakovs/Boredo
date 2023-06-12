@@ -62,7 +62,7 @@ function UserPosts(){
     return(
         <Box>
         <FixedContainer>
-          <BackNav/>
+          <BackNav destination={'/profile'}/>
         </FixedContainer>
         <ScrollableContainer>
           <Grid container spacing={2} sx={{display: 'flex', justifyContent:'center'}}>
