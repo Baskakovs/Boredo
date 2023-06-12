@@ -39,13 +39,29 @@ const writeSlice = createSlice({
             state.titlesList = action.payload
         },
         setGeographySelected(state, action){
+            console.log("hi")
             state.geography_selected = action.payload
+            if(action.payload !== undefined){
+                state.writeForm.geography_id = action.payload.id
+            }else{
+                state.writeForm.geography_id = ""
+            }
         },
         setCategorySelected(state, action){
             state.category_selected = action.payload
+            if(action.payload !== undefined){
+                state.writeForm.category_id = action.payload.id
+            }else{
+                state.writeForm.category_id = ""
+            }
         },
         setTitleSelected(state, action){
             state.title_selected = action.payload
+            if(action.payload !== undefined){
+                state.writeForm.title_id = action.payload.id
+            }else{
+                state.writeForm.title_id = ""
+            }
         }
     }
 })

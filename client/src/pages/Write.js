@@ -12,7 +12,7 @@ import { useSelector, useDispatch } from "react-redux"
 import { setVisibility, setText, setGeographiesList, setGeographySelected, setCategoriesList, setCategorySelected, setTitlesList, setTitleSelected} from "../slices/writeSlice"
 import { setErrors } from "../slices/errorsSlice"
 
-import { useEffect } from "react"
+import { useEffect, useState } from "react"
 import { useHistory } from "react-router-dom"
 
 const Box = styled(Grid)`
@@ -140,15 +140,16 @@ fetch(`/categories/${categorySelected.id}/titles`, {
 
     function handleSelectChange(e){
         const { name, value } = e.target
-        if(name === "geography"){
+        if(name == "geography"){
             let selectedGeography = geographiesList.find((geography) => geography.name == value && geography.id !== undefined)
+            console.log( selectedGeography, "selectedGeography")
             dispatch(setGeographySelected(selectedGeography))
         }
-        if(name === "category"){
+        if(name == "category"){
             let selectedCategory = categoriesList.find((category) => category.name == value && category.id !== undefined)
             dispatch(setCategorySelected(selectedCategory))
         }
-        if(name === "title"){
+        if(name == "title"){
             let selectedTitle = titlesList.find((title) => title.name == value && title.id !== undefined)
             dispatch(setTitleSelected(selectedTitle))
         }
@@ -180,8 +181,17 @@ fetch(`/categories/${categorySelected.id}/titles`, {
         }
         })
     }
+  
+    const [validity, setValidity] = useState(false)
+
+    useEffect(()=>{
+      if(writeForm.text !== "" && writeForm.geography_id != "", writeForm.category_id !="" && writeForm.title_id !==""){
+        setValidity(!validity)
+      }
+    },[writeForm])
 
 
+    console.log(validity)
     return(
         <Box container>
         <Grid container xs={12} md={4} sx={{alignItems: "center"}} >
@@ -197,7 +207,7 @@ fetch(`/categories/${categorySelected.id}/titles`, {
                     :
                     "Archive"}
                 onClick={writeForm.text == "" ? null : handlePublish}
-                active={writeForm.text == "" ? false : true}
+                active={validity}
                 />
             </Row>
         <InputBox

@@ -15,14 +15,14 @@ const searchSlice = createSlice({
       state.countries.push(action.payload);
     },
     setCountrySelected: (state, action) => {
-        if(action.payload === state.countrySelected){
+        if(action.payload == state.countrySelected){
             state.countrySelected = false
             state.categorySelected = false
             state.titleSelected = false
             state.categories = []
             state.titles = []
-        } else if (action.payload !== state.countrySelected){
-            state.countrySelected = action.payload;
+        } else if (action.payload != state.countrySelected){
+            state.countrySelected = action.payload
             state.categorySelected = false
             state.titleSelected = false
             state.categories = []
@@ -33,12 +33,12 @@ const searchSlice = createSlice({
         state.categories = action.payload
     },
     setCategorySelected: (state, action) => {
-        if(action.payload === state.categorySelected){
+        if(action.payload == state.categorySelected){
             state.categorySelected = false
             state.titleSelected = false
             state.categories = []
             state.titles = []
-        }else if(action.payload !== state.categorySelected){
+        }else if(action.payload != state.categorySelected){
             state.categorySelected = action.payload
             state.titleSelected = false
             state.titles = []
@@ -48,10 +48,10 @@ const searchSlice = createSlice({
         state.titles = action.payload;
     },
     setTitleSelected: (state, action) => {
-        if(action.payload === state.titleSelected){
+        if(action.payload == state.titleSelected){
             state.titleSelected = false
             state.titles=[]
-        }else if(action.payload !== state.categorySelected){
+        }else if(action.payload != state.categorySelected){
             state.titleSelected = action.payload
         }
     }

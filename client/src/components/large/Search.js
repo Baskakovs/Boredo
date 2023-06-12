@@ -67,7 +67,7 @@ const countrySelected = useSelector((state) => state.search.countrySelected);
                     return res.json().then(
                         data => {
                             dispatch(setCategories(data))
-                            dispatch(setCategorySelected(true))
+                            // dispatch(setCategorySelected(true))
                         }
                     )
                 }

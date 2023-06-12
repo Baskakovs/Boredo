@@ -90,7 +90,7 @@ flex-grow: 0;
 `
 function FurtherText(){
     const post = useSelector(state => state.further.post)
-    console.log(post, "post")
+
     return(
         <>
         {
