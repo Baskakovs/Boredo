@@ -36,6 +36,7 @@ class PostsController < ApplicationController
     end
 
     def create
+        # byebug
         post = Post.create!(post_params)
         render json: post, status: 201
     rescue ActiveRecord::RecordInvalid => e
@@ -63,7 +64,7 @@ class PostsController < ApplicationController
     end
 
     def unprocessable_entity(e)
-        render json: { errors: e.record.errors }, status: :unprocessable_entity
+        render json: { errors: e.record.errors }, status: :record_invalid
     end
 
 end

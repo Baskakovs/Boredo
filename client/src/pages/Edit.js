@@ -309,7 +309,7 @@ fetch(`/geographies/${geographySelected.id}/categories/${categorySelected.id}/ti
             :
             null
         }
-        {
+        {/* {
             categorySelected !== false ?
             <SelectWithSearch
             key={3}
@@ -320,7 +320,7 @@ fetch(`/geographies/${geographySelected.id}/categories/${categorySelected.id}/ti
             />
             :
             null
-        }
+        } */}
         </Row>
         </Grid>
         </Box>

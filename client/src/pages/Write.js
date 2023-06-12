@@ -122,7 +122,7 @@ function Write(){
 
       useEffect(() => {
         if(geographySelected && categorySelected) {
-fetch(`/geographies/${geographySelected.id}/categories/${categorySelected.id}/titles`, {
+fetch(`/categories/${categorySelected.id}/titles`, {
             method: "GET",
             headers: {
               "Content-Type": "application/json",

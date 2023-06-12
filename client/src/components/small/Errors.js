@@ -38,13 +38,19 @@ function Errors(props) {
   }
 
   return (
-    <Box>
+    <>
+    {
+      errors && Object.keys(errors).length > 0 ?
+      <Box>
       <Title>{`Something went wrong :(`}</Title>
       <ErrorsList>
         {renderErrorMessages()}
       </ErrorsList>
       <Title>{`Hope that helps 🤔 :)`}</Title>
     </Box>
+    : null
+    }
+    </>
   )
 }
 

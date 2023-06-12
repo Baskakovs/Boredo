@@ -41,7 +41,6 @@ function SearchRow({ items, type }) {
       // Update the selected item ID based on the clicked button
       setSelectedItemId(itemId === selectedItemId ? null : itemId);
     }
-    console.log(items, "items");
   
     return (
       <SearchRowContainer>

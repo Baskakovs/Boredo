@@ -26,7 +26,7 @@ const Item = styled(Paper)(({ theme }) => ({
     margin: auto;
     flex-grow: 1;
     overflow-y: auto;
-    padding-bottom: 100px /* Adjust this value based on the height of the NavBar */
+    padding-bottom: 100px
   `
   
   const FixedContainer = styled(Box)`
@@ -34,6 +34,7 @@ const Item = styled(Paper)(({ theme }) => ({
     top: 0;
     z-index: 1;
     background-color: #ffffff;
+    margin-bottom: 100px;
   `
 
 function Feed(){
@@ -108,7 +109,7 @@ function Feed(){
       }
     }, [categorySelected, titleSelected]);
 
-      //fetching the feed when a category is selected
+      // fetching the feed when a category is selected
       useEffect(() => {
         if(countrySelected !== false){
           fetch(`/posts/title/${titleSelected}`,

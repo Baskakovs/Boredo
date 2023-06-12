@@ -40,6 +40,8 @@ const searchSlice = createSlice({
             state.titles = []
         }else if(action.payload !== state.categorySelected){
             state.categorySelected = action.payload
+            state.titleSelected = false
+            state.titles = []
         }
     },
     setTitles: (state, action) => {
@@ -48,6 +50,7 @@ const searchSlice = createSlice({
     setTitleSelected: (state, action) => {
         if(action.payload === state.titleSelected){
             state.titleSelected = false
+            state.titles=[]
         }else if(action.payload !== state.categorySelected){
             state.titleSelected = action.payload
         }

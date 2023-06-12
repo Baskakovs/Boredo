@@ -99,6 +99,8 @@ const categorySelected = useSelector((state) => state.search.categorySelected);
         }
     },[categorySelected])
 
+// disabled for v1
+
   
 //accessing store
   const countries = useSelector((state) => state.search.countries)
