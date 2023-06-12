@@ -22,7 +22,7 @@ categories.each do |category|
     phrase = Faker::Lorem.words(number: 2).join(' ')
     Title.create(name: phrase, geography_id: category.geography_id, category_id: category.id)
   end
-
+end
 titles = Title.all
 
 titles.each do |title|
