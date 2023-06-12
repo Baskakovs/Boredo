@@ -286,6 +286,7 @@ width: 100px;
                 optionsArray={ViewArray}
                 handleVisibilityChange={handleVisibilityChange}
                 label="Visibility"
+                active={writeForm.published}
                 />
                 <ButtonGroup>
                 <SmallBlueButton 

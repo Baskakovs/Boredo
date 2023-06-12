@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
 
 const Box = styled.div`
@@ -56,8 +56,8 @@ const Label = styled.span`
   vertical-align: middle;
 `;
 
-const ToggleSwitch = ({ handleVisibilityChange }) => {
-  const [isChecked, setIsChecked] = useState(true);
+const ToggleSwitch = ({ handleVisibilityChange, active = true}) => {
+  const [isChecked, setIsChecked] = useState(active);
 
   const handleToggle = () => {
     setIsChecked(!isChecked)

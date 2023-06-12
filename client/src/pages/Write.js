@@ -112,8 +112,7 @@ function Write(){
             .then((res) => {
               if (res.ok) {
                 res.json().then((categories) => {
-                    console.log(categories, "categories")
-                  dispatch(setCategoriesList(categories))
+                dispatch(setCategoriesList(categories))
                 })
               }
             })
@@ -142,7 +141,6 @@ fetch(`/categories/${categorySelected.id}/titles`, {
         const { name, value } = e.target
         if(name == "geography"){
             let selectedGeography = geographiesList.find((geography) => geography.name == value && geography.id !== undefined)
-            console.log( selectedGeography, "selectedGeography")
             dispatch(setGeographySelected(selectedGeography))
         }
         if(name == "category"){
