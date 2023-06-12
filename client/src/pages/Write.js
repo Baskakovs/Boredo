@@ -155,7 +155,17 @@ fetch(`/categories/${categorySelected.id}/titles`, {
         }
     }
 
+    const [validity, setValidity] = useState(false)
+
+    useEffect(()=>{
+      if(writeForm.text !== "" && writeForm.geography_id != "", writeForm.category_id !="" && writeForm.title_id !==""){
+        setValidity(true)
+      }
+    },[writeForm])
+
+
     function handlePublish(){
+      if(validity){
         fetch(`posts`,{
             method: "POST",
             headers: {
@@ -180,18 +190,9 @@ fetch(`/categories/${categorySelected.id}/titles`, {
             })
         }
         })
-    }
-  
-    const [validity, setValidity] = useState(false)
-
-    useEffect(()=>{
-      if(writeForm.text !== "" && writeForm.geography_id != "", writeForm.category_id !="" && writeForm.title_id !==""){
-        setValidity(!validity)
       }
-    },[writeForm])
+    }
 
-
-    console.log(validity)
     return(
         <Box container>
         <Grid container xs={12} md={4} sx={{alignItems: "center"}} >
@@ -206,7 +207,7 @@ fetch(`/categories/${categorySelected.id}/titles`, {
                     "Publish"
                     :
                     "Archive"}
-                onClick={writeForm.text == "" ? null : handlePublish}
+                onClick={handlePublish}
                 active={validity}
                 />
             </Row>

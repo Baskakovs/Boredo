@@ -82,6 +82,8 @@ function Edit(){
         if (userPosts.length > 0) {
           const filteredPost = userPosts.find((post) => post.id == params.id);
           setUserPost(filteredPost);
+        }else{
+          history.push("/profile/posts")
         }
       }, [userPosts, params.id]);
       
@@ -96,8 +98,6 @@ function Edit(){
       
         handleUserPostChange();
       }, [userPost]);
-
-    
 
 
     const writeForm = useSelector((state) => state.write.writeForm)
@@ -160,7 +160,7 @@ function Edit(){
 
       useEffect(() => {
         if(geographySelected && categorySelected) {
-fetch(`/geographies/${geographySelected.id}/categories/${categorySelected.id}/titles`, {
+fetch(`/categories/${categorySelected.id}/titles`, {
             method: "GET",
             headers: {
               "Content-Type": "application/json",
@@ -194,6 +194,14 @@ fetch(`/geographies/${geographySelected.id}/categories/${categorySelected.id}/ti
             dispatch(setTitleSelected(selectedTitle))
         }
     }
+
+    const [validity, setValidity] = useState(false)
+
+    useEffect(()=>{
+      if(writeForm.text !== "" && writeForm.geography_id != "", writeForm.category_id !="" && writeForm.title_id !==""){
+        setValidity(true)
+      }
+    },[writeForm])
 
     function handleUpdate(){
         fetch(`/posts/${userPost.id}`,{
@@ -273,9 +281,9 @@ fetch(`/geographies/${geographySelected.id}/categories/${categorySelected.id}/ti
                 active
                 />
                 <SmallBlueButton
-                  onClick={writeForm.text != "" ? ()=>{handleUpdate()} : null}
+                  onClick={handleUpdate}
                   text={"Update"}
-                  active={writeForm.text != "" ? true : false}
+                  active={validity}
                 />
                 </ButtonGroup>
             </Row>
@@ -309,7 +317,7 @@ fetch(`/geographies/${geographySelected.id}/categories/${categorySelected.id}/ti
             :
             null
         }
-        {/* {
+        {
             categorySelected !== false ?
             <SelectWithSearch
             key={3}
@@ -320,7 +328,7 @@ fetch(`/geographies/${geographySelected.id}/categories/${categorySelected.id}/ti
             />
             :
             null
-        } */}
+        }
         </Row>
         </Grid>
         </Box>
