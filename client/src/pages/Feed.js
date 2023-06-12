@@ -12,6 +12,7 @@ import SearchAndSort from '../components/large/SearchAndSort';
 import Post from '../components/large/Post';
 import NavBar from '../components/large/NavBar';
 
+
 const Item = styled(Paper)(({ theme }) => ({
     backgroundColor: theme.palette.mode === 'dark' ? '#1A2027' : '#fff',
     ...theme.typography.body2,
@@ -26,8 +27,6 @@ const Item = styled(Paper)(({ theme }) => ({
     flex-grow: 1;
     overflow-y: auto;
     padding-bottom: 100px /* Adjust this value based on the height of the NavBar */
-    position: relative;
-    padding: 100px /* Adjust this value based on the height of the NavBar */
   `
   
   const FixedContainer = styled(Box)`
@@ -35,7 +34,6 @@ const Item = styled(Paper)(({ theme }) => ({
     top: 0;
     z-index: 1;
     background-color: #ffffff;
-
   `
 
 function Feed(){

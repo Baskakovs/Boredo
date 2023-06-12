@@ -13,7 +13,6 @@ const SearchRowContainer = styled.div`
     align-items: flex-start;
     gap: 8px;
     width: 100vw;
-    padding: 80px;
 
     ::-webkit-scrollbar {
         display: none;

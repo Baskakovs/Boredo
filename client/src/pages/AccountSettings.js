@@ -218,7 +218,7 @@ function AccountSettings(){
                         </MethodBoxRow>
                         <MethodBoxRow>
                             <Heading>Date of Birth</Heading>
-                            <InformationText>{user.date_of_birth}</InformationText>
+                            <InformationText>{user.date_of_birth ? user.date_of_birth : "Update!"}</InformationText>
                         </MethodBoxRow>
                         <MethodBoxRow>
                             <Heading>Email</Heading>
