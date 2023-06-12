@@ -1,7 +1,11 @@
-import React from 'react';
-import styled from 'styled-components';
+import React from 'react'
+import styled from 'styled-components'
 
-import { Link } from 'react-router-dom';
+//importing redux
+import { useDispatch } from 'react-redux'
+import { setCountrySelected, setCategorySelected, setTitleSelected } from '../../slices/searchSlice'
+
+import { Link } from 'react-router-dom'
 
 import Box from '@mui/material/Box'
 import WriteIcon from '../../images/WriteIcon.png'
@@ -52,11 +56,19 @@ background-color: #ffffff;
 `
 
 function NavBar() {
+  const dispatch = useDispatch()
+
+  function handleResetSearch(){
+    dispatch(setCountrySelected(false))
+    dispatch(setCategorySelected(false))
+    dispatch(setTitleSelected(false))
+  }
+
   return (
     <FixedContainer>
     <Container>
     <Link to="/">
-      <IconContainer>
+      <IconContainer onClick={handleResetSearch}>
         <img src={FeedIcon} alt="Feed Icon" />
       </IconContainer>
       </Link>
