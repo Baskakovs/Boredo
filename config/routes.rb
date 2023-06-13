@@ -1,5 +1,6 @@
 Rails.application.routes.draw do
-  namespace :api do
+    scope module: :gapi do
+    get '/me', to: 'users#show' 
     resources :sessions
     resources :subcomments
     resources :comments

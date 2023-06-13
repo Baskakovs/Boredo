@@ -2,10 +2,6 @@ require 'dotenv/load'
 require 'openai'
 require 'faker'
 
-# client = OpenAI::Client.new
-
-client = OpenAI::Client.new(access_token: "")
-
 geographies = ["USA", "UK", "Germany", "China", "France", "Japan", "EU", "Poland", "Ukraine", "Brazil", "Canada","India", "Russia", "Australia", "Mexico", "South Korea", "Italy", "Spain", "Netherlands", "Switzerland", "Sweden", "Norway", "Argentina", "Turkey", "Saudi Arabia", "United Arab Emirates", "South Africa", "Egypt", "Indonesia", "Singapore", "Thailand", "New Zealand", "Greece", "Belgium", "Austria", "Portugal"]
 
 
