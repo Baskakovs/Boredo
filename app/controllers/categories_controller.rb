@@ -1,4 +1,3 @@
-require 'byebug'
 class CategoriesController < ApplicationController
     def index_by_country
         country = Geography.find(params[:id])
