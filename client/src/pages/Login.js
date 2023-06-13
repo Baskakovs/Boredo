@@ -1,7 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 import LoginSignupWindow from '../components/large/LoginSignupWindow';
-import BackgroundImage from '../images/BusanImage.svg'
+import BackgroundImage from '../images/BusanImage.png'
 import Errors from '../components/small/Errors';
 
 const Box = styled.div`
