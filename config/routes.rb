@@ -1,4 +1,11 @@
 Rails.application.routes.draw do
+  resources :users
+  resources :subcomments
+  resources :sessions
+  resources :posts
+  resources :comments
+  resources :categories
+  resources :names
   namespace :api do
     get "/me", to: "users#show"
     resources :geographies

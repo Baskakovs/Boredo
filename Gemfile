@@ -58,5 +58,4 @@ gem 'faker', '~> 3.2'
 
 gem 'googleauth'
 
-
-gem "appengine", "~> 0.7.0"
+gem 'mongoid', '~> 7.0.5'
